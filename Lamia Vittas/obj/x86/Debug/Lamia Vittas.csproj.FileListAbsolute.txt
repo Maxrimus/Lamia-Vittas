@@ -1,0 +1,23 @@
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\obj\x86\Debug\Lamia Vittas.exe
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\obj\x86\Debug\Lamia Vittas.pdb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Content\Girl.xnb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Content\Bush.xnb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Content\Cat.xnb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Content\Fist.xnb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Content\GeneralBLock.xnb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Content\Spikes.xnb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Content\Vial.xnb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Content\Yarn.xnb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Content\Arial.xnb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Content\MainScreen.xnb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Content\Pause.xnb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Content\TestQuit.xnb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Content\TestStart.xnb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Content\Return to Menu.xnb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.exe
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.pdb
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Lidgren.Network.dll
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\MonoGame.Framework.dll
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\OpenTK.dll
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Tao.Sdl.dll
+D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\obj\x86\Debug\Lamia Vittas.csprojResolveAssemblyReference.cache
