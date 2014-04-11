@@ -21,3 +21,49 @@ D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\MonoGame.F
 D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\OpenTK.dll
 D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\bin\WindowsGL\Debug\Tao.Sdl.dll
 D:\Lamia Vittas\Lamia Vittas.v11.suo\Lamia Vittas\obj\x86\Debug\Lamia Vittas.csprojResolveAssemblyReference.cache
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.exe
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.pdb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Girl.xnb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Bush.xnb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Cat.xnb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Fist.xnb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\GeneralBLock.xnb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Spikes.xnb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Vial.xnb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Yarn.xnb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Arial.xnb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\MainScreen.xnb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Pause.xnb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\TestQuit.xnb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\TestStart.xnb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Return to Menu.xnb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.exe
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.pdb
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lidgren.Network.dll
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\MonoGame.Framework.dll
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\OpenTK.dll
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Tao.Sdl.dll
+\\banner.main.ad.rit.edu\students\jpt6083\IGMProfile\Documents\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.csprojResolveAssemblyReference.cache
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.exe
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.pdb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Girl.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Bush.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Cat.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Fist.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\GeneralBLock.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Spikes.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Vial.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Yarn.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Arial.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\MainScreen.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Pause.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\TestQuit.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\TestStart.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Return to Menu.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.exe
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.pdb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lidgren.Network.dll
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\MonoGame.Framework.dll
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\OpenTK.dll
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Tao.Sdl.dll
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.csprojResolveAssemblyReference.cache
