@@ -105,6 +105,10 @@ namespace Lamia_Vittas
 
         public override void Jump(SpriteBatch batch)
         {
+            batch.Begin();
+            PictureBox = new Rectangle(PictureBox.X, PictureBox.Y - 4, GameVariables.girlWidth, GameVariables.girlHeight);
+            batch.Draw(Image, PictureBox, Color.White);
+            batch.End();
         }
 
         /// <summary>
