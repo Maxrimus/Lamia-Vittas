@@ -35,5 +35,9 @@ namespace Lamia_Vittas
         {
             visible = false;
         }
+
+        public override void Move()
+        {
+        }
     }
 }
