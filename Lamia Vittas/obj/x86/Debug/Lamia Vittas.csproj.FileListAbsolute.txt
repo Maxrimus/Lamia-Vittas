@@ -67,3 +67,4 @@ Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\MonoGame.Framework.dll
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\OpenTK.dll
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Tao.Sdl.dll
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.csprojResolveAssemblyReference.cache
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\BoundingBox.xnb

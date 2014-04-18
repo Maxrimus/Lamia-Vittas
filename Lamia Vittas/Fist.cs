@@ -18,24 +18,47 @@ namespace Lamia_Vittas
 {
     class Fist:MovableGamePiece
     {
-        bool visible;
+        //visible: whether or not the fist is visible
+        private bool visible;
 
+        public bool Visible
+        {//attribute for visibility
+            get { return visible; }
+            set { visible = value; }
+        }
+
+        /// <summary>
+        /// Parameterized Constructor
+        /// </summary>
+        /// <param name="vector">Location of the image</param>
+        /// <param name="texture">Texture of the image</param>
+        /// <param name="dir">Direction the image is facing, 0 for left, 1 for right</param>
         public Fist(Rectangle picturesize, Texture2D texture, int dir)
             : base(picturesize, texture, dir)
         {
+            //sets visible
             visible = false;
         }
 
+        /// <summary>
+        /// Fist Punches
+        /// </summary>
         public void Punch()
         {
             visible = true;
         }
 
+        /// <summary>
+        /// Fist UnPunches
+        /// </summary>
         public void UnPunch()
         {
             visible = false;
         }
 
+        /// <summary>
+        /// Moves the Fist
+        /// </summary>
         public override void Move()
         {
         }

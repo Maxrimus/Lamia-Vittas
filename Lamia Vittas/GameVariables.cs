@@ -37,6 +37,7 @@ namespace Lamia_Vittas
 
         //dark textures
         public static string girlTexture = "Girl";
+        public static string fistTexture = "Fist";
         public static string vialTexture = "Vial";
 
         //light textures
@@ -48,6 +49,8 @@ namespace Lamia_Vittas
         public static string blockTexture = "GeneralBLock";
         public static string spikeTexture = "Spikes";
 
+        //texture for Bounding Box debug
+        public static string bBTexture = "BoundingBox";
 
         // widths and heights for the images
         public static int girlWidth = 96;
