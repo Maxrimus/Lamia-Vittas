@@ -257,7 +257,7 @@ namespace Lamia_Vittas
 
                 if (p1.fist.Direction == 0)
                 {//sets the fist relative to the location of the player
-                    p1.fist.PictureBox = new Rectangle(p1.GetPosition().X /*+ (((2*p1.GetPosition().Width) / 3)*/ - ((15*p1.fist.PictureBox.Width)/32), p1.GetPosition().Y + ((15 * p1.GetPosition().Height) / 32), p1.fist.PictureBox.Width, p1.fist.PictureBox.Height);
+                    p1.fist.PictureBox = new Rectangle(p1.GetPosition().X - ((15*p1.fist.PictureBox.Width)/32), p1.GetPosition().Y + ((15 * p1.GetPosition().Height) / 32), p1.fist.PictureBox.Width, p1.fist.PictureBox.Height);
                 }
                 else
                 {
