@@ -44,6 +44,7 @@
     <Compile Include="Door.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Environmental.cs" />
+    <Compile Include="Fist.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameVariables.cs" />
     <Compile Include="GamePiece.cs" />
@@ -86,18 +87,7 @@
     <Content Include="SDL.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Girl.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Content\Bush.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Cat.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Fist.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\GeneralBLock.xnb">
@@ -138,6 +128,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Return to Menu.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\BoundingBox.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Cat.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Girl.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Fist.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

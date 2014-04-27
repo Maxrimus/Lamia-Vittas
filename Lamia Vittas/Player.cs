@@ -26,7 +26,8 @@ namespace Lamia_Vittas
          */
         Girl girl;
         Cat cat;
-        int state;
+        public Fist fist;
+        public int state;
         int health;
         int lives;
         const int MAXHEALTH = 250;
@@ -55,10 +56,11 @@ namespace Lamia_Vittas
         /// <param name="g1">Girl object associated with this player</param>
         /// <param name="c1">Cat object associated with this player</param>
         /// <param name="st">State the player is in</param>
-        public Player(Girl g1, Cat c1, int st)
+        public Player(Girl g1, Cat c1, int st,Fist f1)
         {
             girl = g1;
             cat = c1;
+            fist = f1;
             state = st;
             health = g1.HealthFriendly;
             lives = 10;
@@ -342,6 +344,7 @@ namespace Lamia_Vittas
                 state = 1;
                 cat.PictureBox = new Rectangle(girl.PictureBox.X, girl.PictureBox.Y + 32, GameVariables.catWidth, GameVariables.catHeight);
                 cat.Direction = girl.Direction;
+                fist.UnPunch();
             }
             else if (state == 1)
             {//switches to girl state

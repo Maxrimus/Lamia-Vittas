@@ -28,24 +28,37 @@ namespace Lamia_Vittas
         SpriteBatch spriteBatch;
         SpriteFont font;
 
+        //Instantiations of all needed objects
         Girl g1;
+        Fist f1;
         Cat c1;
         Player p1;
-        KeyboardState kState;
-        KeyboardState oldState;
-        MouseState mState;
-
-        List<Platform> platforms;
-        Platform pl1;
         Button b1;
         Door d1;
         Spike s1, s2;
         Bush bu1, bu2;
 
+        //states for keyboard and mouse
+        KeyboardState kState;
+        KeyboardState oldState;
+        MouseState mState;
 
+        //List to hold platforms
+        List<Platform> platforms;
+
+        //list to hold all objects
+        List<GamePiece> allObjects;
+
+        //list to hold all Bounding Boxes
+        List<GamePiece> bBs;
+
+        //Platform pl1;
+
+        //Screens for MainScreen and PauseScreen
         MainScreen mainScreen;
         PauseScreen pauseScreen;
 
+        //Textures for the Screens
         Texture2D mainScreenTexture;
         Texture2D startButton;
         Texture2D quitButton;
@@ -80,6 +93,8 @@ namespace Lamia_Vittas
             kState = new KeyboardState();
             oldState = new KeyboardState();
             platforms = new List<Platform>();
+            allObjects = new List<GamePiece>();
+            bBs = new List<GamePiece>();
             mState = new MouseState();
             base.Initialize();
         }
@@ -96,26 +111,51 @@ namespace Lamia_Vittas
             main = InterfaceScreen.MainScreen;
 
             // TODO: use this.Content to load your game content here
-            g1 = new Girl(new Rectangle(600,100, 96, 128),Content.Load<Texture2D>(GameVariables.girlTexture),1,250,2);
-            c1 = new Cat(new Rectangle(600,100, 128, 96), Content.Load<Texture2D>(GameVariables.catTexture), 1, 250, 0);
-            s1 = new Spike(new Rectangle(0, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
-            bu1 = new Bush(new Rectangle(200, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
-            s2 = new Spike(new Rectangle(400, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
-            bu2 = new Bush(new Rectangle(600, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
 
+            //Instantiates objects and adds to allObjects List
+            g1 = new Girl(new Rectangle(600,100, 96, 128),Content.Load<Texture2D>(GameVariables.girlTexture),1,250,2);
+            allObjects.Add(g1);
+            f1 = new Fist(new Rectangle(600, 200, 60, 20), Content.Load<Texture2D>(GameVariables.fistTexture), 1);
+            allObjects.Add(f1);
+            c1 = new Cat(new Rectangle(600,100, 128, 96), Content.Load<Texture2D>(GameVariables.catTexture), 1, 250, 0);
+            allObjects.Add(c1);
+            s1 = new Spike(new Rectangle(0, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
+            allObjects.Add(s1);
+            bu1 = new Bush(new Rectangle(200, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
+            allObjects.Add(bu1);
+            s2 = new Spike(new Rectangle(400, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
+            allObjects.Add(s2);
+            bu2 = new Bush(new Rectangle(600, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
+            allObjects.Add(bu2);
+
+            //creates fonts
             font = Content.Load<SpriteFont>(GameVariables.arialFont);
+            
+            //creates screens
             mainScreen = new MainScreen(Content.Load<Texture2D>(GameVariables.startButton), Content.Load<Texture2D>(GameVariables.quitButton), Content.Load<Texture2D>(GameVariables.returnToMenu), new Rectangle(200, 200, 97, 33), new Rectangle(100, 200, 97, 33), new Rectangle(300, 200, 100, 100));
             mainScreenTexture = Content.Load<Texture2D>(GameVariables.mainScreen);
             pauseTexture = Content.Load<Texture2D>(GameVariables.pause);
             pauseScreen = new PauseScreen(Content.Load<Texture2D>(GameVariables.startButton), Content.Load<Texture2D>(GameVariables.quitButton), Content.Load<Texture2D>(GameVariables.returnToMenu), new Rectangle(200, 200, 97, 33), new Rectangle(100, 200, 97, 33), new Rectangle(300, 200, 100, 100));
             //returnToMainMenu = Content.Load<Texture2D>(GameVariables.returnToMenu);
 
+            //creates platforms and adds to platforms List
             platforms.Add(new Platform(new Rectangle(0, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(200, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(400, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(600, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(0, 100, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(600, 100, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
+
+            foreach (Platform i in platforms)
+            {//adds all platforms to allObjects List
+                allObjects.Add(i);
+            }
+
+            foreach (GamePiece i in allObjects)
+            {//creates Bounding Boxes for all objects
+                bBs.Add(new GamePiece(i.PictureBox,Content.Load<Texture2D>(GameVariables.bBTexture)));
+            }
+
             /*
             for (int i = 1; i < (graphics.GraphicsDevice.Viewport.Width/pl1.Image.Width) - 1; i++)
             {
@@ -127,7 +167,7 @@ namespace Lamia_Vittas
             
             //platforms.Add(pl1 = new Platform(new Vector2(-50, 100), Content.Load<Texture2D>("GeneralBLock")));
 
-            p1 = new Player(g1, c1, 0);
+            p1 = new Player(g1, c1, 0, f1);
         }
 
         /// <summary>
@@ -151,7 +191,9 @@ namespace Lamia_Vittas
 
             // TODO: Add your update logic here
 
+            //current keyboard state
             kState = Keyboard.GetState();
+
             if (kState.IsKeyDown(Keys.Left) && (p1.GetPosition().X >= 0))
             {//moves the player left
                 p1.SetDirection(0);
@@ -207,6 +249,41 @@ namespace Lamia_Vittas
                 p1.ResetPosition();
             }
 
+            if (kState.IsKeyDown(Keys.P) && p1.state == 0)
+            {//punches
+
+                //sets the direction of the fist to the direction of the player
+                p1.fist.Direction = p1.GetDirection();
+
+                if (p1.fist.Direction == 0)
+                {//sets the fist relative to the location of the player
+                    p1.fist.PictureBox = new Rectangle(p1.GetPosition().X - ((15*p1.fist.PictureBox.Width)/32), p1.GetPosition().Y + ((15 * p1.GetPosition().Height) / 32), p1.fist.PictureBox.Width, p1.fist.PictureBox.Height);
+                }
+                else
+                {
+                    p1.fist.PictureBox = new Rectangle(p1.GetPosition().X + ((2*p1.GetPosition().Width) / 3), p1.GetPosition().Y + ((15 * p1.GetPosition().Height) / 32), p1.fist.PictureBox.Width, p1.fist.PictureBox.Height);
+                }
+
+                //sets the fist to visible
+                p1.fist.Punch();
+            }
+
+            if (kState.IsKeyUp(Keys.P))
+            {//unpunches
+
+                //sets the fist to invisible
+                p1.fist.UnPunch();
+            }
+
+            //clears all Bounding Boxes
+            bBs.Clear();
+
+            foreach (GamePiece i in allObjects)
+            {//recreates Bounding Boxes
+                bBs.Add(new GamePiece(i.PictureBox, Content.Load<Texture2D>(GameVariables.bBTexture)));
+            }
+
+            //sets old state to the current one
             oldState = kState;
 
             //checks for any collisions
@@ -333,18 +410,20 @@ namespace Lamia_Vittas
 
             if (main == InterfaceScreen.GameScreen)
             {
-                
+                //draws the player
                 p1.Draw(spriteBatch);
 
-
-
-
+                if (p1.fist.Visible)
+                {//draws the fist if the fist is visible
+                    p1.fist.Draw(spriteBatch);
+                }
 
                 for (int i = 0; i < platforms.Count; i++)
-                {
+                {//draws all platforms
                     platforms[i].Draw(spriteBatch);
                 }
 
+                //draws obstacles
                 s1.Draw(spriteBatch);
                 s2.Draw(spriteBatch);
                 bu1.Draw(spriteBatch);
@@ -361,6 +440,10 @@ namespace Lamia_Vittas
                     + "\nLives:         " + p1.Lives
                     + "\nGame Over: " + GameOver
                     + "\n\nLeft arrow - move left     Right arrom - more right     Shift - switch states     Space - jump/hover     R - respawn", new Vector2(0, 300), Color.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                foreach (GamePiece i in bBs)
+                {//draws all Bounding Boxes
+                    i.Draw(spriteBatch);
+                }
 
                 // Draws the pause texture
                 spriteBatch.Draw(pauseTexture, new Vector2(770, 450), Color.White);

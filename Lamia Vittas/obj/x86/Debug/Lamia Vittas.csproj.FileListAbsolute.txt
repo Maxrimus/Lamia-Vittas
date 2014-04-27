@@ -67,3 +67,24 @@ Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\MonoGame.Framework.dll
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\OpenTK.dll
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Tao.Sdl.dll
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.csprojResolveAssemblyReference.cache
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\BoundingBox.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.exe
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.pdb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Bush.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\GeneralBLock.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Spikes.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Vial.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Yarn.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Arial.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\MainScreen.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Pause.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\TestQuit.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\TestStart.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Return to Menu.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\BoundingBox.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Cat.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Girl.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Fist.xnb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.exe
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.pdb
+C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.csprojResolveAssemblyReference.cache
