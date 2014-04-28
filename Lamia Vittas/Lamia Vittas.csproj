@@ -40,6 +40,7 @@
     <Compile Include="Button.cs" />
     <Compile Include="Cat.cs" />
     <Compile Include="Character.cs" />
+    <Compile Include="Collectible.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="Door.cs" />
     <Compile Include="Enemy.cs" />
@@ -96,12 +97,6 @@
     <Content Include="Content\Spikes.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Vial.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Yarn.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Arial.xnb">
@@ -146,6 +141,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Fist.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Vial.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Yarn.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

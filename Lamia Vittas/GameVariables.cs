@@ -19,6 +19,9 @@ namespace Lamia_Vittas
 {
     public static class GameVariables
     {
+        // number of collectibles
+        public const int NUM_COLLECTIBLES = 500;
+        
         //font
         public static string arialFont = "Arial";
 

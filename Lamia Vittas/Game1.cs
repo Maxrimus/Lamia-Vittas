@@ -38,6 +38,9 @@ namespace Lamia_Vittas
         Spike s1, s2;
         Bush bu1, bu2;
 
+        // list to hold the collectibles
+        List<Collectible> coll;
+
         //states for keyboard and mouse
         KeyboardState kState;
         KeyboardState oldState;
@@ -94,6 +97,7 @@ namespace Lamia_Vittas
             oldState = new KeyboardState();
             platforms = new List<Platform>();
             allObjects = new List<GamePiece>();
+            coll = new List<Collectible>();
             bBs = new List<GamePiece>();
             mState = new MouseState();
             base.Initialize();
@@ -127,6 +131,16 @@ namespace Lamia_Vittas
             allObjects.Add(s2);
             bu2 = new Bush(new Rectangle(600, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
             allObjects.Add(bu2);
+
+            // populate the dictionary with collectibles, set the value to false
+            // when they get collected (picked up) the value becomes true
+            coll.Add(new Collectible((new Rectangle(0, 0, 48, 48)), Content.Load<Texture2D>(GameVariables.vialTexture), false, "vial"));
+            coll.Add(new Collectible((new Rectangle(0, 48, 48, 48)), Content.Load<Texture2D>(GameVariables.yarnTexture), false, "yarn"));
+            coll.Add(new Collectible((new Rectangle(48, 96, 48, 48)), Content.Load<Texture2D>(GameVariables.vialTexture), false, "vial"));
+            coll.Add(new Collectible((new Rectangle(96, 96, 48, 48)), Content.Load<Texture2D>(GameVariables.yarnTexture), false, "yarn"));
+            coll.Add(new Collectible((new Rectangle(144, 96, 48, 48)), Content.Load<Texture2D>(GameVariables.vialTexture), false, "vial"));
+            coll.Add(new Collectible((new Rectangle(144, 144, 48, 48)), Content.Load<Texture2D>(GameVariables.yarnTexture), false, "yarn"));
+            coll.Add(new Collectible((new Rectangle(192, 144, 48, 48)), Content.Load<Texture2D>(GameVariables.vialTexture), false, "vial"));
 
             //creates fonts
             font = Content.Load<SpriteFont>(GameVariables.arialFont);
@@ -245,8 +259,12 @@ namespace Lamia_Vittas
             }
 
             if (kState.IsKeyDown(Keys.R) && oldState.IsKeyDown(Keys.R))
-            {//reset the original position of the cat and girl
+            {//reset the original position of the cat and girl, reset the collectibles
                 p1.ResetPosition();
+                foreach (Collectible z in coll)
+                {
+                    z.Collected = false;
+                }
             }
 
             if (kState.IsKeyDown(Keys.P) && p1.state == 0)
@@ -288,6 +306,9 @@ namespace Lamia_Vittas
 
             //checks for any collisions
             CheckCollisions();
+
+            // check for any collections
+            CheckCollections();
 
             // checks if the game is over
             if (p1.Lives <= 0)
@@ -429,6 +450,19 @@ namespace Lamia_Vittas
                 bu1.Draw(spriteBatch);
                 bu2.Draw(spriteBatch);
 
+                // draw collectibles
+                for (int y = 0; y < coll.Count; y++)
+                {
+                    if (coll[y].Collected == false)
+                    {
+                        coll[y].Draw(spriteBatch);
+                    }
+                }
+                // draws all bounding boxes
+                foreach (GamePiece i in bBs)
+                {//draws all Bounding Boxes
+                    i.Draw(spriteBatch);
+                }
                 // draw the Debug info
                 spriteBatch.DrawString(font,
                     p1.GetPosition()
@@ -440,10 +474,7 @@ namespace Lamia_Vittas
                     + "\nLives:         " + p1.Lives
                     + "\nGame Over: " + GameOver
                     + "\n\nLeft arrow - move left     Right arrom - more right     Shift - switch states     Space - jump/hover     R - respawn", new Vector2(0, 300), Color.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
-                foreach (GamePiece i in bBs)
-                {//draws all Bounding Boxes
-                    i.Draw(spriteBatch);
-                }
+                
 
                 // Draws the pause texture
                 spriteBatch.Draw(pauseTexture, new Vector2(770, 450), Color.White);
@@ -601,6 +632,25 @@ namespace Lamia_Vittas
              
             
                 // check for collisions between bush and character
-        }     
+        }
+
+        /// <summary>
+        /// Check if the character collected a collectible
+        /// </summary>
+        public void CheckCollections()
+        {
+            foreach (Collectible z in coll)
+            {
+                if (p1.state == 0 && p1.IsColliding(z) && z.Collected==false && z.Style == "vial")
+                {
+                    z.Collected = true;
+                }
+
+                if (p1.state == 1 && p1.IsColliding(z) && z.Collected == false && z.Style == "yarn")
+                {
+                    z.Collected = true;
+                }
+            }
+        }
     }
 }
