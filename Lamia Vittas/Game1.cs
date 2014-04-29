@@ -27,6 +27,22 @@ namespace Lamia_Vittas
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont font;
+        Texture2D gWSheet;
+        Texture2D cWSheet;
+
+        //needed for girl's animation
+        Point gframeSize = new Point(70, 100);
+        Point gcurrentFrame = new Point(0, 0);
+        Point gframes = new Point(4, 1);
+        TimeSpan gnextFrameInterval = TimeSpan.FromSeconds((float)1 / 16);
+        TimeSpan gnextFrame;
+
+        //needed for girl's animation
+        Point cframeSize = new Point(100, 50);
+        Point ccurrentFrame = new Point(0, 0);
+        Point cframes = new Point(4, 1);
+        TimeSpan cnextFrameInterval = TimeSpan.FromSeconds((float)1 / 16);
+        TimeSpan cnextFrame;
 
         //Instantiations of all needed objects
         Girl g1;
@@ -85,6 +101,7 @@ namespace Lamia_Vittas
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            TargetElapsedTime = new TimeSpan(0, 0, 0, 0, 100);
         }
 
         /// <summary>
@@ -138,6 +155,9 @@ namespace Lamia_Vittas
             allObjects.Add(b1);
             d1 = new Door(new Rectangle(650, 150, 25, 150), Content.Load<Texture2D>(GameVariables.doorTexture), b1);
             allObjects.Add(d1);
+
+            gWSheet = Content.Load<Texture2D>(GameVariables.girlTextureSheet);
+            cWSheet = Content.Load<Texture2D>(GameVariables.catTextureSheet);
 
             // populate the list with collectibles, set the value to false
             // when they get collected (picked up) the value becomes true
@@ -268,12 +288,44 @@ namespace Lamia_Vittas
             if (kState.IsKeyDown(Keys.Left) && (p1.GetPosition().X >= 0))
             {//moves the player left
                 p1.SetDirection(0);
+                if (p1.state == 0)
+                {
+                    gcurrentFrame.X++;
+                    if (gcurrentFrame.X >= 4)
+                    {
+                        gcurrentFrame.X = 0;
+                    }
+                }
+                else
+                {
+                    ccurrentFrame.X++;
+                    if (ccurrentFrame.X >= 4)
+                    {
+                        ccurrentFrame.X = 0;
+                    }
+                }
                 p1.Move();
             }
 
             if (kState.IsKeyDown(Keys.Right) && ((p1.GetPosition().X + (p1.GetPosition().Width)) < graphics.GraphicsDevice.Viewport.Width))
             {//moves the player right
                 p1.SetDirection(1);
+                if (p1.state == 0)
+                {
+                    gcurrentFrame.X++;
+                    if (gcurrentFrame.X >= 4)
+                    {
+                        gcurrentFrame.X = 0;
+                    }
+                }
+                else
+                {
+                    ccurrentFrame.X++;
+                    if (ccurrentFrame.X >= 4)
+                    {
+                        ccurrentFrame.X = 0;
+                    }
+                }
                 p1.Move();
             }
 
@@ -515,7 +567,28 @@ namespace Lamia_Vittas
             if (main == InterfaceScreen.GameScreen)
             {
                 //draws the player
-                p1.Draw(spriteBatch);
+                if (p1.state == 0)
+                {
+                    if (p1.GetDirection() == 1)
+                    {
+                        spriteBatch.Draw(gWSheet, p1.GetPosition(), new Rectangle(gframeSize.X * gcurrentFrame.X, gframeSize.Y * gcurrentFrame.Y, gframeSize.X, gframeSize.Y), Color.White);
+                    }
+                    else if (p1.GetDirection() == 0)
+                    {
+                        spriteBatch.Draw(gWSheet, p1.GetPosition(), new Rectangle(gframeSize.X * gcurrentFrame.X, gframeSize.Y * gcurrentFrame.Y, gframeSize.X, gframeSize.Y), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                    }
+                }
+                else
+                {
+                    if (p1.GetDirection() == 1)
+                    {
+                        spriteBatch.Draw(cWSheet, p1.GetPosition(), new Rectangle(cframeSize.X * ccurrentFrame.X, cframeSize.Y * ccurrentFrame.Y, cframeSize.X, cframeSize.Y), Color.White);
+                    }
+                    else if (p1.GetDirection() == 0)
+                    {
+                        spriteBatch.Draw(cWSheet, p1.GetPosition(), new Rectangle(cframeSize.X * ccurrentFrame.X, cframeSize.Y * ccurrentFrame.Y, cframeSize.X, cframeSize.Y), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                    }
+                }
 
                 if (p1.fist.Visible)
                 {//draws the fist if the fist is visible

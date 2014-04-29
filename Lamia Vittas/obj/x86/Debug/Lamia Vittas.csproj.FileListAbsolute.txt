@@ -115,3 +115,8 @@ C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vitt
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\ButtonOriginal.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\ButtonPressed.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Door.xnb
+<<<<<<< HEAD
+=======
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\GirlWalkSpritesheet.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\CatWalkSpritesheet.xnb
+>>>>>>> origin/Animations

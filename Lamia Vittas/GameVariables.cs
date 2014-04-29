@@ -40,11 +40,13 @@ namespace Lamia_Vittas
 
         //dark textures
         public static string girlTexture = "Girl";
+        public static string girlTextureSheet = "GirlWalkSpritesheet";
         public static string fistTexture = "Fist";
         public static string vialTexture = "Vial";
 
         //light textures
         public static string catTexture = "Cat";
+        public static string catTextureSheet = "CatWalkSpritesheet";
         public static string yarnTexture = "Yarn";
 
         //environment textures
