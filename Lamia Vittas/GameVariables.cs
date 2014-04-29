@@ -46,6 +46,7 @@ namespace Lamia_Vittas
 
         //light textures
         public static string catTexture = "Cat";
+        public static string catTextureSheet = "CatWalkSpritesheet";
         public static string yarnTexture = "Yarn";
 
         //environment textures
