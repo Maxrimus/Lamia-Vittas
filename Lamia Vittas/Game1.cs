@@ -352,6 +352,9 @@ namespace Lamia_Vittas
             //checks for any collisions
             CheckCollisions();
 
+            //checks for any collections
+            CheckCollections();
+
             //opens door if button is pressed
             d1.Open();
 
