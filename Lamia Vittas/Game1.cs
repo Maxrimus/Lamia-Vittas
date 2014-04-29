@@ -35,6 +35,7 @@ namespace Lamia_Vittas
         Player p1;
         Button b1;
         Door d1;
+        Door d2;
         Spike s1, s2;
         Bush bu1, bu2;
 
@@ -117,20 +118,24 @@ namespace Lamia_Vittas
             // TODO: use this.Content to load your game content here
 
             //Instantiates objects and adds to allObjects List
-            g1 = new Girl(new Rectangle(600,100, 96, 128),Content.Load<Texture2D>(GameVariables.girlTexture),1,250,2);
+            g1 = new Girl(new Rectangle(300,200, 96, 128),Content.Load<Texture2D>(GameVariables.girlTexture),1,250,2);
             allObjects.Add(g1);
-            f1 = new Fist(new Rectangle(600, 200, 60, 20), Content.Load<Texture2D>(GameVariables.fistTexture), 1);
+            f1 = new Fist(new Rectangle(300, 200, 60, 20), Content.Load<Texture2D>(GameVariables.fistTexture), 1);
             allObjects.Add(f1);
             c1 = new Cat(new Rectangle(600,100, 128, 96), Content.Load<Texture2D>(GameVariables.catTexture), 1, 250, 0);
             allObjects.Add(c1);
-            s1 = new Spike(new Rectangle(0, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
+            s1 = new Spike(new Rectangle(0, 400, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
             allObjects.Add(s1);
-            bu1 = new Bush(new Rectangle(200, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
+            bu1 = new Bush(new Rectangle(200, 400, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
             allObjects.Add(bu1);
-            s2 = new Spike(new Rectangle(400, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
+            s2 = new Spike(new Rectangle(400, 400, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
             allObjects.Add(s2);
-            bu2 = new Bush(new Rectangle(600, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
+            bu2 = new Bush(new Rectangle(600, 400, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
             allObjects.Add(bu2);
+            b1 = new Button(new Rectangle(25, 200, 25, 75), Content.Load<Texture2D>(GameVariables.buttonOriginalTexture));
+            allObjects.Add(b1);
+            d1 = new Door(new Rectangle(650, 150, 25, 150), Content.Load<Texture2D>(GameVariables.doorTexture), b1);
+            allObjects.Add(d1);
 
             // populate the dictionary with collectibles, set the value to false
             // when they get collected (picked up) the value becomes true
@@ -153,12 +158,50 @@ namespace Lamia_Vittas
             //returnToMainMenu = Content.Load<Texture2D>(GameVariables.returnToMenu);
 
             //creates platforms and adds to platforms List
-            platforms.Add(new Platform(new Rectangle(0, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(200, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(400, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(600, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(0, 100, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(600, 100, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(0, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(0, 200, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(0, 225, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(0, 250, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(0, 275, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(25, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(50, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(75, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(100, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(125, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(150, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(175, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(200, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(225, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(250, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(275, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(300, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(325, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(350, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(375, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(400, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(425, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(450, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(475, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(500, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(525, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(550, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(575, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(600, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(625, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(650, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(675, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(700, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(725, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(750, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(775, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(650, 0, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(650, 25, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(650, 50, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(650, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(650, 100, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(650, 125, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            //platforms.Add(new Platform(new Rectangle(0, 100, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            //platforms.Add(new Platform(new Rectangle(600, 100, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
 
             foreach (Platform i in platforms)
             {//adds all platforms to allObjects List
@@ -256,6 +299,7 @@ namespace Lamia_Vittas
             if (kState.IsKeyDown(Keys.LeftShift) && !oldState.IsKeyDown(Keys.LeftShift))
             {//switches from girl to cat and vice versa
                 p1.Switch();
+
             }
 
             if (kState.IsKeyDown(Keys.R) && oldState.IsKeyDown(Keys.R))
@@ -265,6 +309,7 @@ namespace Lamia_Vittas
                 {
                     z.Collected = false;
                 }
+                b1.on = false;
             }
 
             if (kState.IsKeyDown(Keys.P) && p1.state == 0)
@@ -307,8 +352,29 @@ namespace Lamia_Vittas
             //checks for any collisions
             CheckCollisions();
 
-            // check for any collections
-            CheckCollections();
+            //opens door if button is pressed
+            d1.Open();
+
+            if (!d1.on)
+            {
+                if (d1.PictureBox.Y - 5 >= d1.maxHeight)
+                {
+                    d1.PictureBox = new Rectangle(d1.PictureBox.X,d1.PictureBox.Y - 5,d1.PictureBox.Width,d1.PictureBox.Height);
+                    //d1.Draw(spriteBatch);
+                }
+            }
+
+            
+            if (b1.on == true)
+            {
+                b1 = new Button(b1.PictureBox,Content.Load<Texture2D>(GameVariables.buttonPressedTexture));
+                b1.on = true;
+                d1.on = false;
+            }
+            else
+            {
+                b1 = new Button(b1.PictureBox, Content.Load<Texture2D>(GameVariables.buttonOriginalTexture));
+            }
 
             // checks if the game is over
             if (p1.Lives <= 0)
@@ -449,6 +515,13 @@ namespace Lamia_Vittas
                 s2.Draw(spriteBatch);
                 bu1.Draw(spriteBatch);
                 bu2.Draw(spriteBatch);
+                b1.Draw(spriteBatch);
+                d1.Draw(spriteBatch);
+
+                foreach (GamePiece i in bBs)
+                {//draws all Bounding Boxes
+                    i.Draw(spriteBatch);
+                }
 
                 // draw collectibles
                 for (int y = 0; y < coll.Count; y++)
@@ -474,7 +547,6 @@ namespace Lamia_Vittas
                     + "\nLives:         " + p1.Lives
                     + "\nGame Over: " + GameOver
                     + "\n\nLeft arrow - move left     Right arrom - more right     Shift - switch states     Space - jump/hover     R - respawn", new Vector2(0, 300), Color.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
-                
 
                 // Draws the pause texture
                 spriteBatch.Draw(pauseTexture, new Vector2(770, 450), Color.White);
@@ -527,6 +599,21 @@ namespace Lamia_Vittas
                     {
                         p1.SetPosition(new Rectangle(plat.PictureBox.Right, p1.GetPosition().Y, p1.GetPosition().Width, p1.GetPosition().Height));
                     }
+                }
+
+                if (p1.fist.IsColliding(b1))
+                {//determines if button it pushed
+                    b1.on = true;
+                }
+
+                if ((p1.GetPosition().X < d1.PictureBox.Right && p1.GetPosition().X > d1.PictureBox.Left) && p1.IsColliding(d1))
+                {//determines if player colliding with door from left
+                    p1.SetPosition(new Rectangle(p1.GetPosition().X + 1, p1.GetPosition().Y, p1.GetPosition().Width,p1.GetPosition().Height));
+                }
+
+                if ((p1.GetPosition().X + p1.GetPosition().Width > d1.PictureBox.Left && p1.GetPosition().X + p1.GetPosition().Width < d1.PictureBox.Right) && p1.IsColliding(d1))
+                {//determines if player colliding with door from right
+                    p1.SetPosition(new Rectangle(p1.GetPosition().X - 1, p1.GetPosition().Y, p1.GetPosition().Width, p1.GetPosition().Height));
                 }
             }
 

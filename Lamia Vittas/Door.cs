@@ -18,9 +18,23 @@ namespace Lamia_Vittas
 {
     class Door:Mechanical
     {
-        Door(Rectangle picturesize, Texture2D texture)
+        Button b1;
+        public int maxHeight;
+
+        public Door(Rectangle picturesize, Texture2D texture, Button b)
             : base(picturesize, texture)
         {
+            on = true;
+            b1 = b;
+            maxHeight = picturesize.Y - picturesize.Height;
+        }
+
+        public void Open()
+        {
+            if (b1.on)
+            {
+                this.on = false;
+            }
         }
     }
 }

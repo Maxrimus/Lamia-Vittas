@@ -18,9 +18,12 @@ namespace Lamia_Vittas
 {
     class Mechanical:GamePiece
     {
+        public bool on;
+
         public Mechanical(Rectangle picturesize, Texture2D texture)
             : base(picturesize, texture)
         {
+            on = false;
         }
     }
 }

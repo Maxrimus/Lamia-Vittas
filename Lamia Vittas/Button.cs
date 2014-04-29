@@ -18,7 +18,7 @@ namespace Lamia_Vittas
 {
     class Button:Mechanical
     {
-        Button(Rectangle picturesize, Texture2D texture)
+        public Button(Rectangle picturesize, Texture2D texture)
             : base(picturesize, texture)
         {
         }

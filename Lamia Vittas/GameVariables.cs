@@ -51,6 +51,9 @@ namespace Lamia_Vittas
         public static string bushTexture = "Bush";
         public static string blockTexture = "GeneralBLock";
         public static string spikeTexture = "Spikes";
+        public static string buttonPressedTexture = "ButtonPressed";
+        public static string buttonOriginalTexture = "ButtonOriginal";
+        public static string doorTexture = "Door";
 
         //texture for Bounding Box debug
         public static string bBTexture = "BoundingBox";
