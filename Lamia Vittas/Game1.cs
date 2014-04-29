@@ -77,6 +77,8 @@ namespace Lamia_Vittas
         bool enableSpace = true;
 
         int jumpStart;
+        int vialsLeft = 0;
+        int yarnLeft = 0;
 
         public Game1()
             : base()
@@ -124,28 +126,40 @@ namespace Lamia_Vittas
             allObjects.Add(f1);
             c1 = new Cat(new Rectangle(600,100, 128, 96), Content.Load<Texture2D>(GameVariables.catTexture), 1, 250, 0);
             allObjects.Add(c1);
-            s1 = new Spike(new Rectangle(0, 400, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
+            s1 = new Spike(new Rectangle(0, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
             allObjects.Add(s1);
-            bu1 = new Bush(new Rectangle(200, 400, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
+            bu1 = new Bush(new Rectangle(200, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
             allObjects.Add(bu1);
-            s2 = new Spike(new Rectangle(400, 400, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
+            s2 = new Spike(new Rectangle(775, 250, 75, 25), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
             allObjects.Add(s2);
-            bu2 = new Bush(new Rectangle(600, 400, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
+            bu2 = new Bush(new Rectangle(400, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
             allObjects.Add(bu2);
             b1 = new Button(new Rectangle(25, 200, 25, 75), Content.Load<Texture2D>(GameVariables.buttonOriginalTexture));
             allObjects.Add(b1);
             d1 = new Door(new Rectangle(650, 150, 25, 150), Content.Load<Texture2D>(GameVariables.doorTexture), b1);
             allObjects.Add(d1);
 
-            // populate the dictionary with collectibles, set the value to false
+            // populate the list with collectibles, set the value to false
             // when they get collected (picked up) the value becomes true
-            coll.Add(new Collectible((new Rectangle(0, 0, 48, 48)), Content.Load<Texture2D>(GameVariables.vialTexture), false, "vial"));
-            coll.Add(new Collectible((new Rectangle(0, 48, 48, 48)), Content.Load<Texture2D>(GameVariables.yarnTexture), false, "yarn"));
-            coll.Add(new Collectible((new Rectangle(48, 96, 48, 48)), Content.Load<Texture2D>(GameVariables.vialTexture), false, "vial"));
-            coll.Add(new Collectible((new Rectangle(96, 96, 48, 48)), Content.Load<Texture2D>(GameVariables.yarnTexture), false, "yarn"));
-            coll.Add(new Collectible((new Rectangle(144, 96, 48, 48)), Content.Load<Texture2D>(GameVariables.vialTexture), false, "vial"));
-            coll.Add(new Collectible((new Rectangle(144, 144, 48, 48)), Content.Load<Texture2D>(GameVariables.yarnTexture), false, "yarn"));
-            coll.Add(new Collectible((new Rectangle(192, 144, 48, 48)), Content.Load<Texture2D>(GameVariables.vialTexture), false, "vial"));
+            coll.Add(new Collectible((new Rectangle(225, 50, 48, 48)), Content.Load<Texture2D>(GameVariables.vialTexture), false, "vial"));
+            coll.Add(new Collectible((new Rectangle(250, 100, 48, 48)), Content.Load<Texture2D>(GameVariables.yarnTexture), false, "yarn"));
+            coll.Add(new Collectible((new Rectangle(400, 50, 48, 48)), Content.Load<Texture2D>(GameVariables.vialTexture), false, "vial"));
+            coll.Add(new Collectible((new Rectangle(500, 100, 48, 48)), Content.Load<Texture2D>(GameVariables.yarnTexture), false, "yarn"));
+            coll.Add(new Collectible((new Rectangle(575, 50, 48, 48)), Content.Load<Texture2D>(GameVariables.vialTexture), false, "vial"));
+            coll.Add(new Collectible((new Rectangle(750, 100, 48, 48)), Content.Load<Texture2D>(GameVariables.yarnTexture), false, "yarn"));
+            coll.Add(new Collectible((new Rectangle(750, 50, 48, 48)), Content.Load<Texture2D>(GameVariables.vialTexture), false, "vial"));
+
+            foreach (Collectible i in coll)
+            {
+                if (i.Style == "vial")
+                {
+                    vialsLeft++;
+                }
+                else
+                {
+                    yarnLeft++;
+                }
+            }
 
             //creates fonts
             font = Content.Load<SpriteFont>(GameVariables.arialFont);
@@ -551,6 +565,8 @@ namespace Lamia_Vittas
                     + "\nGame Over: " + GameOver
                     + "\n\nLeft arrow - move left     Right arrom - more right     Shift - switch states     Space - jump/hover     R - respawn", new Vector2(0, 300), Color.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
 
+                spriteBatch.DrawString(font, "Vials left: " + vialsLeft + " Yarn Left: " + yarnLeft, new Vector2(10, 10), Color.Black);
+
                 // Draws the pause texture
                 spriteBatch.Draw(pauseTexture, new Vector2(770, 450), Color.White);
             }
@@ -734,11 +750,13 @@ namespace Lamia_Vittas
                 if (p1.state == 0 && p1.IsColliding(z) && z.Collected==false && z.Style == "vial")
                 {
                     z.Collected = true;
+                    vialsLeft--;
                 }
 
                 if (p1.state == 1 && p1.IsColliding(z) && z.Collected == false && z.Style == "yarn")
                 {
                     z.Collected = true;
+                    yarnLeft--;
                 }
             }
         }
