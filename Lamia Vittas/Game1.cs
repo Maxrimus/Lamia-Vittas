@@ -27,6 +27,14 @@ namespace Lamia_Vittas
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont font;
+        Texture2D gWSheet;
+
+        //needed for girl's animation
+        Point frameSize = new Point(70, 100);
+        Point currentFrame = new Point(0, 0);
+        Point frames = new Point(4, 1);
+        TimeSpan nextFrameInterval = TimeSpan.FromSeconds((float)1 / 16);
+        TimeSpan nextFrame;
 
         //Instantiations of all needed objects
         Girl g1;
@@ -85,6 +93,7 @@ namespace Lamia_Vittas
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            TargetElapsedTime = new TimeSpan(0, 0, 0, 0, 100);
         }
 
         /// <summary>
@@ -138,6 +147,8 @@ namespace Lamia_Vittas
             allObjects.Add(b1);
             d1 = new Door(new Rectangle(650, 150, 25, 150), Content.Load<Texture2D>(GameVariables.doorTexture), b1);
             allObjects.Add(d1);
+
+            gWSheet = Content.Load<Texture2D>(GameVariables.girlTextureSheet);
 
             // populate the list with collectibles, set the value to false
             // when they get collected (picked up) the value becomes true
@@ -268,12 +279,22 @@ namespace Lamia_Vittas
             if (kState.IsKeyDown(Keys.Left) && (p1.GetPosition().X >= 0))
             {//moves the player left
                 p1.SetDirection(0);
+                currentFrame.X++;
+                if (currentFrame.X >= 4)
+                {
+                    currentFrame.X = 0;
+                }
                 p1.Move();
             }
 
             if (kState.IsKeyDown(Keys.Right) && ((p1.GetPosition().X + (p1.GetPosition().Width)) < graphics.GraphicsDevice.Viewport.Width))
             {//moves the player right
                 p1.SetDirection(1);
+                currentFrame.X++;
+                if (currentFrame.X >= 4)
+                {
+                    currentFrame.X = 0;
+                }
                 p1.Move();
             }
 
@@ -515,7 +536,14 @@ namespace Lamia_Vittas
             if (main == InterfaceScreen.GameScreen)
             {
                 //draws the player
-                p1.Draw(spriteBatch);
+                if (p1.GetDirection() == 1)
+                {
+                    spriteBatch.Draw(gWSheet, p1.GetPosition(), new Rectangle(frameSize.X * currentFrame.X, frameSize.Y * currentFrame.Y, frameSize.X, frameSize.Y), Color.White);
+                }
+                else if (p1.GetDirection() == 0)
+                {
+                    spriteBatch.Draw(gWSheet, p1.GetPosition(), new Rectangle(frameSize.X * currentFrame.X, frameSize.Y * currentFrame.Y, frameSize.X, frameSize.Y), Color.White,0,new Vector2(),SpriteEffects.FlipHorizontally,0);
+                }
 
                 if (p1.fist.Visible)
                 {//draws the fist if the fist is visible
