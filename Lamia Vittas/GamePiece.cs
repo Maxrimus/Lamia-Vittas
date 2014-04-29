@@ -16,7 +16,7 @@ using Microsoft.Xna.Framework.GamerServices;
 
 namespace Lamia_Vittas
 {
-    abstract class GamePiece
+    public abstract class GamePiece
     {
         /*Attributes
          * position: A Vector2 holding the location of the image

@@ -11,30 +11,55 @@ using Microsoft.Xna.Framework.GamerServices;
 
 namespace Lamia_Vittas
 {
-    class Physics
+    public static class Physics
     {
-        public double velocity;
-        public bool up = true;
+        public static double xVelocity;
+        public static double yVelocity;
+        public static bool up = true;
+        public static bool jump = false;
+        public static int jumpAngle = (int)(Math.PI / 4);
+        public static int walkAngle = 0;
+        public static int initVel = 10;
+        public static double time = 0;
 
-        public void upDateVelocity(int acc)
+        public static void upDateVelocity(double tm)
         {
-            if (velocity > 0 && up)
+            time += tm;
+
+            if (up)
             {
-                velocity -= acc;
-            }
-            else if (velocity == 0)
-            {
-                up = false;
+                if (jump)
+                {
+                    yVelocity = (Math.Sin(jumpAngle) * initVel * time) - (.5 * GameVariables.gravity * Math.Pow(time, 2));
+                }
+                else
+                {
+                    yVelocity = (Math.Sin(jumpAngle) * initVel * time) - (.5 * GameVariables.gravity * Math.Pow(time, 2));
+                }
             }
             else
             {
-                velocity += acc;
+                if (jump)
+                {
+                    yVelocity = (Math.Sin(jumpAngle) * initVel * time) - (.5 * -GameVariables.gravity * Math.Pow(time, 2));
+                }
+                else
+                {
+                    yVelocity = (Math.Sin(jumpAngle) * initVel * time) - (.5 * -GameVariables.gravity * Math.Pow(time, 2));
+                }
             }
+
+            if (yVelocity <= 0)
+            {
+                up = false;
+            }
+
+            xVelocity = Math.Cos(jumpAngle) * initVel * time;
         }
 
-        public void upDateY(GamePiece gp)
+        public static void upDateY(GamePiece gp)
         {
-            gp.PictureBox = new Rectangle(gp.PictureBox.X,(int)(gp.PictureBox.Y + velocity),gp.PictureBox.Width,gp.PictureBox.Height);
+            gp.PictureBox = new Rectangle((int)(gp.PictureBox.X + xVelocity),(int)(gp.PictureBox.Y + yVelocity),gp.PictureBox.Width,gp.PictureBox.Height);
         }
     }
 }

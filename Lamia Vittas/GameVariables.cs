@@ -25,15 +25,14 @@ namespace Lamia_Vittas
         //movement
         public static int girlMAXSpeed = 7;
         public static int catMAXSpeed = 20;
-        public static int girlJump = 40;
-        public static int catJump = 80;
+        public static int girlJump = 100;
+        public static int catJump = 200;
         public static int enemySpeed = 10;
 
         // physics
-        public static int gravity = 1;
+        public static int gravity = -2;
         public static int girlAcc = 9;
         public static int catAcc = 12;
-        public static int jumpAngle = 45;
 
         //dark textures
         public static string girlTexture = "Girl";

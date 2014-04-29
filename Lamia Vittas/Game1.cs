@@ -164,13 +164,23 @@ namespace Lamia_Vittas
                 p1.Move();
             }
 
-            if (kState.IsKeyDown(Keys.Space) /*&& !oldState.IsKeyDown(Keys.Space)*/ && (p1.GetPosition().Y >= 0))
+            if (kState.IsKeyDown(Keys.Space) && !oldState.IsKeyDown(Keys.Space) && (p1.GetPosition().Y >= 0))
             {//makes the player jump
-                if (p1.GetPosition().Y + p1.Image().Height >= jumpStart - p1.JumpHeight())
-                {
-                p1.Jump(spriteBatch);
+                /*
+                Physics.upDateVelocity((1/60));
+                Physics.upDateY(g1);
+                 */
+                jumpStart = p1.GetPosition().Bottom;
+
+                enableSpace = true;
+
                 
+                while (p1.GetPosition().Bottom >= jumpStart - p1.JumpHeight())
+                {
+                    p1.Jump(spriteBatch);
                 }
+                 
+                 
                     /*
                 else
                 { 
@@ -179,20 +189,31 @@ namespace Lamia_Vittas
                      */
             }
 
-            /*
-            if ((kState.IsKeyDown(Keys.Space) && oldState.IsKeyDown(Keys.Space)) && (enableSpace == false) && (p1.GetPosition().Y + p1.Image().Height <= jumpStart))
+            if (enableSpace)
             {
-                for (int i = 0; i < p1.JumpHeight()/4; i++)
-                {
-                    p1.Fall(spriteBatch);
-                }
+                p1.Jump(spriteBatch);
             }
-             */
+
+            if ((kState.IsKeyDown(Keys.Space) && oldState.IsKeyDown(Keys.Space)) && enableSpace)
+            {
+                
+            }
+             
 
 
-            if (kState.IsKeyUp(Keys.Space) && p1.GetPosition().Y < 250)
+            if (kState.IsKeyUp(Keys.Space) && p1.GetPosition().Bottom < 300)
             {//brings the player down from their jump
                 p1.Fall(spriteBatch);
+
+                if (!(p1.GetPosition().Bottom >= jumpStart - p1.JumpHeight()))
+                {
+                    enableSpace = false;
+                }
+
+                if (p1.GetPosition().Bottom == 300)
+                {
+                    enableSpace = true;
+                }
                 //enableSpace = true;
             }
 
@@ -514,8 +535,6 @@ namespace Lamia_Vittas
                 // damage the player
                 bu1.DamagePlayerBush(p1);
             }
-             
-             
             
                 // check for collisions between bush and character
         }     
