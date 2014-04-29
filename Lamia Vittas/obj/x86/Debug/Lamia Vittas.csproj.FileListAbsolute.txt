@@ -88,3 +88,6 @@ C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Cont
 C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.exe
 C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.pdb
 C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.csprojResolveAssemblyReference.cache
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\ButtonOriginal.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\ButtonPressed.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Door.xnb

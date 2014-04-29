@@ -128,9 +128,9 @@ namespace Lamia_Vittas
             allObjects.Add(s2);
             bu2 = new Bush(new Rectangle(600, 400, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
             allObjects.Add(bu2);
-            b1 = new Button(new Rectangle(25, 200, 25, 75), Content.Load<Texture2D>(GameVariables.bushTexture));
+            b1 = new Button(new Rectangle(25, 200, 25, 75), Content.Load<Texture2D>(GameVariables.buttonOriginalTexture));
             allObjects.Add(b1);
-            d1 = new Door(new Rectangle(650, 150, 25, 150), Content.Load<Texture2D>(GameVariables.bushTexture), b1);
+            d1 = new Door(new Rectangle(650, 150, 25, 150), Content.Load<Texture2D>(GameVariables.doorTexture), b1);
             allObjects.Add(d1);
 
             //creates fonts
@@ -285,11 +285,13 @@ namespace Lamia_Vittas
             if (kState.IsKeyDown(Keys.LeftShift) && !oldState.IsKeyDown(Keys.LeftShift))
             {//switches from girl to cat and vice versa
                 p1.Switch();
+
             }
 
             if (kState.IsKeyDown(Keys.R) && oldState.IsKeyDown(Keys.R))
             {//reset the original position of the cat and girl
                 p1.ResetPosition();
+                b1.on = false;
             }
 
             if (kState.IsKeyDown(Keys.P) && p1.state == 0)
@@ -343,6 +345,19 @@ namespace Lamia_Vittas
                     //d1.Draw(spriteBatch);
                 }
             }
+
+            
+            if (b1.on == true)
+            {
+                b1 = new Button(b1.PictureBox,Content.Load<Texture2D>(GameVariables.buttonPressedTexture));
+                b1.on = true;
+                d1.on = false;
+            }
+            else
+            {
+                b1 = new Button(b1.PictureBox, Content.Load<Texture2D>(GameVariables.buttonOriginalTexture));
+            }
+            
 
             // checks if the game is over
             if (p1.Lives <= 0)
@@ -486,6 +501,11 @@ namespace Lamia_Vittas
                 b1.Draw(spriteBatch);
                 d1.Draw(spriteBatch);
 
+                foreach (GamePiece i in bBs)
+                {//draws all Bounding Boxes
+                    i.Draw(spriteBatch);
+                }
+
                 // draw the Debug info
                 spriteBatch.DrawString(font,
                     p1.GetPosition()
@@ -496,11 +516,8 @@ namespace Lamia_Vittas
                     + "\nHealth:        " + p1.Health
                     + "\nLives:         " + p1.Lives
                     + "\nGame Over: " + GameOver
-                    + "\n\nLeft arrow - move left     Right arrom - more right     Shift - switch states     Space - jump/hover     R - respawn", new Vector2(0, 300), Color.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
-                foreach (GamePiece i in bBs)
-                {//draws all Bounding Boxes
-                    i.Draw(spriteBatch);
-                }
+                    + "\n\nLeft arrow - move left     Right arrom - more right     Shift - switch states     Space - jump/hover     R - respawn", new Vector2(0, 300), Color.Red, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+
 
                 // Draws the pause texture
                 spriteBatch.Draw(pauseTexture, new Vector2(770, 450), Color.White);
