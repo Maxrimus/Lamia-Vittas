@@ -88,7 +88,6 @@ C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Cont
 C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.exe
 C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.pdb
 C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.csprojResolveAssemblyReference.cache
-<<<<<<< HEAD
 \\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.exe
 \\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.pdb
 \\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Bush.xnb
@@ -113,8 +112,6 @@ C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vitt
 \\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\OpenTK.dll
 \\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Tao.Sdl.dll
 \\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.csprojResolveAssemblyReference.cache
-=======
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\ButtonOriginal.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\ButtonPressed.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Door.xnb
->>>>>>> origin/Button-and-Door
