@@ -61,12 +61,18 @@ namespace Lamia_Vittas
 
         // Interface Textures
         //Screen Textures
-        public static string mainScreen = "MainScreen";
+        public static string mainScreen = "MainUnclicked";
         // Button Textures
-        public static string startButton = "TestStart";
-        public static string quitButton = "TestQuit";
-        public static string returnToMenu = "Return To Menu";
+        public static string newButton = "NewButton";
+        public static string quitButton = "QuitButton";
+        //public static string returnToMenu = "Return To Menu";
         // Pause Texture
         public static string pause = "Pause";
+        public static string pauseMenu = "pauseMenu";
+        public static string returnMenu = "R2Menu";
+        public static string returnToGame = "R2Game";
+        public static string returnToDesktrop = "R2Desktop";
+      
+
     }
 }

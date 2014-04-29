@@ -55,7 +55,6 @@ Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Spikes.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Vial.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Yarn.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Arial.xnb
-Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\MainScreen.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Pause.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\TestQuit.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\TestStart.xnb
@@ -88,3 +87,10 @@ C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Cont
 C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.exe
 C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.pdb
 C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.csprojResolveAssemblyReference.cache
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\MainUnclicked.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\pauseMenu.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\NewButton.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\QuitButton.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\R2Desktop.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\R2Game.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\R2Menu.xnb

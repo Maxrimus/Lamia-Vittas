@@ -60,10 +60,23 @@ namespace Lamia_Vittas
 
         //Textures for the Screens
         Texture2D mainScreenTexture;
-        Texture2D startButton;
-        Texture2D quitButton;
         Texture2D pauseTexture;
         Texture2D returnToMainMenu;
+        Texture2D pauseScreenTexture;
+
+        // Rectangles for position
+        Rectangle newButton = new Rectangle();
+        Rectangle quitButton = new Rectangle();
+        Rectangle loadButton = new Rectangle();
+        Rectangle pauseRect = new Rectangle();
+        Rectangle menuRect = new Rectangle();
+        Rectangle r2Menu = new Rectangle();
+        Rectangle r2Desktop = new Rectangle();
+        Rectangle r2Game = new Rectangle();
+        Rectangle mouseRect = new Rectangle();
+        
+
+        
 
         // Dictionary to hold the button's cords
         Dictionary<int, int> buttonDict = new Dictionary<int,int>();
@@ -96,6 +109,9 @@ namespace Lamia_Vittas
             allObjects = new List<GamePiece>();
             bBs = new List<GamePiece>();
             mState = new MouseState();
+            this.Window.Title = "Lamia Vittas";
+            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferWidth = 800;
             base.Initialize();
         }
 
@@ -131,12 +147,47 @@ namespace Lamia_Vittas
             //creates fonts
             font = Content.Load<SpriteFont>(GameVariables.arialFont);
             
+            // Store the data into the rectangles
+            newButton.X = 43;
+            newButton.Y = 215;
+            newButton.Width = 700;
+            newButton.Height = 84;
+
+            quitButton.X = 43;
+            quitButton.Y = 464;
+            quitButton.Width = 706;
+            quitButton.Height = 109;
+
+            pauseRect.X = 750;
+            pauseRect.Y = 550;
+            pauseRect.Width = 33;
+            pauseRect.Height = 33;
+
+            menuRect.Y = 100;
+            menuRect.X = 140;
+            menuRect.Width = 510;
+            menuRect.Height = 430;
+
+            r2Game.X = 120;
+            r2Game.Y = 170;
+            r2Game.Width = 379;
+            r2Game.Height = 43;
+
+            r2Menu.X = 154;
+            r2Menu.Y = 360;
+            r2Menu.Width = 481;
+            r2Menu.Height = 72;
+
             //creates screens
-            mainScreen = new MainScreen(Content.Load<Texture2D>(GameVariables.startButton), Content.Load<Texture2D>(GameVariables.quitButton), Content.Load<Texture2D>(GameVariables.returnToMenu), new Rectangle(200, 200, 97, 33), new Rectangle(100, 200, 97, 33), new Rectangle(300, 200, 100, 100));
+            mainScreen = new MainScreen(Content.Load<Texture2D>(GameVariables.newButton), Content.Load<Texture2D>(GameVariables.quitButton), Content.Load<Texture2D>(GameVariables.returnMenu), newButton, quitButton, r2Menu);
             mainScreenTexture = Content.Load<Texture2D>(GameVariables.mainScreen);
             pauseTexture = Content.Load<Texture2D>(GameVariables.pause);
-            pauseScreen = new PauseScreen(Content.Load<Texture2D>(GameVariables.startButton), Content.Load<Texture2D>(GameVariables.quitButton), Content.Load<Texture2D>(GameVariables.returnToMenu), new Rectangle(200, 200, 97, 33), new Rectangle(100, 200, 97, 33), new Rectangle(300, 200, 100, 100));
-            //returnToMainMenu = Content.Load<Texture2D>(GameVariables.returnToMenu);
+            pauseScreenTexture = Content.Load<Texture2D>(GameVariables.pauseMenu);
+            //pauseScreen = new PauseScreen(Content.Load<Texture2D>(GameVariables.newButton), Content.Load<Texture2D>(GameVariables.quitButton), Content.Load<Texture2D>(GameVariables.pauseMenu), new Rectangle(160, 200, 97, 33), new Rectangle(100, 200, 97, 33), new Rectangle(150, 80, 510, 430));
+         
+
+            returnToMainMenu = Content.Load<Texture2D>(GameVariables.returnMenu);
+
 
             //creates platforms and adds to platforms List
             platforms.Add(new Platform(new Rectangle(0, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
@@ -300,46 +351,83 @@ namespace Lamia_Vittas
            
                 //Gets the mouse's state.
                 mState = Mouse.GetState();
-                for (int r = 200; r <= 297; r++)
+            /*    if (main == InterfaceScreen.MainScreen)
                 {
-                    for (int c = 200; c <= 233; c++)
+                    mouseRect.X = mState.X;
+                    mouseRect.Y = mState.Y;
+                    if ((newButton.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
                     {
-                        if ((mState.X == r) && (mState.Y == c) && (mState.LeftButton == ButtonState.Pressed))
-                        {
-                            // Changes the Enum to GameScreen
-                            main = InterfaceScreen.GameScreen;
-                            // Calls the draw method
-                            Draw(gameTime);
-                            r = 297;
-                            c = 233;
-                        }
+                        // Changes the Enum to GameScreen
+                        main = InterfaceScreen.GameScreen;
+                        // Calls the draw method
+                        Draw(gameTime);
                     }
-                }
-            
+                    // Outdated Code!
+                     for (int r = 200; r <= 297; r++)
+                     {
+                         for (int c = 200; c <= 233; c++)
+                         {
+                             if ((mState.X == r) && (mState.Y == c) && (mState.LeftButton == ButtonState.Pressed))
+                             {
+                                 // Changes the Enum to GameScreen
+                                 main = InterfaceScreen.GameScreen;
+                                 // Calls the draw method
+                                 Draw(gameTime);
+                                 r = 297;
+                                 c = 233;
+                             }
+                         }
+                     }
 
-            if (main == InterfaceScreen.GameScreen)
-            {
-                for (int r = 770; r <= 870; r++)
+                }*/
+           
+                if (main == InterfaceScreen.GameScreen)
                 {
-                    for (int c = 450; c <= 550; c++)
+
+                    mouseRect.X = mState.X;
+                    mouseRect.Y = mState.Y;
+                    if ((pauseRect.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
                     {
-                        if ((mState.X == r) && (mState.Y == c) && (mState.LeftButton == ButtonState.Pressed))
-                        {
-                            main = InterfaceScreen.PauseScreen;
+                        // Changes Enum to PauseScreen
+                        main = InterfaceScreen.PauseScreen;
 
-                            // Calls the draw method
-                            Draw(gameTime);
-
-                            r = 870;
-                            c = 550;
-                        }
-
+                        // Calls the draw method
+                        Draw(gameTime);
                     }
+                     
                 }
-            }
+             
 
             if (main == InterfaceScreen.MainScreen)
             {
+
+                mouseRect.X = mState.X;
+                mouseRect.Y = mState.Y;
+
+                // Checks if the mouse is in the newbutton's rectangle
+                if ((newButton.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
+                {
+                    // Changes the Enum to GameScreen
+                    main = InterfaceScreen.GameScreen;
+                    // Calls the draw method
+                    Draw(gameTime);
+                }
+
+                // Checks if the mouse is in the quitbutton's rectangle
+                if ((quitButton.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
+                {
+                    // Closes the Window
+                    Exit();
+                }
+
+                // Not Implemented as of yet
+                if ((loadButton.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
+                {
+                    
+                }
+
+               
+                /*
                 for (int r = 100; r <= 197; r++)
                 {
                     for (int c = 200; c <= 233; c++)
@@ -351,29 +439,19 @@ namespace Lamia_Vittas
                         }
                     }
                 }
+                 */
             }
 
 
             if (main == InterfaceScreen.PauseScreen)
             {
-                for (int r = 300; r <= 400; r++)
+                if ((r2Menu.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
                 {
-                    for (int c = 200; c <= 300; c++)
-                    {
-                        if ((mState.X == r) && (mState.Y == c) && (mState.LeftButton == ButtonState.Pressed))
-                        {
-                            main = InterfaceScreen.MainScreen;
-
-                            // Calls the draw method
-                            Draw(gameTime);
-                            r = 400;
-                            c = 500;
-                        }
-
-                    }
+                    main = InterfaceScreen.MainScreen;
+                    Draw(gameTime);
                 }
             }
-
+       
           
             base.Update(gameTime);
         }
@@ -446,12 +524,14 @@ namespace Lamia_Vittas
                 }
 
                 // Draws the pause texture
-                spriteBatch.Draw(pauseTexture, new Vector2(770, 450), Color.White);
+                spriteBatch.Draw(pauseTexture, pauseRect, Color.White);
             }
             if (main == InterfaceScreen.PauseScreen)
             {
-                spriteBatch.Draw(mainScreenTexture, new Vector2(0, 0), Color.White);
-                pauseScreen.Draw(spriteBatch);
+                GraphicsDevice.Clear(Color.Black);
+                spriteBatch.Draw(pauseScreenTexture, menuRect, Color.White);
+                spriteBatch.Draw(returnToMainMenu, r2Menu, Color.White);
+                
 
             }
 
