@@ -425,21 +425,6 @@ namespace Lamia_Vittas
                 {
                     
                 }
-
-               
-                /*
-                for (int r = 100; r <= 197; r++)
-                {
-                    for (int c = 200; c <= 233; c++)
-                    {
-                        if ((mState.X == r) && (mState.Y == c) && (mState.LeftButton == ButtonState.Pressed))
-                        {
-                            // Closes the Window
-                            Exit();
-                        }
-                    }
-                }
-                 */
             }
 
 
