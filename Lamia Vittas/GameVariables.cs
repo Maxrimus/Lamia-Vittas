@@ -30,7 +30,7 @@ namespace Lamia_Vittas
         public static int enemySpeed = 10;
 
         // physics
-        public static int gravity = -2;
+        public static int gravity = -1;
         public static int girlAcc = 9;
         public static int catAcc = 12;
 

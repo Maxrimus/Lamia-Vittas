@@ -59,6 +59,8 @@ namespace Lamia_Vittas
         InterfaceScreen main;
         bool enableSpace = true;
 
+        int worldClock = 0;
+
         int jumpStart;
 
         public Game1()
@@ -96,7 +98,7 @@ namespace Lamia_Vittas
             main = InterfaceScreen.MainScreen;
 
             // TODO: use this.Content to load your game content here
-            g1 = new Girl(new Rectangle(600,100, 96, 128),Content.Load<Texture2D>(GameVariables.girlTexture),1,250,2);
+            g1 = new Girl(new Rectangle(300,100, 96, 128),Content.Load<Texture2D>(GameVariables.girlTexture),1,250,2);
             c1 = new Cat(new Rectangle(600,100, 128, 96), Content.Load<Texture2D>(GameVariables.catTexture), 1, 250, 0);
             s1 = new Spike(new Rectangle(0, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
             bu1 = new Bush(new Rectangle(200, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
@@ -152,6 +154,9 @@ namespace Lamia_Vittas
             // TODO: Add your update logic here
 
             kState = Keyboard.GetState();
+
+            Physics.upDateY(p1.GamePiece(), worldClock, spriteBatch);
+
             if (kState.IsKeyDown(Keys.Left) && (p1.GetPosition().X >= 0))
             {//moves the player left
                 p1.SetDirection(0);
@@ -164,12 +169,16 @@ namespace Lamia_Vittas
                 p1.Move();
             }
 
-            if (kState.IsKeyDown(Keys.Space) && !oldState.IsKeyDown(Keys.Space) && (p1.GetPosition().Y >= 0))
+            worldClock = gameTime.TotalGameTime.Milliseconds;
+
+            if (kState.IsKeyUp(Keys.Space) && oldState.IsKeyDown(Keys.Space) /*&& (p1.GetPosition().Y >= 0)*/)
             {//makes the player jump
+                Physics.jump = true;
+                Physics.upDateVelocity((worldClock));
+                Physics.upDateY(p1.GamePiece(), worldClock, spriteBatch);
+                Physics.jump = false;
+
                 /*
-                Physics.upDateVelocity((1/60));
-                Physics.upDateY(g1);
-                 */
                 jumpStart = p1.GetPosition().Bottom;
 
                 enableSpace = true;
@@ -179,6 +188,7 @@ namespace Lamia_Vittas
                 {
                     p1.Jump(spriteBatch);
                 }
+                 */
                  
                  
                     /*
@@ -189,6 +199,7 @@ namespace Lamia_Vittas
                      */
             }
 
+            /*
             if (enableSpace)
             {
                 p1.Jump(spriteBatch);
@@ -198,13 +209,15 @@ namespace Lamia_Vittas
             {
                 
             }
+             */
              
 
-
-            if (kState.IsKeyUp(Keys.Space) && p1.GetPosition().Bottom < 300)
+            /*
+            if (kState.IsKeyUp(Keys.Space))
             {//brings the player down from their jump
                 p1.Fall(spriteBatch);
 
+                /*
                 if (!(p1.GetPosition().Bottom >= jumpStart - p1.JumpHeight()))
                 {
                     enableSpace = false;
@@ -214,8 +227,9 @@ namespace Lamia_Vittas
                 {
                     enableSpace = true;
                 }
+                 
                 //enableSpace = true;
-            }
+            }*/
 
 
             if (kState.IsKeyDown(Keys.LeftShift) && !oldState.IsKeyDown(Keys.LeftShift))

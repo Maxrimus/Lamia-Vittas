@@ -13,53 +13,64 @@ namespace Lamia_Vittas
 {
     public static class Physics
     {
-        public static double xVelocity;
-        public static double yVelocity;
+        public static double yVelocity = 0;
         public static bool up = true;
         public static bool jump = false;
         public static int jumpAngle = (int)(Math.PI / 4);
         public static int walkAngle = 0;
         public static int initVel = 10;
-        public static double time = 0;
+        public static float prevTimeVel = 0;
+        public static float curTimeVel = 0;
+        public static float prevTimeDist = 0;
+        public static float curTimeDist = 0;
 
-        public static void upDateVelocity(double tm)
+        public static void upDateVelocity(int tm)
         {
-            time += tm;
+            curTimeVel = tm;
+
+            double timeToUse = curTimeVel - prevTimeVel;
 
             if (up)
             {
-                if (jump)
-                {
-                    yVelocity = (Math.Sin(jumpAngle) * initVel * time) - (.5 * GameVariables.gravity * Math.Pow(time, 2));
-                }
-                else
-                {
-                    yVelocity = (Math.Sin(jumpAngle) * initVel * time) - (.5 * GameVariables.gravity * Math.Pow(time, 2));
-                }
+                yVelocity = yVelocity + GameVariables.gravity * timeToUse;
             }
             else
             {
-                if (jump)
-                {
-                    yVelocity = (Math.Sin(jumpAngle) * initVel * time) - (.5 * -GameVariables.gravity * Math.Pow(time, 2));
-                }
-                else
-                {
-                    yVelocity = (Math.Sin(jumpAngle) * initVel * time) - (.5 * -GameVariables.gravity * Math.Pow(time, 2));
-                }
+                yVelocity = yVelocity - GameVariables.gravity * timeToUse;
             }
 
-            if (yVelocity <= 0)
+            yVelocity = yVelocity/1000;
+
+            if (yVelocity >= 0)
             {
                 up = false;
             }
 
-            xVelocity = Math.Cos(jumpAngle) * initVel * time;
+            prevTimeVel = curTimeVel;
         }
 
-        public static void upDateY(GamePiece gp)
+        public static void upDateY(GamePiece gp, int time, SpriteBatch batch)
         {
-            gp.PictureBox = new Rectangle((int)(gp.PictureBox.X + xVelocity),(int)(gp.PictureBox.Y + yVelocity),gp.PictureBox.Width,gp.PictureBox.Height);
+            batch.Begin();
+            curTimeDist = time;
+            double timeToUse = curTimeDist - prevTimeDist;
+
+            if (jump == true)
+            {
+                int toChange = (int)((yVelocity * timeToUse) + (.5 * GameVariables.gravity * Math.Pow(timeToUse, 2)));
+                gp.PictureBox = new Rectangle(gp.PictureBox.X, gp.PictureBox.Y + toChange, gp.PictureBox.Width, gp.PictureBox.Height);
+                gp.Draw(batch);
+            }
+            else
+            {
+                gp.PictureBox = new Rectangle(gp.PictureBox.X, gp.PictureBox.Y + 10, gp.PictureBox.Width, gp.PictureBox.Height);
+                gp.Draw(batch);
+            }
+
+            yVelocity = 0;
+
+            batch.End();
+            prevTimeDist = curTimeDist;
         }
     }
 }
