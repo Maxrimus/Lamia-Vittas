@@ -62,6 +62,8 @@ namespace Lamia_Vittas
         Texture2D mainScreenTexture;
         Texture2D pauseTexture;
         Texture2D returnToMainMenu;
+        Texture2D returnToGame;
+        Texture2D returnToDesktop;
         Texture2D pauseScreenTexture;
 
         // Rectangles for position
@@ -74,9 +76,6 @@ namespace Lamia_Vittas
         Rectangle r2Desktop = new Rectangle();
         Rectangle r2Game = new Rectangle();
         Rectangle mouseRect = new Rectangle();
-        
-
-        
 
         // Dictionary to hold the button's cords
         Dictionary<int, int> buttonDict = new Dictionary<int,int>();
@@ -84,6 +83,8 @@ namespace Lamia_Vittas
         bool GameOver = false;
         InterfaceScreen main;
         bool enableSpace = true;
+
+        bool touchCheck = false;
 
         int jumpStart;
 
@@ -129,20 +130,20 @@ namespace Lamia_Vittas
             // TODO: use this.Content to load your game content here
 
             //Instantiates objects and adds to allObjects List
-            g1 = new Girl(new Rectangle(600,100, 96, 128),Content.Load<Texture2D>(GameVariables.girlTexture),1,250,2);
+            g1 = new Girl(new Rectangle(238,252, 96, 128),Content.Load<Texture2D>(GameVariables.girlTexture),1,250,2);
             allObjects.Add(g1);
             f1 = new Fist(new Rectangle(600, 200, 60, 20), Content.Load<Texture2D>(GameVariables.fistTexture), 1);
             allObjects.Add(f1);
             c1 = new Cat(new Rectangle(600,100, 128, 96), Content.Load<Texture2D>(GameVariables.catTexture), 1, 250, 0);
             allObjects.Add(c1);
-            s1 = new Spike(new Rectangle(0, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
-            allObjects.Add(s1);
-            bu1 = new Bush(new Rectangle(200, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
-            allObjects.Add(bu1);
-            s2 = new Spike(new Rectangle(400, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
-            allObjects.Add(s2);
-            bu2 = new Bush(new Rectangle(600, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
-            allObjects.Add(bu2);
+           // s1 = new Spike(new Rectangle(0, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
+         //   allObjects.Add(s1);
+        //    bu1 = new Bush(new Rectangle(200, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
+         //   allObjects.Add(bu1);
+          //  s2 = new Spike(new Rectangle(400, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
+           // allObjects.Add(s2);
+          //  bu2 = new Bush(new Rectangle(600, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
+          //  allObjects.Add(bu2);
 
             //creates fonts
             font = Content.Load<SpriteFont>(GameVariables.arialFont);
@@ -168,15 +169,20 @@ namespace Lamia_Vittas
             menuRect.Width = 510;
             menuRect.Height = 430;
 
-            r2Game.X = 120;
-            r2Game.Y = 170;
-            r2Game.Width = 379;
-            r2Game.Height = 43;
+            r2Game.X = 154;
+            r2Game.Y = 283;
+            r2Game.Width = 482;
+            r2Game.Height = 72;
 
             r2Menu.X = 154;
             r2Menu.Y = 360;
-            r2Menu.Width = 481;
+            r2Menu.Width = 482;
             r2Menu.Height = 72;
+
+            r2Desktop.X = 154;
+            r2Desktop.Y = 436;
+            r2Desktop.Width = 482;
+            r2Desktop.Height = 72;
 
             //creates screens
             mainScreen = new MainScreen(Content.Load<Texture2D>(GameVariables.newButton), Content.Load<Texture2D>(GameVariables.quitButton), Content.Load<Texture2D>(GameVariables.returnMenu), newButton, quitButton, r2Menu);
@@ -185,17 +191,22 @@ namespace Lamia_Vittas
             pauseScreenTexture = Content.Load<Texture2D>(GameVariables.pauseMenu);
             //pauseScreen = new PauseScreen(Content.Load<Texture2D>(GameVariables.newButton), Content.Load<Texture2D>(GameVariables.quitButton), Content.Load<Texture2D>(GameVariables.pauseMenu), new Rectangle(160, 200, 97, 33), new Rectangle(100, 200, 97, 33), new Rectangle(150, 80, 510, 430));
          
-
+            // Loads the return to MainMenu button
             returnToMainMenu = Content.Load<Texture2D>(GameVariables.returnMenu);
 
+            // Loads the return to game.
+            returnToGame = Content.Load<Texture2D>(GameVariables.returnToGame);
+
+            // Loads the return to Desktop
+            returnToDesktop = Content.Load<Texture2D>(GameVariables.returnToDesktrop);
 
             //creates platforms and adds to platforms List
-            platforms.Add(new Platform(new Rectangle(0, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(200, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(0, 300, 200, 50), Content.Load<Texture2D>(GameVariables.blockTexture)));
+         //   platforms.Add(new Platform(new Rectangle(200, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(400, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(600, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(0, 100, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(600, 100, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            //platforms.Add(new Platform(new Rectangle(600, 300, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
+           // platforms.Add(new Platform(new Rectangle(0, 100, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
+          //  platforms.Add(new Platform(new Rectangle(600, 100, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
 
             foreach (Platform i in platforms)
             {//adds all platforms to allObjects List
@@ -284,8 +295,10 @@ namespace Lamia_Vittas
 
 
             if (kState.IsKeyUp(Keys.Space) && p1.GetPosition().Y < 250)
-            {//brings the player down from their jump
-                p1.Fall(spriteBatch);
+            {
+
+                //brings the player down from their jump
+                p1.Fall(spriteBatch, touchCheck);
                 //enableSpace = true;
             }
 
@@ -337,9 +350,6 @@ namespace Lamia_Vittas
             //sets old state to the current one
             oldState = kState;
 
-            //checks for any collisions
-            CheckCollisions();
-
             // checks if the game is over
             if (p1.Lives <= 0)
             {
@@ -351,35 +361,6 @@ namespace Lamia_Vittas
            
                 //Gets the mouse's state.
                 mState = Mouse.GetState();
-            /*    if (main == InterfaceScreen.MainScreen)
-                {
-                    mouseRect.X = mState.X;
-                    mouseRect.Y = mState.Y;
-                    if ((newButton.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
-                    {
-                        // Changes the Enum to GameScreen
-                        main = InterfaceScreen.GameScreen;
-                        // Calls the draw method
-                        Draw(gameTime);
-                    }
-                    // Outdated Code!
-                     for (int r = 200; r <= 297; r++)
-                     {
-                         for (int c = 200; c <= 233; c++)
-                         {
-                             if ((mState.X == r) && (mState.Y == c) && (mState.LeftButton == ButtonState.Pressed))
-                             {
-                                 // Changes the Enum to GameScreen
-                                 main = InterfaceScreen.GameScreen;
-                                 // Calls the draw method
-                                 Draw(gameTime);
-                                 r = 297;
-                                 c = 233;
-                             }
-                         }
-                     }
-
-                }*/
            
                 if (main == InterfaceScreen.GameScreen)
                 {
@@ -394,6 +375,9 @@ namespace Lamia_Vittas
                         // Calls the draw method
                         Draw(gameTime);
                     }
+                    //checks for any collisions
+                    CheckCollisions();
+                    //Console.WriteLine("TouchCheck Verdict - Update: " + touchCheck);
                      
                 }
              
@@ -430,10 +414,24 @@ namespace Lamia_Vittas
 
             if (main == InterfaceScreen.PauseScreen)
             {
+                mouseRect.X = mState.X;
+                mouseRect.Y = mState.Y;
                 if ((r2Menu.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
                 {
                     main = InterfaceScreen.MainScreen;
                     Draw(gameTime);
+                }
+
+                if ((r2Game.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
+                {
+                    main = InterfaceScreen.GameScreen;
+                    Draw(gameTime);
+                }
+
+                if ((r2Desktop.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
+                {
+                    // Closes the Window
+                    Exit();
                 }
             }
        
@@ -467,12 +465,24 @@ namespace Lamia_Vittas
             if (main == InterfaceScreen.MainScreen)
             {
                 spriteBatch.Draw(mainScreenTexture, new Vector2(0, 0), Color.White);
+                spriteBatch.DrawString(font,
+                    p1.GetPosition()
+                    + "\nP1 Top:       " + p1.GetPosition().Top
+                    + "\nP1 Bottom:  " + p1.GetPosition().Bottom
+                    + "\nP1 Left:       " + p1.GetPosition().Left
+                    + "\nP1 Right:     " + p1.GetPosition().Right
+                    + "\nHealth:        " + p1.Health
+                    + "\nLives:         " + p1.Lives
+                    + "\nGame Over: " + GameOver
+                    + "\nMouse X: " + mouseRect.X + "   Mouse Y: " + mouseRect.Y
+                    + "\n\nLeft arrow - move left     Right arrom - more right     Shift - switch states     Space - jump/hover     R - respawn", new Vector2(0, 300), Color.OrangeRed, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
                 mainScreen.Draw(spriteBatch);
                 
             }
 
             if (main == InterfaceScreen.GameScreen)
             {
+                
                 //draws the player
                 p1.Draw(spriteBatch);
 
@@ -487,10 +497,10 @@ namespace Lamia_Vittas
                 }
 
                 //draws obstacles
-                s1.Draw(spriteBatch);
-                s2.Draw(spriteBatch);
-                bu1.Draw(spriteBatch);
-                bu2.Draw(spriteBatch);
+             //   s1.Draw(spriteBatch);
+               // s2.Draw(spriteBatch);
+               // bu1.Draw(spriteBatch);
+              //  bu2.Draw(spriteBatch);
 
                 // draw the Debug info
                 spriteBatch.DrawString(font,
@@ -502,7 +512,8 @@ namespace Lamia_Vittas
                     + "\nHealth:        " + p1.Health
                     + "\nLives:         " + p1.Lives
                     + "\nGame Over: " + GameOver
-                    + "\n\nLeft arrow - move left     Right arrom - more right     Shift - switch states     Space - jump/hover     R - respawn", new Vector2(0, 300), Color.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                    + "\nMouse X: " + mouseRect.X + "   Mouse Y: " + mouseRect.Y
+                    + "\n\nLeft arrow - move left     Right arrom - more right     Shift - switch states     Space - jump/hover     R - respawn", new Vector2(0, 300), Color.OrangeRed, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
                 foreach (GamePiece i in bBs)
                 {//draws all Bounding Boxes
                     i.Draw(spriteBatch);
@@ -514,10 +525,11 @@ namespace Lamia_Vittas
             if (main == InterfaceScreen.PauseScreen)
             {
                 GraphicsDevice.Clear(Color.Black);
+                
                 spriteBatch.Draw(pauseScreenTexture, menuRect, Color.White);
                 spriteBatch.Draw(returnToMainMenu, r2Menu, Color.White);
-                
-
+                spriteBatch.Draw(returnToGame, r2Game, Color.White);
+                spriteBatch.Draw(returnToDesktop, r2Desktop, Color.White);
             }
 
             spriteBatch.End();
@@ -527,8 +539,22 @@ namespace Lamia_Vittas
 
         protected void CheckCollisions()
         {
+            
+
             foreach (Platform plat in platforms)
             {
+
+                if (p1.GetPosition().Intersects(plat.PictureBox))
+                {
+                    plat.IsTouching = true;
+                    Console.WriteLine("TouchCheck Verdict - Check Collisions: " + plat.IsTouching);
+                }
+                else
+                {
+                    plat.IsTouching = false;
+                    Console.WriteLine("Not touching");
+                }
+                /*
                 if (p1.GetPosition().Intersects(plat.PictureBox))
                 {
                     // determines if player is on top of a block
@@ -562,6 +588,7 @@ namespace Lamia_Vittas
                         p1.SetPosition(new Rectangle(plat.PictureBox.Right, p1.GetPosition().Y, p1.GetPosition().Width, p1.GetPosition().Height));
                     }
                 }
+                 */
             }
 
             /*
@@ -649,7 +676,7 @@ namespace Lamia_Vittas
             //}
 
             
-            if (p1.GetPosition().Intersects(s2.PictureBox))
+        /*    if (p1.GetPosition().Intersects(s2.PictureBox))
             {// check for collisions between spikes and character
 
                 // damage the player
@@ -663,7 +690,7 @@ namespace Lamia_Vittas
                 bu1.DamagePlayerBush(p1);
             }
              
-             
+             */
             
                 // check for collisions between bush and character
         }     

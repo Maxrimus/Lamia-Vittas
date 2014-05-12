@@ -24,6 +24,9 @@ namespace Lamia_Vittas
         // constant start position for the girl
         private Rectangle startPosGirl;
 
+        //List to hold platforms
+        List<Platform> platforms;
+
         // property for the starting Position
         public Rectangle StartPosGirl
         {
@@ -121,16 +124,21 @@ namespace Lamia_Vittas
             batch.End();
         }
 
+
         /// <summary>
         /// Makes the girl fall
         /// </summary>
         /// <param name="batch">The spritebatch to draw from</param>
-        public void Fall(SpriteBatch batch)
+        public void Fall(SpriteBatch batch, bool check)
         {
-            batch.Begin();
-            PictureBox = new Rectangle(PictureBox.X, PictureBox.Y + 4, GameVariables.girlWidth, GameVariables.girlHeight);
-            batch.Draw(Image, PictureBox, Color.White);
-            batch.End();
+           // bool touchCheck = check;
+           // if (touchCheck == false)
+            //{
+                batch.Begin();
+                PictureBox = new Rectangle(PictureBox.X, PictureBox.Y + 4, GameVariables.girlWidth, GameVariables.girlHeight);
+                batch.Draw(Image, PictureBox, Color.White);
+                batch.End();
+           //}
         }
 
         /// <summary>

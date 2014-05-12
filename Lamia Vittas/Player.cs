@@ -120,16 +120,20 @@ namespace Lamia_Vittas
         /// Makes the player fall
         /// </summary>
         /// <param name="batch">The spriteBatch to be drawn in</param>
-        public void Fall(SpriteBatch batch)
+        public void Fall(SpriteBatch batch, bool check)
         {
-            switch (state)
-            {//decides which method to call; 0 for girl, 1 for cat
-                case 0:
-                    girl.Fall(batch);
-                    break;
-                case 1:
-                    cat.Fall(batch);
-                    break;
+            bool touchCheck = check;
+            if (touchCheck == false)
+            {
+                switch (state)
+                {//decides which method to call; 0 for girl, 1 for cat
+                    case 0:
+                        girl.Fall(batch, check);
+                        break;
+                    case 1:
+                        cat.Fall(batch);
+                        break;
+                }
             }
         }
 

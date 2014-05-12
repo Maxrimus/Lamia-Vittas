@@ -18,9 +18,19 @@ namespace Lamia_Vittas
 {
     class Platform:GamePiece
     {
+        // Attributes
+        private bool isTouching = false;
+
         public Platform(Rectangle picturesize, Texture2D texture)
             : base(picturesize, texture)
         {
+
+        }
+
+        public bool IsTouching
+        {
+            get { return isTouching; }
+            set { isTouching = value; }
         }
     }
 }
