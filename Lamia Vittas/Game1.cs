@@ -403,7 +403,6 @@ namespace Lamia_Vittas
             {
                 if (kState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space))
                 {
-                    startY = p1.GetPosition().Y;
                     jumping = true;
                     jumpSpeed = -14;//Give it upward thrust
                 }
