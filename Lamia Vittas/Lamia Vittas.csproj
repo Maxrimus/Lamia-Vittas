@@ -57,7 +57,6 @@
     <Compile Include="MovablePlatform.cs" />
     <Compile Include="PauseScreen.cs" />
     <Compile Include="Girl.cs" />
-    <Compile Include="Physics.cs" />
     <Compile Include="Pit.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Player.cs" />

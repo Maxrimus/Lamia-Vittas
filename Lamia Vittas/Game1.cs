@@ -66,8 +66,14 @@ namespace Lamia_Vittas
         //List to hold platforms
         List<Platform> platforms;
 
+
         //list to hold all objects
         List<GamePiece> allObjects;
+
+        //jumping
+        bool jumping;
+        int startY;
+        int jumpSpeed;
 
         //list to hold all Bounding Boxes
         List<GamePiece> bBs;
@@ -103,9 +109,7 @@ namespace Lamia_Vittas
 
         bool GameOver = false;
         InterfaceScreen main;
-        bool enableSpace = true;
 
-        int jumpStart;
         int vialsLeft = 0;
         int yarnLeft = 0;
 
@@ -137,6 +141,10 @@ namespace Lamia_Vittas
             graphics.PreferredBackBufferHeight = 600;
             graphics.PreferredBackBufferWidth = 800;
             base.Initialize();
+
+            startY = p1.GetPosition().Y;//Starting position
+            jumping = false;//Init jumping to false
+            jumpSpeed = 0;//Default no speed
         }
 
         /// <summary>
@@ -153,9 +161,9 @@ namespace Lamia_Vittas
             // TODO: use this.Content to load your game content here
 
             //Instantiates objects and adds to allObjects List
-            g1 = new Girl(new Rectangle(300,200, 96, 128),Content.Load<Texture2D>(GameVariables.girlTexture),1,250,2);
+            g1 = new Girl(new Rectangle(300,172, 96, 128),Content.Load<Texture2D>(GameVariables.girlTexture),1,250,2);
             allObjects.Add(g1);
-            f1 = new Fist(new Rectangle(300, 200, 60, 20), Content.Load<Texture2D>(GameVariables.fistTexture), 1);
+            f1 = new Fist(new Rectangle(300, 172, 60, 20), Content.Load<Texture2D>(GameVariables.fistTexture), 1);
             allObjects.Add(f1);
             c1 = new Cat(new Rectangle(600,100, 128, 96), Content.Load<Texture2D>(GameVariables.catTexture), 1, 250, 0);
             allObjects.Add(c1);
@@ -380,38 +388,26 @@ namespace Lamia_Vittas
                 p1.Move();
             }
 
-            if (kState.IsKeyDown(Keys.Space) /*&& !oldState.IsKeyDown(Keys.Space)*/ && (p1.GetPosition().Y >= 0))
-            {//makes the player jump
-                if (p1.GetPosition().Y + p1.Image().Height >= jumpStart - p1.JumpHeight())
-                {
-                p1.Jump(spriteBatch);
-                
-                }
-                    /*
-                else
-                { 
-                    enableSpace = false;
-                }
-                     */
-            }
-
-            /*
-            if ((kState.IsKeyDown(Keys.Space) && oldState.IsKeyDown(Keys.Space)) && (enableSpace == false) && (p1.GetPosition().Y + p1.Image().Height <= jumpStart))
+            if (jumping)
             {
-                for (int i = 0; i < p1.JumpHeight()/4; i++)
+                p1.SetPosition(new Rectangle(p1.GetPosition().X,p1.GetPosition().Y + jumpSpeed,p1.GetPosition().Width,p1.GetPosition().Height));//Making it go up
+                jumpSpeed += 1;//Some math (explained later)
+                if (p1.GetPosition().Y >= startY)
+                //If it's farther than ground
                 {
-                    p1.Fall(spriteBatch);
+                    p1.SetPosition(new Rectangle(p1.GetPosition().X, startY, p1.GetPosition().Width, p1.GetPosition().Height)); ;//Then set it on
+                    jumping = false;
                 }
             }
-             */
-
-
-            if (kState.IsKeyUp(Keys.Space) && p1.GetPosition().Y < 250)
-            {//brings the player down from their jump
-                p1.Fall(spriteBatch);
-                //enableSpace = true;
+            else
+            {
+                if (kState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space))
+                {
+                    startY = p1.GetPosition().Y;
+                    jumping = true;
+                    jumpSpeed = -14;//Give it upward thrust
+                }
             }
-
 
             if (kState.IsKeyDown(Keys.LeftShift) && !oldState.IsKeyDown(Keys.LeftShift))
             {//switches from girl to cat and vice versa
@@ -887,8 +883,6 @@ namespace Lamia_Vittas
                 // damage the player
                 bu1.DamagePlayerBush(p1);
             }
-             
-             
             
                 // check for collisions between bush and character
         }
