@@ -28,13 +28,21 @@ namespace Lamia_Vittas
         SpriteBatch spriteBatch;
         SpriteFont font;
         Texture2D gWSheet;
+        Texture2D cWSheet;
 
         //needed for girl's animation
-        Point frameSize = new Point(70, 100);
-        Point currentFrame = new Point(0, 0);
-        Point frames = new Point(4, 1);
-        TimeSpan nextFrameInterval = TimeSpan.FromSeconds((float)1 / 16);
-        TimeSpan nextFrame;
+        Point gframeSize = new Point(70, 100);
+        Point gcurrentFrame = new Point(0, 0);
+        Point gframes = new Point(4, 1);
+        TimeSpan gnextFrameInterval = TimeSpan.FromSeconds((float)1 / 16);
+        TimeSpan gnextFrame;
+
+        //needed for girl's animation
+        Point cframeSize = new Point(100, 50);
+        Point ccurrentFrame = new Point(0, 0);
+        Point cframes = new Point(4, 1);
+        TimeSpan cnextFrameInterval = TimeSpan.FromSeconds((float)1 / 16);
+        TimeSpan cnextFrame;
 
         //Instantiations of all needed objects
         Girl g1;
@@ -58,8 +66,14 @@ namespace Lamia_Vittas
         //List to hold platforms
         List<Platform> platforms;
 
+
         //list to hold all objects
         List<GamePiece> allObjects;
+
+        //jumping
+        bool jumping;
+        int startY;
+        int jumpSpeed;
 
         //list to hold all Bounding Boxes
         List<GamePiece> bBs;
@@ -72,19 +86,30 @@ namespace Lamia_Vittas
 
         //Textures for the Screens
         Texture2D mainScreenTexture;
-        Texture2D startButton;
-        Texture2D quitButton;
         Texture2D pauseTexture;
         Texture2D returnToMainMenu;
+        Texture2D pauseScreenTexture;
+
+        // Rectangles for position
+        Rectangle newButton = new Rectangle();
+        Rectangle quitButton = new Rectangle();
+        Rectangle loadButton = new Rectangle();
+        Rectangle pauseRect = new Rectangle();
+        Rectangle menuRect = new Rectangle();
+        Rectangle r2Menu = new Rectangle();
+        Rectangle r2Desktop = new Rectangle();
+        Rectangle r2Game = new Rectangle();
+        Rectangle mouseRect = new Rectangle();
+        
+
+        
 
         // Dictionary to hold the button's cords
         Dictionary<int, int> buttonDict = new Dictionary<int,int>();
 
         bool GameOver = false;
         InterfaceScreen main;
-        bool enableSpace = true;
 
-        int jumpStart;
         int vialsLeft = 0;
         int yarnLeft = 0;
 
@@ -112,7 +137,14 @@ namespace Lamia_Vittas
             coll = new List<Collectible>();
             bBs = new List<GamePiece>();
             mState = new MouseState();
+            this.Window.Title = "Lamia Vittas";
+            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferWidth = 800;
             base.Initialize();
+
+            startY = p1.GetPosition().Y;//Starting position
+            jumping = false;//Init jumping to false
+            jumpSpeed = 0;//Default no speed
         }
 
         /// <summary>
@@ -129,9 +161,9 @@ namespace Lamia_Vittas
             // TODO: use this.Content to load your game content here
 
             //Instantiates objects and adds to allObjects List
-            g1 = new Girl(new Rectangle(300,200, 96, 128),Content.Load<Texture2D>(GameVariables.girlTexture),1,250,2);
+            g1 = new Girl(new Rectangle(300,172, 96, 128),Content.Load<Texture2D>(GameVariables.girlTexture),1,250,2);
             allObjects.Add(g1);
-            f1 = new Fist(new Rectangle(300, 200, 60, 20), Content.Load<Texture2D>(GameVariables.fistTexture), 1);
+            f1 = new Fist(new Rectangle(300, 172, 60, 20), Content.Load<Texture2D>(GameVariables.fistTexture), 1);
             allObjects.Add(f1);
             c1 = new Cat(new Rectangle(600,100, 128, 96), Content.Load<Texture2D>(GameVariables.catTexture), 1, 250, 0);
             allObjects.Add(c1);
@@ -149,6 +181,7 @@ namespace Lamia_Vittas
             allObjects.Add(d1);
 
             gWSheet = Content.Load<Texture2D>(GameVariables.girlTextureSheet);
+            cWSheet = Content.Load<Texture2D>(GameVariables.catTextureSheet);
 
             // populate the list with collectibles, set the value to false
             // when they get collected (picked up) the value becomes true
@@ -175,12 +208,47 @@ namespace Lamia_Vittas
             //creates fonts
             font = Content.Load<SpriteFont>(GameVariables.arialFont);
             
+            // Store the data into the rectangles
+            newButton.X = 43;
+            newButton.Y = 215;
+            newButton.Width = 700;
+            newButton.Height = 84;
+
+            quitButton.X = 43;
+            quitButton.Y = 464;
+            quitButton.Width = 706;
+            quitButton.Height = 109;
+
+            pauseRect.X = 750;
+            pauseRect.Y = 550;
+            pauseRect.Width = 33;
+            pauseRect.Height = 33;
+
+            menuRect.Y = 100;
+            menuRect.X = 140;
+            menuRect.Width = 510;
+            menuRect.Height = 430;
+
+            r2Game.X = 120;
+            r2Game.Y = 170;
+            r2Game.Width = 379;
+            r2Game.Height = 43;
+
+            r2Menu.X = 154;
+            r2Menu.Y = 360;
+            r2Menu.Width = 481;
+            r2Menu.Height = 72;
+
             //creates screens
-            mainScreen = new MainScreen(Content.Load<Texture2D>(GameVariables.startButton), Content.Load<Texture2D>(GameVariables.quitButton), Content.Load<Texture2D>(GameVariables.returnToMenu), new Rectangle(200, 200, 97, 33), new Rectangle(100, 200, 97, 33), new Rectangle(300, 200, 100, 100));
+            mainScreen = new MainScreen(Content.Load<Texture2D>(GameVariables.newButton), Content.Load<Texture2D>(GameVariables.quitButton), Content.Load<Texture2D>(GameVariables.returnMenu), newButton, quitButton, r2Menu);
             mainScreenTexture = Content.Load<Texture2D>(GameVariables.mainScreen);
             pauseTexture = Content.Load<Texture2D>(GameVariables.pause);
-            pauseScreen = new PauseScreen(Content.Load<Texture2D>(GameVariables.startButton), Content.Load<Texture2D>(GameVariables.quitButton), Content.Load<Texture2D>(GameVariables.returnToMenu), new Rectangle(200, 200, 97, 33), new Rectangle(100, 200, 97, 33), new Rectangle(300, 200, 100, 100));
-            //returnToMainMenu = Content.Load<Texture2D>(GameVariables.returnToMenu);
+            pauseScreenTexture = Content.Load<Texture2D>(GameVariables.pauseMenu);
+            //pauseScreen = new PauseScreen(Content.Load<Texture2D>(GameVariables.newButton), Content.Load<Texture2D>(GameVariables.quitButton), Content.Load<Texture2D>(GameVariables.pauseMenu), new Rectangle(160, 200, 97, 33), new Rectangle(100, 200, 97, 33), new Rectangle(150, 80, 510, 430));
+         
+
+            returnToMainMenu = Content.Load<Texture2D>(GameVariables.returnMenu);
+
 
             //creates platforms and adds to platforms List
             platforms.Add(new Platform(new Rectangle(0, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
@@ -279,10 +347,21 @@ namespace Lamia_Vittas
             if (kState.IsKeyDown(Keys.Left) && (p1.GetPosition().X >= 0))
             {//moves the player left
                 p1.SetDirection(0);
-                currentFrame.X++;
-                if (currentFrame.X >= 4)
+                if (p1.state == 0)
                 {
-                    currentFrame.X = 0;
+                    gcurrentFrame.X++;
+                    if (gcurrentFrame.X >= 4)
+                    {
+                        gcurrentFrame.X = 0;
+                    }
+                }
+                else
+                {
+                    ccurrentFrame.X++;
+                    if (ccurrentFrame.X >= 4)
+                    {
+                        ccurrentFrame.X = 0;
+                    }
                 }
                 p1.Move();
             }
@@ -290,46 +369,44 @@ namespace Lamia_Vittas
             if (kState.IsKeyDown(Keys.Right) && ((p1.GetPosition().X + (p1.GetPosition().Width)) < graphics.GraphicsDevice.Viewport.Width))
             {//moves the player right
                 p1.SetDirection(1);
-                currentFrame.X++;
-                if (currentFrame.X >= 4)
+                if (p1.state == 0)
                 {
-                    currentFrame.X = 0;
+                    gcurrentFrame.X++;
+                    if (gcurrentFrame.X >= 4)
+                    {
+                        gcurrentFrame.X = 0;
+                    }
+                }
+                else
+                {
+                    ccurrentFrame.X++;
+                    if (ccurrentFrame.X >= 4)
+                    {
+                        ccurrentFrame.X = 0;
+                    }
                 }
                 p1.Move();
             }
 
-            if (kState.IsKeyDown(Keys.Space) /*&& !oldState.IsKeyDown(Keys.Space)*/ && (p1.GetPosition().Y >= 0))
-            {//makes the player jump
-                if (p1.GetPosition().Y + p1.Image().Height >= jumpStart - p1.JumpHeight())
-                {
-                p1.Jump(spriteBatch);
-                
-                }
-                    /*
-                else
-                { 
-                    enableSpace = false;
-                }
-                     */
-            }
-
-            /*
-            if ((kState.IsKeyDown(Keys.Space) && oldState.IsKeyDown(Keys.Space)) && (enableSpace == false) && (p1.GetPosition().Y + p1.Image().Height <= jumpStart))
+            if (jumping)
             {
-                for (int i = 0; i < p1.JumpHeight()/4; i++)
+                p1.SetPosition(new Rectangle(p1.GetPosition().X,p1.GetPosition().Y + jumpSpeed,p1.GetPosition().Width,p1.GetPosition().Height));//Making it go up
+                jumpSpeed += 1;//Some math (explained later)
+                if (p1.GetPosition().Y >= startY)
+                //If it's farther than ground
                 {
-                    p1.Fall(spriteBatch);
+                    p1.SetPosition(new Rectangle(p1.GetPosition().X, startY, p1.GetPosition().Width, p1.GetPosition().Height)); ;//Then set it on
+                    jumping = false;
                 }
             }
-             */
-
-
-            if (kState.IsKeyUp(Keys.Space) && p1.GetPosition().Y < 250)
-            {//brings the player down from their jump
-                p1.Fall(spriteBatch);
-                //enableSpace = true;
+            else
+            {
+                if (kState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space))
+                {
+                    jumping = true;
+                    jumpSpeed = -14;//Give it upward thrust
+                }
             }
-
 
             if (kState.IsKeyDown(Keys.LeftShift) && !oldState.IsKeyDown(Keys.LeftShift))
             {//switches from girl to cat and vice versa
@@ -425,46 +502,83 @@ namespace Lamia_Vittas
            
                 //Gets the mouse's state.
                 mState = Mouse.GetState();
-                for (int r = 200; r <= 297; r++)
+            /*    if (main == InterfaceScreen.MainScreen)
                 {
-                    for (int c = 200; c <= 233; c++)
+                    mouseRect.X = mState.X;
+                    mouseRect.Y = mState.Y;
+                    if ((newButton.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
                     {
-                        if ((mState.X == r) && (mState.Y == c) && (mState.LeftButton == ButtonState.Pressed))
-                        {
-                            // Changes the Enum to GameScreen
-                            main = InterfaceScreen.GameScreen;
-                            // Calls the draw method
-                            Draw(gameTime);
-                            r = 297;
-                            c = 233;
-                        }
+                        // Changes the Enum to GameScreen
+                        main = InterfaceScreen.GameScreen;
+                        // Calls the draw method
+                        Draw(gameTime);
                     }
-                }
-            
+                    // Outdated Code!
+                     for (int r = 200; r <= 297; r++)
+                     {
+                         for (int c = 200; c <= 233; c++)
+                         {
+                             if ((mState.X == r) && (mState.Y == c) && (mState.LeftButton == ButtonState.Pressed))
+                             {
+                                 // Changes the Enum to GameScreen
+                                 main = InterfaceScreen.GameScreen;
+                                 // Calls the draw method
+                                 Draw(gameTime);
+                                 r = 297;
+                                 c = 233;
+                             }
+                         }
+                     }
 
-            if (main == InterfaceScreen.GameScreen)
-            {
-                for (int r = 770; r <= 870; r++)
+                }*/
+           
+                if (main == InterfaceScreen.GameScreen)
                 {
-                    for (int c = 450; c <= 550; c++)
+
+                    mouseRect.X = mState.X;
+                    mouseRect.Y = mState.Y;
+                    if ((pauseRect.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
                     {
-                        if ((mState.X == r) && (mState.Y == c) && (mState.LeftButton == ButtonState.Pressed))
-                        {
-                            main = InterfaceScreen.PauseScreen;
+                        // Changes Enum to PauseScreen
+                        main = InterfaceScreen.PauseScreen;
 
-                            // Calls the draw method
-                            Draw(gameTime);
-
-                            r = 870;
-                            c = 550;
-                        }
-
+                        // Calls the draw method
+                        Draw(gameTime);
                     }
+                     
                 }
-            }
+             
 
             if (main == InterfaceScreen.MainScreen)
             {
+
+                mouseRect.X = mState.X;
+                mouseRect.Y = mState.Y;
+
+                // Checks if the mouse is in the newbutton's rectangle
+                if ((newButton.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
+                {
+                    // Changes the Enum to GameScreen
+                    main = InterfaceScreen.GameScreen;
+                    // Calls the draw method
+                    Draw(gameTime);
+                }
+
+                // Checks if the mouse is in the quitbutton's rectangle
+                if ((quitButton.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
+                {
+                    // Closes the Window
+                    Exit();
+                }
+
+                // Not Implemented as of yet
+                if ((loadButton.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
+                {
+                    
+                }
+
+               
+                /*
                 for (int r = 100; r <= 197; r++)
                 {
                     for (int c = 200; c <= 233; c++)
@@ -476,29 +590,19 @@ namespace Lamia_Vittas
                         }
                     }
                 }
+                 */
             }
 
 
             if (main == InterfaceScreen.PauseScreen)
             {
-                for (int r = 300; r <= 400; r++)
+                if ((r2Menu.Intersects(mouseRect)) && (mState.LeftButton == ButtonState.Pressed))
                 {
-                    for (int c = 200; c <= 300; c++)
-                    {
-                        if ((mState.X == r) && (mState.Y == c) && (mState.LeftButton == ButtonState.Pressed))
-                        {
-                            main = InterfaceScreen.MainScreen;
-
-                            // Calls the draw method
-                            Draw(gameTime);
-                            r = 400;
-                            c = 500;
-                        }
-
-                    }
+                    main = InterfaceScreen.MainScreen;
+                    Draw(gameTime);
                 }
             }
-
+       
           
             base.Update(gameTime);
         }
@@ -536,13 +640,27 @@ namespace Lamia_Vittas
             if (main == InterfaceScreen.GameScreen)
             {
                 //draws the player
-                if (p1.GetDirection() == 1)
+                if (p1.state == 0)
                 {
-                    spriteBatch.Draw(gWSheet, p1.GetPosition(), new Rectangle(frameSize.X * currentFrame.X, frameSize.Y * currentFrame.Y, frameSize.X, frameSize.Y), Color.White);
+                    if (p1.GetDirection() == 1)
+                    {
+                        spriteBatch.Draw(gWSheet, p1.GetPosition(), new Rectangle(gframeSize.X * gcurrentFrame.X, gframeSize.Y * gcurrentFrame.Y, gframeSize.X, gframeSize.Y), Color.White);
+                    }
+                    else if (p1.GetDirection() == 0)
+                    {
+                        spriteBatch.Draw(gWSheet, p1.GetPosition(), new Rectangle(gframeSize.X * gcurrentFrame.X, gframeSize.Y * gcurrentFrame.Y, gframeSize.X, gframeSize.Y), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                    }
                 }
-                else if (p1.GetDirection() == 0)
+                else
                 {
-                    spriteBatch.Draw(gWSheet, p1.GetPosition(), new Rectangle(frameSize.X * currentFrame.X, frameSize.Y * currentFrame.Y, frameSize.X, frameSize.Y), Color.White,0,new Vector2(),SpriteEffects.FlipHorizontally,0);
+                    if (p1.GetDirection() == 1)
+                    {
+                        spriteBatch.Draw(cWSheet, p1.GetPosition(), new Rectangle(cframeSize.X * ccurrentFrame.X, cframeSize.Y * ccurrentFrame.Y, cframeSize.X, cframeSize.Y), Color.White);
+                    }
+                    else if (p1.GetDirection() == 0)
+                    {
+                        spriteBatch.Draw(cWSheet, p1.GetPosition(), new Rectangle(cframeSize.X * ccurrentFrame.X, cframeSize.Y * ccurrentFrame.Y, cframeSize.X, cframeSize.Y), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                    }
                 }
 
                 if (p1.fist.Visible)
@@ -596,12 +714,14 @@ namespace Lamia_Vittas
                 spriteBatch.DrawString(font, "Vials left: " + vialsLeft + " Yarn Left: " + yarnLeft, new Vector2(10, 10), Color.Black);
 
                 // Draws the pause texture
-                spriteBatch.Draw(pauseTexture, new Vector2(770, 450), Color.White);
+                spriteBatch.Draw(pauseTexture, pauseRect, Color.White);
             }
             if (main == InterfaceScreen.PauseScreen)
             {
-                spriteBatch.Draw(mainScreenTexture, new Vector2(0, 0), Color.White);
-                pauseScreen.Draw(spriteBatch);
+                GraphicsDevice.Clear(Color.Black);
+                spriteBatch.Draw(pauseScreenTexture, menuRect, Color.White);
+                spriteBatch.Draw(returnToMainMenu, r2Menu, Color.White);
+                
 
             }
 
@@ -762,8 +882,6 @@ namespace Lamia_Vittas
                 // damage the player
                 bu1.DamagePlayerBush(p1);
             }
-             
-             
             
                 // check for collisions between bush and character
         }

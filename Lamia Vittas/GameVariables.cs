@@ -28,15 +28,14 @@ namespace Lamia_Vittas
         //movement
         public static int girlMAXSpeed = 7;
         public static int catMAXSpeed = 20;
-        public static int girlJump = 40;
-        public static int catJump = 80;
+        public static int girlJump = 100;
+        public static int catJump = 200;
         public static int enemySpeed = 10;
 
         // physics
-        public static int gravity = 1;
+        public static int gravity = -1;
         public static int girlAcc = 9;
         public static int catAcc = 12;
-        public static int jumpAngle = 45;
 
         //dark textures
         public static string girlTexture = "Girl";
@@ -46,6 +45,7 @@ namespace Lamia_Vittas
 
         //light textures
         public static string catTexture = "Cat";
+        public static string catTextureSheet = "CatWalkSpritesheet";
         public static string yarnTexture = "Yarn";
 
         //environment textures
@@ -68,12 +68,18 @@ namespace Lamia_Vittas
 
         // Interface Textures
         //Screen Textures
-        public static string mainScreen = "MainScreen";
+        public static string mainScreen = "MainUnclicked";
         // Button Textures
-        public static string startButton = "TestStart";
-        public static string quitButton = "TestQuit";
-        public static string returnToMenu = "Return To Menu";
+        public static string newButton = "NewButton";
+        public static string quitButton = "QuitButton";
+        //public static string returnToMenu = "Return To Menu";
         // Pause Texture
         public static string pause = "Pause";
+        public static string pauseMenu = "pauseMenu";
+        public static string returnMenu = "R2Menu";
+        public static string returnToGame = "R2Game";
+        public static string returnToDesktrop = "R2Desktop";
+      
+
     }
 }
