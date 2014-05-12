@@ -42,6 +42,10 @@ namespace Lamia_Vittas
         Spike s1, s2;
         Bush bu1, bu2;
 
+        //jumping
+        bool jumping;
+        int startY;
+        int jumpSpeed;
 
         MainScreen mainScreen;
         PauseScreen pauseScreen;
@@ -57,11 +61,6 @@ namespace Lamia_Vittas
 
         bool GameOver = false;
         InterfaceScreen main;
-        bool enableSpace = true;
-
-        int worldClock = 0;
-
-        int jumpStart;
 
         public Game1()
             : base()
@@ -84,6 +83,10 @@ namespace Lamia_Vittas
             platforms = new List<Platform>();
             mState = new MouseState();
             base.Initialize();
+
+            startY = p1.GetPosition().Y;//Starting position
+            jumping = false;//Init jumping to false
+            jumpSpeed = 0;//Default no speed
         }
 
         /// <summary>
@@ -98,7 +101,7 @@ namespace Lamia_Vittas
             main = InterfaceScreen.MainScreen;
 
             // TODO: use this.Content to load your game content here
-            g1 = new Girl(new Rectangle(300,100, 96, 128),Content.Load<Texture2D>(GameVariables.girlTexture),1,250,2);
+            g1 = new Girl(new Rectangle(300,172, 96, 128),Content.Load<Texture2D>(GameVariables.girlTexture),1,250,2);
             c1 = new Cat(new Rectangle(600,100, 128, 96), Content.Load<Texture2D>(GameVariables.catTexture), 1, 250, 0);
             s1 = new Spike(new Rectangle(0, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
             bu1 = new Bush(new Rectangle(200, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
@@ -155,7 +158,7 @@ namespace Lamia_Vittas
 
             kState = Keyboard.GetState();
 
-            Physics.upDateY(p1.GamePiece(), worldClock, spriteBatch);
+            //Physics.upDateY(p1.GamePiece(), worldClock, spriteBatch);
 
             if (kState.IsKeyDown(Keys.Left) && (p1.GetPosition().X >= 0))
             {//moves the player left
@@ -169,68 +172,26 @@ namespace Lamia_Vittas
                 p1.Move();
             }
 
-            worldClock = gameTime.TotalGameTime.Milliseconds;
-
-            if (kState.IsKeyUp(Keys.Space) && oldState.IsKeyDown(Keys.Space) /*&& (p1.GetPosition().Y >= 0)*/)
-            {//makes the player jump
-                Physics.jump = true;
-                Physics.upDateVelocity((worldClock));
-                Physics.upDateY(p1.GamePiece(), worldClock, spriteBatch);
-                Physics.jump = false;
-
-                /*
-                jumpStart = p1.GetPosition().Bottom;
-
-                enableSpace = true;
-
-                
-                while (p1.GetPosition().Bottom >= jumpStart - p1.JumpHeight())
-                {
-                    p1.Jump(spriteBatch);
-                }
-                 */
-                 
-                 
-                    /*
-                else
-                { 
-                    enableSpace = false;
-                }
-                     */
-            }
-
-            /*
-            if (enableSpace)
+            if (jumping)
             {
-                p1.Jump(spriteBatch);
+                p1.SetPosition(new Rectangle(p1.GetPosition().X,p1.GetPosition().Y + jumpSpeed,p1.GetPosition().Width,p1.GetPosition().Height));//Making it go up
+                jumpSpeed += 1;//Some math (explained later)
+                if (p1.GetPosition().Y >= startY)
+                //If it's farther than ground
+                {
+                    p1.SetPosition(new Rectangle(p1.GetPosition().X, startY, p1.GetPosition().Width, p1.GetPosition().Height)); ;//Then set it on
+                    jumping = false;
+                }
             }
-
-            if ((kState.IsKeyDown(Keys.Space) && oldState.IsKeyDown(Keys.Space)) && enableSpace)
+            else
             {
-                
+                if (kState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space))
+                {
+                    startY = p1.GetPosition().Y;
+                    jumping = true;
+                    jumpSpeed = -14;//Give it upward thrust
+                }
             }
-             */
-             
-
-            /*
-            if (kState.IsKeyUp(Keys.Space))
-            {//brings the player down from their jump
-                p1.Fall(spriteBatch);
-
-                /*
-                if (!(p1.GetPosition().Bottom >= jumpStart - p1.JumpHeight()))
-                {
-                    enableSpace = false;
-                }
-
-                if (p1.GetPosition().Bottom == 300)
-                {
-                    enableSpace = true;
-                }
-                 
-                //enableSpace = true;
-            }*/
-
 
             if (kState.IsKeyDown(Keys.LeftShift) && !oldState.IsKeyDown(Keys.LeftShift))
             {//switches from girl to cat and vice versa
