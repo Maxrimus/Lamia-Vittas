@@ -1,5 +1,4 @@
-﻿/*Joseph Tursi
- * Sadiki Solomon
+﻿/* Sadiki Solomon
  * Date: 4/2/2014
  * Purpose: A class for the main Game Screen
  * Exceptions:

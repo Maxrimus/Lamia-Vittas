@@ -18,6 +18,12 @@ namespace Lamia_Vittas
 {
     class Button:Mechanical
     {
+
+        /// <summary>
+        /// Parameterized Constructor, all values passed up
+        /// </summary>
+        /// <param name="picturesize">Rectangle that holds button information</param>
+        /// <param name="texture">Button texture</param>
         public Button(Rectangle picturesize, Texture2D texture)
             : base(picturesize, texture)
         {

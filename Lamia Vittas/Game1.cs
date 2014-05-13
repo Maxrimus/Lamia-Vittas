@@ -24,25 +24,35 @@ namespace Lamia_Vittas
     /// </summary>
     public class Game1 : Game
     {
+        #region Attributes
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont font;
         Texture2D gWSheet;
         Texture2D cWSheet;
 
-        //needed for girl's animation
+        //needed for girl's walking animation
         Point gframeSize = new Point(70, 100);
         Point gcurrentFrame = new Point(0, 0);
         Point gframes = new Point(4, 1);
         TimeSpan gnextFrameInterval = TimeSpan.FromSeconds((float)1 / 16);
-        TimeSpan gnextFrame;
 
-        //needed for girl's animation
+        //needed for cat's walking animation
         Point cframeSize = new Point(100, 50);
         Point ccurrentFrame = new Point(0, 0);
         Point cframes = new Point(4, 1);
         TimeSpan cnextFrameInterval = TimeSpan.FromSeconds((float)1 / 16);
-        TimeSpan cnextFrame;
+
+        //light textures
+        Texture2D lightBlock;
+        Texture2D lightSpikes;
+        Texture2D lightBush;
+
+        //dark textures
+        Texture2D darkBlock;
+        Texture2D darkSpikes;
+        Texture2D darkBush;
 
         //Instantiations of all needed objects
         Girl g1;
@@ -51,7 +61,6 @@ namespace Lamia_Vittas
         Player p1;
         Button b1;
         Door d1;
-        Door d2;
         Spike s1, s2;
         Bush bu1, bu2;
 
@@ -78,8 +87,6 @@ namespace Lamia_Vittas
         //list to hold all Bounding Boxes
         List<GamePiece> bBs;
 
-        //Platform pl1;
-
         //Screens for MainScreen and PauseScreen
         MainScreen mainScreen;
         PauseScreen pauseScreen;
@@ -100,18 +107,21 @@ namespace Lamia_Vittas
         Rectangle r2Desktop = new Rectangle();
         Rectangle r2Game = new Rectangle();
         Rectangle mouseRect = new Rectangle();
-        
-
-        
 
         // Dictionary to hold the button's cords
         Dictionary<int, int> buttonDict = new Dictionary<int,int>();
 
+        //Whether or not the game is over
         bool GameOver = false;
+
+
         InterfaceScreen main;
 
+        //number of vials and yarn left, starts at 0
         int vialsLeft = 0;
         int yarnLeft = 0;
+
+        #endregion
 
         public Game1()
             : base()
@@ -132,19 +142,24 @@ namespace Lamia_Vittas
             // TODO: Add your initialization logic here
             kState = new KeyboardState();
             oldState = new KeyboardState();
+
+            //lists of objects
             platforms = new List<Platform>();
             allObjects = new List<GamePiece>();
             coll = new List<Collectible>();
             bBs = new List<GamePiece>();
+
+            
             mState = new MouseState();
             this.Window.Title = "Lamia Vittas";
             graphics.PreferredBackBufferHeight = 600;
             graphics.PreferredBackBufferWidth = 800;
             base.Initialize();
 
-            startY = p1.GetPosition().Y;//Starting position
-            jumping = false;//Init jumping to false
-            jumpSpeed = 0;//Default no speed
+            //Initialize jumping data
+            startY = p1.GetPosition().Y + p1.GetPosition().Height;
+            jumping = false;
+            jumpSpeed = 0;
         }
 
         /// <summary>
@@ -171,7 +186,7 @@ namespace Lamia_Vittas
             allObjects.Add(s1);
             bu1 = new Bush(new Rectangle(200, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
             allObjects.Add(bu1);
-            s2 = new Spike(new Rectangle(775, 250, 75, 25), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
+            s2 = new Spike(new Rectangle(775, 250, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
             allObjects.Add(s2);
             bu2 = new Bush(new Rectangle(400, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
             allObjects.Add(bu2);
@@ -180,8 +195,18 @@ namespace Lamia_Vittas
             d1 = new Door(new Rectangle(650, 150, 25, 150), Content.Load<Texture2D>(GameVariables.doorTexture), b1);
             allObjects.Add(d1);
 
+            //Animation Sheets
             gWSheet = Content.Load<Texture2D>(GameVariables.girlTextureSheet);
             cWSheet = Content.Load<Texture2D>(GameVariables.catTextureSheet);
+
+            //loads dark and light textures
+            lightBlock = Content.Load<Texture2D>(GameVariables.lightBlockTexture);
+            lightBush = Content.Load<Texture2D>(GameVariables.lightBushTexture);
+            lightSpikes = Content.Load<Texture2D>(GameVariables.lightSpikesTexture);
+
+            darkBlock = Content.Load<Texture2D>(GameVariables.darkBlockTexture);
+            darkBush = Content.Load<Texture2D>(GameVariables.bushTexture);
+            darkSpikes = Content.Load<Texture2D>(GameVariables.spikeTexture);
 
             // populate the list with collectibles, set the value to false
             // when they get collected (picked up) the value becomes true
@@ -194,7 +219,7 @@ namespace Lamia_Vittas
             coll.Add(new Collectible((new Rectangle(750, 50, 48, 48)), Content.Load<Texture2D>(GameVariables.vialTexture), false, "vial"));
 
             foreach (Collectible i in coll)
-            {
+            {//determines how many vials and yarn there are when the game starts
                 if (i.Style == "vial")
                 {
                     vialsLeft++;
@@ -293,8 +318,6 @@ namespace Lamia_Vittas
             platforms.Add(new Platform(new Rectangle(650, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(650, 100, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(650, 125, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            //platforms.Add(new Platform(new Rectangle(0, 100, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            //platforms.Add(new Platform(new Rectangle(600, 100, 200, 200), Content.Load<Texture2D>(GameVariables.blockTexture)));
 
             foreach (Platform i in platforms)
             {//adds all platforms to allObjects List
@@ -305,17 +328,6 @@ namespace Lamia_Vittas
             {//creates Bounding Boxes for all objects
                 bBs.Add(new GamePiece(i.PictureBox,Content.Load<Texture2D>(GameVariables.bBTexture)));
             }
-
-            /*
-            for (int i = 1; i < (graphics.GraphicsDevice.Viewport.Width/pl1.Image.Width) - 1; i++)
-            {
-                platforms.Add(new Platform(new Vector2(((pl1.Image.Width)*(i)),300),Content.Load<Texture2D>("GeneralBLock")));
-                platforms.Add(new Platform(new Vector2(((pl1.Image.Width) * (i)), 0), Content.Load<Texture2D>("GeneralBLock")));
-            }
-             */
-
-            
-            //platforms.Add(pl1 = new Platform(new Vector2(-50, 100), Content.Load<Texture2D>("GeneralBLock")));
 
             p1 = new Player(g1, c1, 0, f1);
         }
@@ -346,72 +358,98 @@ namespace Lamia_Vittas
 
             if (kState.IsKeyDown(Keys.Left) && (p1.GetPosition().X >= 0))
             {//moves the player left
+
+                //sets the direction to the left
                 p1.SetDirection(0);
+
                 if (p1.state == 0)
-                {
+                {//if the player is the girl
+
+                    //moves along the spritesheet one frame
                     gcurrentFrame.X++;
                     if (gcurrentFrame.X >= 4)
-                    {
+                    {//resets the animation sheet if it has gone off the end
                         gcurrentFrame.X = 0;
                     }
                 }
                 else
-                {
+                {//if the player is a cat
                     ccurrentFrame.X++;
                     if (ccurrentFrame.X >= 4)
-                    {
+                    {//resets the animation sheet if it has gone off the end
                         ccurrentFrame.X = 0;
                     }
                 }
+
+                //moves the player
                 p1.Move();
             }
 
             if (kState.IsKeyDown(Keys.Right) && ((p1.GetPosition().X + (p1.GetPosition().Width)) < graphics.GraphicsDevice.Viewport.Width))
             {//moves the player right
+
+                //sets the direction to the right
                 p1.SetDirection(1);
+
                 if (p1.state == 0)
-                {
+                {//if the player is the girl
+
+                    //moves along the spritesheet one frame
                     gcurrentFrame.X++;
                     if (gcurrentFrame.X >= 4)
-                    {
+                    {//resets the animation sheet if it has gone off the end
                         gcurrentFrame.X = 0;
                     }
                 }
                 else
-                {
+                {//if the player is a cat
                     ccurrentFrame.X++;
                     if (ccurrentFrame.X >= 4)
-                    {
+                    {//resets the animation sheet if it has gone off the end
                         ccurrentFrame.X = 0;
                     }
                 }
+
+                //moves the player
                 p1.Move();
             }
 
             if (jumping)
-            {
-                p1.SetPosition(new Rectangle(p1.GetPosition().X,p1.GetPosition().Y + jumpSpeed,p1.GetPosition().Width,p1.GetPosition().Height));//Making it go up
-                jumpSpeed += 1;//Some math (explained later)
-                if (p1.GetPosition().Y >= startY)
-                //If it's farther than ground
-                {
-                    p1.SetPosition(new Rectangle(p1.GetPosition().X, startY, p1.GetPosition().Width, p1.GetPosition().Height)); ;//Then set it on
-                    jumping = false;
+            {//if already jumping
+
+                //sets the position, adding the current jumpSpeed to the Y
+                p1.SetPosition(new Rectangle(p1.GetPosition().X,p1.GetPosition().Y + jumpSpeed,p1.GetPosition().Width,p1.GetPosition().Height));
+                
+                jumpSpeed += 1;//increments jumpspeed to slow down or speed up
+
+                if ((p1.GetPosition().Y + p1.GetPosition().Height) >= startY)
+                {//if the player has landed
+
+                    //makes sure the character is set where it started
+                    p1.SetPosition(new Rectangle(p1.GetPosition().X, startY - p1.GetPosition().Height, p1.GetPosition().Width, p1.GetPosition().Height)); ;
+                    jumping = false;//sets jumping to false
                 }
             }
             else
-            {
+            {//not currently jumping
                 if (kState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space))
-                {
-                    jumping = true;
-                    jumpSpeed = -14;//Give it upward thrust
+                {//determines if space was pressed and was not previously pressed
+                    jumping = true;//sets jumping to true
+
+                    if (p1.state == 0)
+                    {//if girl, sets upwards velocity to 14
+                        jumpSpeed = -14;
+                    }
+                    else
+                    {//if cat, sets upwards velocity to 20, will jump twice as high as girl
+                        jumpSpeed = -20;
+                    }
                 }
             }
 
             if (kState.IsKeyDown(Keys.LeftShift) && !oldState.IsKeyDown(Keys.LeftShift))
             {//switches from girl to cat and vice versa
                 p1.Switch();
-
             }
 
             if (kState.IsKeyDown(Keys.R) && oldState.IsKeyDown(Keys.R))
@@ -424,7 +462,7 @@ namespace Lamia_Vittas
                 b1.on = false;
             }
 
-            if (kState.IsKeyDown(Keys.P) && p1.state == 0)
+            if (kState.IsKeyDown(Keys.Z) && p1.state == 0)
             {//punches
 
                 //sets the direction of the fist to the direction of the player
@@ -443,9 +481,8 @@ namespace Lamia_Vittas
                 p1.fist.Punch();
             }
 
-            if (kState.IsKeyUp(Keys.P))
+            if (kState.IsKeyUp(Keys.Z))
             {//unpunches
-
                 //sets the fist to invisible
                 p1.fist.UnPunch();
             }
@@ -471,23 +508,26 @@ namespace Lamia_Vittas
             d1.Open();
 
             if (!d1.on)
-            {
+            {//if the door is open
                 if (d1.PictureBox.Y - 5 >= d1.maxHeight)
-                {
+                {//determines if the next move would move it above it's maximum height
                     d1.PictureBox = new Rectangle(d1.PictureBox.X,d1.PictureBox.Y - 5,d1.PictureBox.Width,d1.PictureBox.Height);
-                    //d1.Draw(spriteBatch);
                 }
             }
 
             
             if (b1.on == true)
-            {
+            {//determines if the button has been pressed
+
+                //draws the button as pressed
                 b1 = new Button(b1.PictureBox,Content.Load<Texture2D>(GameVariables.buttonPressedTexture));
+                
+                //makes sure the button stays on and sets the door to open
                 b1.on = true;
                 d1.on = false;
             }
             else
-            {
+            {//if not pressed, draws unpressed texture
                 b1 = new Button(b1.PictureBox, Content.Load<Texture2D>(GameVariables.buttonOriginalTexture));
             }
 
@@ -495,7 +535,6 @@ namespace Lamia_Vittas
             if (p1.Lives <= 0)
             {
                 GameOver = true;
-                System.Threading.Thread.Sleep(1000);
                 Exit();
             }
 
@@ -619,16 +658,6 @@ namespace Lamia_Vittas
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            /*
-            if (p1.GetDirection() == 0)
-            {//flips her to the left if she is moving left
-                p1.Draw(spriteBatch);
-            }
-            else if(p1.GetDirection() == 1)
-            {//draws her normally if going right
-                p1.Draw(spriteBatch);
-            }
-             */
 
             if (main == InterfaceScreen.MainScreen)
             {
@@ -641,24 +670,24 @@ namespace Lamia_Vittas
             {
                 //draws the player
                 if (p1.state == 0)
-                {
+                {//if girl, draws the girl
                     if (p1.GetDirection() == 1)
-                    {
+                    {//if right, draws to the right
                         spriteBatch.Draw(gWSheet, p1.GetPosition(), new Rectangle(gframeSize.X * gcurrentFrame.X, gframeSize.Y * gcurrentFrame.Y, gframeSize.X, gframeSize.Y), Color.White);
                     }
                     else if (p1.GetDirection() == 0)
-                    {
+                    {//if left, draws to the left
                         spriteBatch.Draw(gWSheet, p1.GetPosition(), new Rectangle(gframeSize.X * gcurrentFrame.X, gframeSize.Y * gcurrentFrame.Y, gframeSize.X, gframeSize.Y), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
                     }
                 }
                 else
-                {
+                {//if cat, draws the cat
                     if (p1.GetDirection() == 1)
-                    {
+                    {//if right, draws to the right
                         spriteBatch.Draw(cWSheet, p1.GetPosition(), new Rectangle(cframeSize.X * ccurrentFrame.X, cframeSize.Y * ccurrentFrame.Y, cframeSize.X, cframeSize.Y), Color.White);
                     }
                     else if (p1.GetDirection() == 0)
-                    {
+                    {//if left, draws to the left
                         spriteBatch.Draw(cWSheet, p1.GetPosition(), new Rectangle(cframeSize.X * ccurrentFrame.X, cframeSize.Y * ccurrentFrame.Y, cframeSize.X, cframeSize.Y), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
                     }
                 }
@@ -670,14 +699,31 @@ namespace Lamia_Vittas
 
                 for (int i = 0; i < platforms.Count; i++)
                 {//draws all platforms
-                    platforms[i].Draw(spriteBatch);
+                    if (p1.state == 0)
+                    {
+                        platforms[i].Draw(spriteBatch,darkBlock);
+                    }
+                    else
+                    {
+                        platforms[i].Draw(spriteBatch, lightBlock);
+                    }
                 }
 
                 //draws obstacles
-                s1.Draw(spriteBatch);
-                s2.Draw(spriteBatch);
-                bu1.Draw(spriteBatch);
-                bu2.Draw(spriteBatch);
+                if (p1.state == 0)
+                {
+                    s1.Draw(spriteBatch,darkSpikes);
+                    s2.Draw(spriteBatch, darkSpikes);
+                    bu1.Draw(spriteBatch, darkBush);
+                    bu2.Draw(spriteBatch, darkBush);
+                }
+                else
+                {
+                    s1.Draw(spriteBatch, lightSpikes);
+                    s2.Draw(spriteBatch, lightSpikes);
+                    bu1.Draw(spriteBatch, lightBush);
+                    bu2.Draw(spriteBatch, lightBush);
+                }
                 b1.Draw(spriteBatch);
                 d1.Draw(spriteBatch);
 
@@ -694,11 +740,7 @@ namespace Lamia_Vittas
                         coll[y].Draw(spriteBatch);
                     }
                 }
-                // draws all bounding boxes
-                foreach (GamePiece i in bBs)
-                {//draws all Bounding Boxes
-                    i.Draw(spriteBatch);
-                }
+
                 // draw the Debug info
                 spriteBatch.DrawString(font,
                     p1.GetPosition()
@@ -768,14 +810,9 @@ namespace Lamia_Vittas
                     }
                 }
 
-                if (p1.fist.IsColliding(b1))
-                {//determines if button it pushed
-                    b1.on = true;
-                }
-
                 if ((p1.GetPosition().X < d1.PictureBox.Right && p1.GetPosition().X > d1.PictureBox.Left) && p1.IsColliding(d1))
                 {//determines if player colliding with door from left
-                    p1.SetPosition(new Rectangle(p1.GetPosition().X + 1, p1.GetPosition().Y, p1.GetPosition().Width,p1.GetPosition().Height));
+                    p1.SetPosition(new Rectangle(p1.GetPosition().X + 1, p1.GetPosition().Y, p1.GetPosition().Width, p1.GetPosition().Height));
                 }
 
                 if ((p1.GetPosition().X + p1.GetPosition().Width > d1.PictureBox.Left && p1.GetPosition().X + p1.GetPosition().Width < d1.PictureBox.Right) && p1.IsColliding(d1))
@@ -784,91 +821,20 @@ namespace Lamia_Vittas
                 }
             }
 
-            /*
-            for (int i = 0; i < platforms.Count; i++)
-            {
-                if (p1.GetPosition().Intersects(platforms[i].PictureBox))
-                {    
-                    (
-                    // top of the block
-                    //if ((p1.GetPosition().Y + p1.GetPosition().Height > platforms[i].PictureBox.Y));/* && ((p1.GetPosition().X + p1.GetPosition().Width < platforms[i].PictureBox.X + platforms[i].PictureBox.Width) && (p1.GetPosition().X > platforms[i].PictureBox.X)))*/
-                    //{
-                        //p1.SetPosition(new Rectangle(p1.GetPosition().X, platforms[i].PictureBox.Y - p1.GetPosition().Height, p1.GetPosition().Width, p1.GetPosition().Height));
-                    //}
-                    
-                    /* If all else fails USE THIS
-                     * 
-                     * 
-                     * 
-                     * 
-                    //  top of a block
-                    if ((p1.GetPosition().Bottom > platforms[i].PictureBox.Top) && (p1.GetPosition().Left > platforms[i].PictureBox.Left - platforms[i].PictureBox.Width / 2 && p1.GetPosition().Right < platforms[i].PictureBox.Right + platforms[i].PictureBox.Width / 2))
-                    {
-                        p1.SetPosition(new Rectangle(p1.GetPosition().X, platforms[i].PictureBox.Top - p1.GetPosition().Height, p1.GetPosition().Width, p1.GetPosition().Height));
-                    }
+            if (p1.fist.IsColliding(b1))
+            {//determines if button it pushed
+                b1.on = true;
+            }
 
-                    // right of a block
-                    if ((p1.GetPosition().Left < platforms[i].PictureBox.Right) && !(p1.GetPosition().Bottom >= platforms[i].PictureBox.Top))
-                    {
-                        p1.SetPosition(new Rectangle(platforms[i].PictureBox.Right, p1.GetPosition().Bottom, p1.GetPosition().Width, p1.GetPosition().Height));
-                    }
-                     */
-                    
-                        
-                        /*
-                    // top failure
-                    if (p1.GetPosition().Y - GameVariables.girlJump < 0)
-                    {
-                        p1.SetPosition(new Vector2(p1.GetPosition().X, 0 + p1.Image().Height));
-                        
-                    }
+            //spike checks
 
-                    // collision detection for top of blocks
-                    if ((p1.GetPosition().Y + p1.Image().Bounds.Width > platforms[i].Position.Y) && ((p1.GetPosition().X + p1.Image().Width < platforms[i].Position.X + platforms[i].BoundingBox.Width) && (p1.GetPosition().X > platforms[i].Position.X)))
-                    {
-                        p1.SetPosition(new Vector2(p1.GetPosition().X, (platforms[i].Position.Y) - p1.Image().Height));
-                    }                                    
+            if (p1.GetPosition().Intersects(s1.PictureBox))
+            {// check for collisions between spikes and character
 
-                    // right of a block
-                    if ((p1.GetPosition().X < platforms[i].Position.X + platforms[i].BoundingBox.Width) && (p1.GetPosition().Y + p1.Image().Height > platforms[i].Position.Y))
-                    {
-                        p1.SetPosition(new Vector2(platforms[i].Position.X + platforms[i].BoundingBox.Width, p1.GetPosition().Y));
-                    }
+                // damage the player
+                s1.DamagePlayerSpike(p1);
+            }
 
-                    
-                    // left of a block
-                    if ((p1.GetPosition().X + p1.Image().Bounds.Width > platforms[i].Position.X) && (p1.GetPosition().Y + p1.Image().Height > platforms[i].Position.Y))
-                    {
-                        p1.SetPosition(new Vector2(platforms[i].Position.X, p1.GetPosition().Y));
-                    }
-                    
-                    /*
-                    string side = p1.Side(platforms[i]);
-                    
-                    switch (side)
-                    {
-                        case "bottom":
-                            p1.SetPosition(new Vector2(p1.GetPosition().X, platforms[i].Position.Y + platforms[i].Image.Height));
-                            break;
-                        case "top":
-                            p1.SetPosition(new Vector2(p1.GetPosition().X, platforms[i].Position.Y - p1.Image().Height));
-                            break;
-                        case "right":
-                            p1.SetPosition(new Vector2(platforms[i].Position.X - p1.Image().Width, p1.GetPosition().Y));
-                            break;
-                        case "left":
-                            p1.SetPosition(new Vector2(platforms[i].Position.X, p1.GetPosition().Y));
-                            break;
-                        default:
-                            break;
-                    }
-                     */
-
-                    //jumpStart = (int)p1.GetPosition().Y + p1.Image().Height;
-                //}
-            //}
-
-            
             if (p1.GetPosition().Intersects(s2.PictureBox))
             {// check for collisions between spikes and character
 
@@ -876,14 +842,21 @@ namespace Lamia_Vittas
                 s2.DamagePlayerSpike(p1);
             }
 
+            //bush checks
+
             if (p1.GetPosition().Intersects(bu1.PictureBox))
             {// check for collisions between spikes and character
 
                 // damage the player
                 bu1.DamagePlayerBush(p1);
             }
-            
-                // check for collisions between bush and character
+
+            if (p1.GetPosition().Intersects(bu2.PictureBox))
+            {// check for collisions between spikes and character
+
+                // damage the player
+                bu2.DamagePlayerBush(p1);
+            }
         }
 
         /// <summary>
@@ -892,15 +865,15 @@ namespace Lamia_Vittas
         public void CheckCollections()
         {
             foreach (Collectible z in coll)
-            {
+            {//checks each collectible
                 if (p1.state == 0 && p1.IsColliding(z) && z.Collected==false && z.Style == "vial")
-                {
+                {//checks if it is a vial, if it has not been collected, and if the player is colliding with it
                     z.Collected = true;
                     vialsLeft--;
                 }
 
                 if (p1.state == 1 && p1.IsColliding(z) && z.Collected == false && z.Style == "yarn")
-                {
+                {//checks if it is a yarn, if it has not been collected, and if the player is colliding with it
                     z.Collected = true;
                     yarnLeft--;
                 }

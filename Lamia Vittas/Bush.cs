@@ -19,6 +19,12 @@ namespace Lamia_Vittas
 {
     class Bush:Environmental
     {
+        /// <summary>
+        /// Parameterized Constuctor, all values passed up
+        /// </summary>
+        /// <param name="picturesize">The rectangle holding the information of the bush</param>
+        /// <param name="texture">The texture of the book</param>
+        /// <param name="dir">Direction the bush faces</param>
         public Bush(Rectangle picturesize, Texture2D texture, int dir)
             : base(picturesize, texture, dir)
         {
@@ -30,6 +36,7 @@ namespace Lamia_Vittas
         /// <param name="chara">Character object to take damage</param>
         public void DamagePlayerBush(Player plyr)
         {
+            //makes the player take 10 damage
             plyr.TakeHit(10);
         }
     }
