@@ -850,7 +850,7 @@ namespace Lamia_Vittas
                     i.Draw(spriteBatch);
                 }
 
-               // spriteBatch.DrawString(font, "Vials left: " + vialsLeft + " Yarn Left: " + yarnLeft, new Vector2(10, 10), Color.Black);
+               spriteBatch.DrawString(font, "" + vialsLeft + " \n" + yarnLeft, new Vector2(133, 23), Color.White);
 
                 // Draws the pause texture
                 spriteBatch.Draw(pauseTexture, pauseRect, Color.White);
