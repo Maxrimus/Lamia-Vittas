@@ -44,6 +44,7 @@ namespace Lamia_Vittas
             set { health = value; }
         }
 
+        //the attack value of the character
         private int attack;
 
         public int Attack
@@ -66,40 +67,6 @@ namespace Lamia_Vittas
             healthFriendly = health;
             attack = atk;
         }
-
-        /*
-        /// <summary>
-        /// Takes a hit
-        /// </summary>
-        /// <param name="atk">damage recieved</param>
-        public void TakeHit(int atk)
-        {
-            //takes damage
-            healthFriendly = healthFriendly - atk;
-
-            if (healthFriendly <= 0)
-            {//checks if dead
-                healthFriendly = 0;
-                Die();
-                
-            }
-        }
-         */
-
-        /// <summary>
-        /// Method stub for Dying
-        /// </summary>
-        abstract public void Die();
-
-        /// <summary>
-        /// Method stub for attacking
-        /// </summary>
-        abstract public void Attacks();
-
-        /// <summary>
-        /// Method stub for jumping
-        /// </summary>
-        abstract public void Jump(SpriteBatch batch);
 
         /// <summary>
         /// Method stub for Move method

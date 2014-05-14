@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5E80B8BF-F046-402B-9940-ED9A40FAD75D}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lamia_Vittas</RootNamespace>
     <AssemblyName>Lamia Vittas</AssemblyName>
@@ -34,31 +34,28 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Boss.cs" />
     <Compile Include="Bush.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Cat.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="Collectible.cs" />
-    <Compile Include="Connection.cs" />
     <Compile Include="Door.cs" />
-    <Compile Include="Enemy.cs" />
     <Compile Include="Environmental.cs" />
     <Compile Include="Fist.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameVariables.cs" />
     <Compile Include="GamePiece.cs" />
     <Compile Include="GameScreen.cs" />
-    <Compile Include="LoadContent.cs" />
     <Compile Include="MainScreen.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Mechanical.cs" />
     <Compile Include="MovableGamePiece.cs" />
-    <Compile Include="MovablePlatform.cs" />
     <Compile Include="PauseScreen.cs" />
     <Compile Include="Girl.cs" />
-    <Compile Include="Pit.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
@@ -190,6 +187,28 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\R2Menu.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\BrightBlock.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\CatBush.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\CatSpikes.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\DarkBlock.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\CatJumpSpritesheet.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\GirlJumpSpritesheet.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

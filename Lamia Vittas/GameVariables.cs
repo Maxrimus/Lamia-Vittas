@@ -1,5 +1,6 @@
 ﻿/*Joseph Tursi
  * Gregory Bednarowicz
+ * Sadiki Solomon
  * Date: 4/2/2014
  * Purpose: A static class housing multiple variables needed throughout the game
  * Exceptions:
@@ -26,32 +27,29 @@ namespace Lamia_Vittas
         public static string arialFont = "Arial";
 
         //movement
-        public static int girlMAXSpeed = 7;
-        public static int catMAXSpeed = 20;
-        public static int girlJump = 100;
-        public static int catJump = 200;
-        public static int enemySpeed = 10;
-
-        // physics
-        public static int gravity = -1;
-        public static int girlAcc = 9;
-        public static int catAcc = 12;
+        public static int playerMAXSpeed = 8;
 
         //dark textures
         public static string girlTexture = "Girl";
         public static string girlTextureSheet = "GirlWalkSpritesheet";
+        public static string girlJumpSheet = "GirlJumpSpritesheet";
         public static string fistTexture = "Fist";
         public static string vialTexture = "Vial";
+        public static string darkBlockTexture = "DarkBlock";
+        public static string spikeTexture = "Spikes";
+        public static string bushTexture = "Bush";
 
         //light textures
         public static string catTexture = "Cat";
         public static string catTextureSheet = "CatWalkSpritesheet";
+        public static string catJumpSheet = "CatJumpSpritesheet";
         public static string yarnTexture = "Yarn";
+        public static string lightBlockTexture = "BrightBlock";
+        public static string lightSpikesTexture = "CatSpikes";
+        public static string lightBushTexture = "CatBush";
 
         //environment textures
-        public static string bushTexture = "Bush";
         public static string blockTexture = "GeneralBLock";
-        public static string spikeTexture = "Spikes";
         public static string buttonPressedTexture = "ButtonPressed";
         public static string buttonOriginalTexture = "ButtonOriginal";
         public static string doorTexture = "Door";

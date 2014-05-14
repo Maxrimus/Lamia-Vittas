@@ -1,6 +1,4 @@
-﻿/*Joseph Tursi
- * Greg Bednarowicz
- * Sadiki Solomon
+﻿/* Greg Bednarowicz
  * Date: 4/25/2014
  * Purpose: Hold all the collectible items in the game
  * Exceptions:

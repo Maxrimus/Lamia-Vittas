@@ -19,6 +19,13 @@ namespace Lamia_Vittas
 {
     class Spike:Environmental
     {
+        /// <summary>
+        /// Parameterized Constructor
+        /// All values passed up
+        /// </summary>
+        /// <param name="picturesize">The rectangle of the image</param>
+        /// <param name="texture">The image of the spike</param>
+        /// <param name="dir">The direction of the spike</param>
         public Spike(Rectangle picturesize, Texture2D texture, int dir)
             : base(picturesize, texture,dir)
         {

@@ -18,7 +18,7 @@ namespace Lamia_Vittas
 {
     abstract class MovableGamePiece:GamePiece
     {
-        /*Attributes
+        /*Attributes and Properties
          * direction: the direction the character is facing. 0 for left, 1 for right
          */
         private int direction;
@@ -46,15 +46,19 @@ namespace Lamia_Vittas
         /// </summary>
         abstract public void Move();
 
+        /// <summary>
+        /// Draws the gamepiece depending upon direction
+        /// </summary>
+        /// <param name="batch">The spritebatch to draw in</param>
         public override void Draw(SpriteBatch batch)
         {
             if (Direction == 0)
             {//flips her to the left if she is moving left
-                batch.Draw(Image, Position, null, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 0);
+                batch.Draw(Image, PictureBox, null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
             }
             else if (Direction == 1)
             {//draws her normally if going right
-                batch.Draw(Image, Position, Color.White);
+                batch.Draw(Image, PictureBox, Color.White);
             }
         }
     }
