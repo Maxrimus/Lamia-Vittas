@@ -65,6 +65,61 @@ namespace Lamia_Vittas
 
         //List to hold platforms
         List<Platform> platforms;
+        List<Bush> bushes;
+        List<Spike> spikes;
+        List<Yarn> yarns;
+        List<Vial> vials;
+        List<Door> doors;
+        List<Button> buttons;
+        List<Girl> girls;
+
+        internal List<Girl> Girls
+        {
+            get { return girls; }
+            set { girls = value; }
+        }
+
+        internal List<Button> Buttons
+        {
+            get { return buttons; }
+            set { buttons = value; }
+        }
+
+        internal List<Door> Doors
+        {
+            get { return doors; }
+            set { doors = value; }
+        }
+
+        internal List<Vial> Vials
+        {
+            get { return vials; }
+            set { vials = value; }
+        }
+
+        internal List<Yarn> Yarns
+        {
+            get { return yarns; }
+            set { yarns = value; }
+        }
+
+        internal List<Spike> Spikes
+        {
+            get { return spikes; }
+            set { spikes = value; }
+        }
+
+        internal List<Bush> Bushes
+        {
+            get { return bushes; }
+            set { bushes = value; }
+        }
+
+        internal List<Platform> Platforms
+        {
+            get { return platforms; }
+            set { platforms = value; }
+        }
 
 
         //list to hold all objects
@@ -137,6 +192,13 @@ namespace Lamia_Vittas
             coll = new List<Collectible>();
             bBs = new List<GamePiece>();
             mState = new MouseState();
+            bushes = new List<Bush>();
+            spikes = new List<Spike>();
+            yarns = new List<Yarn>();
+            vials = new List<Vial>();
+            doors = new List<Door>();
+            buttons = new List<Button>();
+            girls = new List<Girl>();
             this.Window.Title = "Lamia Vittas";
             graphics.PreferredBackBufferHeight = 600;
             graphics.PreferredBackBufferWidth = 800;
@@ -318,6 +380,8 @@ namespace Lamia_Vittas
             //platforms.Add(pl1 = new Platform(new Vector2(-50, 100), Content.Load<Texture2D>("GeneralBLock")));
 
             p1 = new Player(g1, c1, 0, f1);
+            Map m1 = new Map();
+            m1.ReadMap("map.txt",this);
         }
 
         /// <summary>

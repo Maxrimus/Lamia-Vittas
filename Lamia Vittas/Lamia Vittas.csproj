@@ -52,6 +52,7 @@
     <Compile Include="GameScreen.cs" />
     <Compile Include="LoadContent.cs" />
     <Compile Include="MainScreen.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Mechanical.cs" />
     <Compile Include="MovableGamePiece.cs" />
     <Compile Include="MovablePlatform.cs" />
@@ -64,7 +65,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screen.cs" />
     <Compile Include="Spike.cs" />
+    <Compile Include="Vial.cs" />
     <Compile Include="Vine.cs" />
+    <Compile Include="Yarn.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK">
@@ -140,7 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Vial.xnb">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\MainUnclicked.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -157,7 +160,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Door.xnb">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\pauseMenu.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -170,7 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\GirlWalkSpritesheet.xnb">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\QuitButton.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -178,7 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\CatWalkSpritesheet.xnb">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\R2Desktop.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
