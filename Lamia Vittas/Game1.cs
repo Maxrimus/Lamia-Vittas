@@ -29,8 +29,12 @@ namespace Lamia_Vittas
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont font;
+
+        //Spritesheets
         Texture2D gWSheet;
         Texture2D cWSheet;
+        Texture2D cJSheet;
+        Texture2D gJSheet;
 
         //needed for girl's walking animation
         Point gframeSize = new Point(70, 100);
@@ -201,6 +205,8 @@ namespace Lamia_Vittas
             //Animation Sheets
             gWSheet = Content.Load<Texture2D>(GameVariables.girlTextureSheet);
             cWSheet = Content.Load<Texture2D>(GameVariables.catTextureSheet);
+            gJSheet = Content.Load<Texture2D>(GameVariables.girlJumpSheet);
+            cJSheet = Content.Load<Texture2D>(GameVariables.catJumpSheet);
 
             //loads dark and light textures
             lightBlock = Content.Load<Texture2D>(GameVariables.lightBlockTexture);
@@ -312,6 +318,7 @@ namespace Lamia_Vittas
             platforms.Add(new Platform(new Rectangle(725, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(750, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(775, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+
             // end floor
 
 
@@ -373,8 +380,7 @@ namespace Lamia_Vittas
             platforms.Add(new Platform(new Rectangle(550, 150, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(525, 125, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(525, 150, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            //end right pillar
-
+            //end right pillar           
 
             foreach (Platform i in platforms)
             {//adds all platforms to allObjects List
@@ -478,11 +484,13 @@ namespace Lamia_Vittas
             {//if already jumping
 
                 //sets the position, adding the current jumpSpeed to the Y
+
                 if (!colliding)
                 {
                     p1.SetPosition(new Rectangle(p1.GetPosition().X, p1.GetPosition().Y + jumpSpeed, p1.GetPosition().Width, p1.GetPosition().Height));
 
                 }
+
                 jumpSpeed += 1;//increments jumpspeed to slow down or speed up
                 
                 if(((p1.GetPosition().Y + p1.GetPosition().Height) > startY) || colliding)
@@ -498,13 +506,15 @@ namespace Lamia_Vittas
                     jumping = false;//sets jumping to false
                     
 
-                }
-                /*
-                if (((p1.GetPosition().Y + p1.GetPosition().Height) >= startY) || colliding)
+
+                if (((p1.GetPosition().Y + p1.GetPosition().Height) >= startY) || (colliding))
                 {//if the player has landed
 
-                    //makes sure the character is set where it started
-                    p1.SetPosition(new Rectangle(p1.GetPosition().X, startY - p1.GetPosition().Height, p1.GetPosition().Width, p1.GetPosition().Height)); ;
+                    if (!colliding)
+                    {
+                        //makes sure the character is set where it started
+                        p1.SetPosition(new Rectangle(p1.GetPosition().X, startY - p1.GetPosition().Height, p1.GetPosition().Width, p1.GetPosition().Height));
+                    }
                     jumping = false;//sets jumping to false
 
                 }
@@ -537,6 +547,15 @@ namespace Lamia_Vittas
                 p1.SetPosition(new Rectangle(p1.GetPosition().X, p1.GetPosition().Y + 1, p1.GetPosition().Width, p1.GetPosition().Height));
             }
             
+
+            if (!jumping && !colliding)
+            {
+                p1.SetPosition(new Rectangle(p1.GetPosition().X, p1.GetPosition().Y + 10, p1.GetPosition().Width, p1.GetPosition().Height));
+            }
+            else if (!jumping && colliding)
+            {
+                p1.SetPosition(new Rectangle(p1.GetPosition().X, p1.GetPosition().Y + 1, p1.GetPosition().Width, p1.GetPosition().Height));
+            }
 
             if (kState.IsKeyDown(Keys.LeftShift) && !oldState.IsKeyDown(Keys.LeftShift))
             {//switches from girl to cat and vice versa
@@ -733,11 +752,8 @@ namespace Lamia_Vittas
             }
 
             colliding = false;
-          
             base.Update(gameTime);
         }
-
-        
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -760,26 +776,114 @@ namespace Lamia_Vittas
             if (main == InterfaceScreen.GameScreen)
             {
                 //draws the player
-                if (p1.state == 0)
-                {//if girl, draws the girl
-                    if (p1.GetDirection() == 1)
-                    {//if right, draws to the right
-                        spriteBatch.Draw(gWSheet, p1.GetPosition(), new Rectangle(gframeSize.X * gcurrentFrame.X, gframeSize.Y * gcurrentFrame.Y, gframeSize.X, gframeSize.Y), Color.White);
+                if (!jumping)
+                {//draws the characters normally if they aren't jumping
+                    if (p1.state == 0)
+                    {//if girl, draws the girl
+                        if (p1.GetDirection() == 1)
+                        {//if right, draws to the right
+                            spriteBatch.Draw(gWSheet, p1.GetPosition(), new Rectangle(gframeSize.X * gcurrentFrame.X, gframeSize.Y * gcurrentFrame.Y, gframeSize.X, gframeSize.Y), Color.White);
+                        }
+                        else if (p1.GetDirection() == 0)
+                        {//if left, draws to the left
+                            spriteBatch.Draw(gWSheet, p1.GetPosition(), new Rectangle(gframeSize.X * gcurrentFrame.X, gframeSize.Y * gcurrentFrame.Y, gframeSize.X, gframeSize.Y), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                        }
                     }
-                    else if (p1.GetDirection() == 0)
-                    {//if left, draws to the left
-                        spriteBatch.Draw(gWSheet, p1.GetPosition(), new Rectangle(gframeSize.X * gcurrentFrame.X, gframeSize.Y * gcurrentFrame.Y, gframeSize.X, gframeSize.Y), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                    else
+                    {//if cat, draws the cat
+                        if (p1.GetDirection() == 1)
+                        {//if right, draws to the right
+                            spriteBatch.Draw(cWSheet, p1.GetPosition(), new Rectangle(cframeSize.X * ccurrentFrame.X, cframeSize.Y * ccurrentFrame.Y, cframeSize.X, cframeSize.Y), Color.White);
+                        }
+                        else if (p1.GetDirection() == 0)
+                        {//if left, draws to the left
+                            spriteBatch.Draw(cWSheet, p1.GetPosition(), new Rectangle(cframeSize.X * ccurrentFrame.X, cframeSize.Y * ccurrentFrame.Y, cframeSize.X, cframeSize.Y), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                        }
                     }
                 }
                 else
-                {//if cat, draws the cat
-                    if (p1.GetDirection() == 1)
-                    {//if right, draws to the right
-                        spriteBatch.Draw(cWSheet, p1.GetPosition(), new Rectangle(cframeSize.X * ccurrentFrame.X, cframeSize.Y * ccurrentFrame.Y, cframeSize.X, cframeSize.Y), Color.White);
+                {//if they are jumping draws them depending on their current jumpspeed
+                    if (p1.GetDirection() == 0)
+                    {//facing left
+                        if (p1.state == 0)
+                        {//girl
+                            if (jumpSpeed == -14)
+                            {
+                                spriteBatch.Draw(gJSheet, p1.GetPosition(), new Rectangle(0, 0, 70, 100), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                            }
+                            else if (jumpSpeed > -14 && jumpSpeed <= 0)
+                            {
+                                spriteBatch.Draw(gJSheet, p1.GetPosition(), new Rectangle(70, 0, 70, 100), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                            }
+                            else if (jumpSpeed > 0 && jumpSpeed < 14)
+                            {
+                                spriteBatch.Draw(gJSheet, p1.GetPosition(), new Rectangle(140, 0, 70, 100), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                            }
+                            else if (jumpSpeed == 14)
+                            {
+                                spriteBatch.Draw(gJSheet, p1.GetPosition(), new Rectangle(210, 0, 70, 100), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                            }
+                        }
+                        else if (p1.state == 1)
+                        {//cat
+                            if (jumpSpeed == -20)
+                            {
+                                spriteBatch.Draw(cJSheet, p1.GetPosition(), new Rectangle(0, 0, 100, 70), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                            }
+                            else if (jumpSpeed > -20 && jumpSpeed <= 0)
+                            {
+                                spriteBatch.Draw(cJSheet, p1.GetPosition(), new Rectangle(100, 0, 100, 70), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                            }
+                            else if (jumpSpeed > 0 && jumpSpeed < 20)
+                            {
+                                spriteBatch.Draw(cJSheet, p1.GetPosition(), new Rectangle(200, 0, 100, 70), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                            }
+                            else if (jumpSpeed == 20)
+                            {
+                                spriteBatch.Draw(cJSheet, p1.GetPosition(), new Rectangle(300, 0, 100, 70), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                            }
+                        }
                     }
-                    else if (p1.GetDirection() == 0)
-                    {//if left, draws to the left
-                        spriteBatch.Draw(cWSheet, p1.GetPosition(), new Rectangle(cframeSize.X * ccurrentFrame.X, cframeSize.Y * ccurrentFrame.Y, cframeSize.X, cframeSize.Y), Color.White, 0, new Vector2(), SpriteEffects.FlipHorizontally, 0);
+                    else
+                    {//facing right
+                        if (p1.state == 0)
+                        {//girl
+                            if (jumpSpeed == -14)
+                            {
+                                spriteBatch.Draw(gJSheet, p1.GetPosition(), new Rectangle(0, 0, 70, 100), Color.White);
+                            }
+                            else if (jumpSpeed > -14 && jumpSpeed <= 0)
+                            {
+                                spriteBatch.Draw(gJSheet, p1.GetPosition(), new Rectangle(70, 0, 70, 100), Color.White);
+                            }
+                            else if (jumpSpeed > 0 && jumpSpeed < 14)
+                            {
+                                spriteBatch.Draw(gJSheet, p1.GetPosition(), new Rectangle(140, 0, 70, 100), Color.White);
+                            }
+                            else if (jumpSpeed == 14)
+                            {
+                                spriteBatch.Draw(gJSheet, p1.GetPosition(), new Rectangle(210, 0, 70, 100), Color.White);
+                            }
+                        }
+                        else if (p1.state == 1)
+                        {//cat
+                            if (jumpSpeed == -20)
+                            {
+                                spriteBatch.Draw(cJSheet, p1.GetPosition(), new Rectangle(0, 0, 100, 70), Color.White);
+                            }
+                            else if (jumpSpeed > -20 && jumpSpeed <= 0)
+                            {
+                                spriteBatch.Draw(cJSheet, p1.GetPosition(), new Rectangle(100, 0, 100, 70), Color.White);
+                            }
+                            else if (jumpSpeed > 0 && jumpSpeed < 20)
+                            {
+                                spriteBatch.Draw(cJSheet, p1.GetPosition(), new Rectangle(200, 0, 100, 70), Color.White);
+                            }
+                            else if (jumpSpeed == 20)
+                            {
+                                spriteBatch.Draw(cJSheet, p1.GetPosition(), new Rectangle(300, 0, 100, 70), Color.White);
+                            }
+                        }
                     }
                 }
 
@@ -865,7 +969,9 @@ namespace Lamia_Vittas
             base.Draw(gameTime);
         }
 
-
+        /// <summary>
+        /// Checks for any collisions
+        /// </summary>
         protected void CheckCollisions()
         {
             foreach (Platform plat in platforms)
@@ -917,6 +1023,7 @@ namespace Lamia_Vittas
                         (p1.GetPosition().Bottom > plat.PictureBox.Top) && 
                         (p1.GetPosition().Center.X >= plat.PictureBox.Left && p1.GetPosition().Center.X <= plat.PictureBox.Right))
                     {
+                        colliding = true;
                         p1.SetPosition(new Rectangle(p1.GetPosition().X, plat.PictureBox.Top - (p1.GetPosition().Height), p1.GetPosition().Width, p1.GetPosition().Height));
                     }
 

@@ -32,6 +32,7 @@ namespace Lamia_Vittas
         //dark textures
         public static string girlTexture = "Girl";
         public static string girlTextureSheet = "GirlWalkSpritesheet";
+        public static string girlJumpSheet = "GirlJumpSpritesheet";
         public static string fistTexture = "Fist";
         public static string vialTexture = "Vial";
         public static string darkBlockTexture = "DarkBlock";
@@ -41,6 +42,7 @@ namespace Lamia_Vittas
         //light textures
         public static string catTexture = "Cat";
         public static string catTextureSheet = "CatWalkSpritesheet";
+        public static string catJumpSheet = "CatJumpSpritesheet";
         public static string yarnTexture = "Yarn";
         public static string lightBlockTexture = "BrightBlock";
         public static string lightSpikesTexture = "CatSpikes";

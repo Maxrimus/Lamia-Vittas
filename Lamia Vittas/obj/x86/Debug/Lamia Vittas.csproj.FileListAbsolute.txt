@@ -127,3 +127,5 @@ Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\BrightBlock.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\CatBush.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\CatSpikes.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\DarkBlock.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\CatJumpSpritesheet.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\GirlJumpSpritesheet.xnb
