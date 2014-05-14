@@ -19,10 +19,14 @@ namespace Lamia_Vittas
 {
     class Player
     {
-        /*Attributes
+        /*Attributes and Properties
          * girl: The girl associated with this player
          * cat: The cat associated with this player
          * state: what state the player is in; 0 for girl, 1 for cat
+         * fist: the fist associated with the girl
+         * health: the girl/cat's combined health
+         * lives: how many lives the girl/cat has
+         * MAXHEALTH: the maximum health the characters can have
          */
         Girl girl;
         Cat cat;
@@ -100,60 +104,7 @@ namespace Lamia_Vittas
         }
 
         /// <summary>
-        /// Jumps the player
-        /// </summary>
-        /// <param name="batch">The spriteBatch to be drawn in</param>
-        public void Jump(SpriteBatch batch)
-        {
-            switch (state)
-            {//decides which method to call; 0 for girl, 1 for cat
-                case 0:
-                    girl.Jump(batch);
-                    break;
-                case 1:
-                    cat.Jump(batch);
-                    break;
-            }
-        }
 
-        /// <summary>
-        /// Makes the player fall
-        /// </summary>
-        /// <param name="batch">The spriteBatch to be drawn in</param>
-        public void Fall(SpriteBatch batch, bool check)
-        {
-            bool touchCheck = check;
-            if (touchCheck == false)
-            {
-                switch (state)
-                {//decides which method to call; 0 for girl, 1 for cat
-                    case 0:
-                        girl.Fall(batch, check);
-                        break;
-                    case 1:
-                        cat.Fall(batch);
-                        break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// The player attacks
-        /// </summary>
-        public void Attack()
-        {
-            switch (state)
-            {//decides which method to call; 0 for girl, 1 for cat
-                case 0:
-                    girl.Attacks();
-                    break;
-                case 1:
-                    cat.Attacks();
-                    break;
-            }
-        }
-
-        /// <summary>
         /// The player takes damage
         /// </summary>
         /// <param name="dmgTaken">the amount of damage taken</param>
@@ -247,6 +198,10 @@ namespace Lamia_Vittas
             }
         }
 
+        /// <summary>
+        /// Sets the position to a passed in rectangle
+        /// </summary>
+        /// <param name="r1">The new position</param>
         public void SetPosition(Rectangle r1)
         {
             switch (state)
@@ -260,19 +215,10 @@ namespace Lamia_Vittas
             }
         }
 
-        public string Side(GamePiece gp2)
-        {
-            switch (state)
-            {//decides which method to call; 0 for girl, 1 for cat
-                case 0:
-                    return girl.Side(gp2);
-                case 1:
-                    return cat.Side(gp2);
-                default:
-                    return "";
-            }
-        }
-
+        /// <summary>
+        /// Returns the current image displayed
+        /// </summary>
+        /// <returns></returns>
         public Texture2D Image()
         {
             switch (state)
@@ -286,32 +232,10 @@ namespace Lamia_Vittas
             }
         }
 
-        public int JumpHeight()
-        {
-            switch (state)
-            {//decides which texture to return; 0 for girl, 1 for cat
-                case 0:
-                    return GameVariables.girlJump;
-                case 1:
-                    return GameVariables.catJump;
-                default:
-                    return GameVariables.girlJump;
-            }
-        }
-
-        public int Acc()
-        {
-            switch (state)
-            {//decides which texture to return; 0 for girl, 1 for cat
-                case 0:
-                    return GameVariables.girlAcc;
-                case 1:
-                    return GameVariables.catAcc;
-                default:
-                    return GameVariables.girlAcc;
-            }
-        }
-
+        /// <summary>
+        /// Returns the girl or the cat
+        /// </summary>
+        /// <returns></returns>
         public GamePiece GamePiece()
         {
             switch (state)
@@ -325,6 +249,11 @@ namespace Lamia_Vittas
             }
         }
 
+        /// <summary>
+        /// Returns whether or not the two gamepieces are colliding
+        /// </summary>
+        /// <param name="gp2">The gamepiece to compare to</param>
+        /// <returns></returns>
         public bool IsColliding(GamePiece gp2)
         {
             switch (state)

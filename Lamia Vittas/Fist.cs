@@ -27,10 +27,6 @@ namespace Lamia_Vittas
             set { visible = value; }
         }
 
-        
-        int minExtend;
-        int maxExtend;
-
         /// <summary>
         /// Parameterized Constructor
         /// </summary>
@@ -42,9 +38,6 @@ namespace Lamia_Vittas
         {
             //sets visible
             visible = false;
-
-            minExtend = 0;
-            maxExtend = 100;
         }
 
         /// <summary>
@@ -63,9 +56,6 @@ namespace Lamia_Vittas
             visible = false;
         }
 
-        /// <summary>
-        /// Moves the Fist
-        /// </summary>
         public override void Move()
         {
         }

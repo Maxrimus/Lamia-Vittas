@@ -21,6 +21,12 @@ namespace Lamia_Vittas
         // Attributes
         private bool isTouching = false;
 
+        /// <summary>
+        /// Parameterized Constructor
+        /// All values passed up
+        /// </summary>
+        /// <param name="picturesize">The rectangle holding the image</param>
+        /// <param name="texture">The image of the platform</param>
         public Platform(Rectangle picturesize, Texture2D texture)
             : base(picturesize, texture)
         {
@@ -31,6 +37,11 @@ namespace Lamia_Vittas
         {
             get { return isTouching; }
             set { isTouching = value; }
+        }
+
+        public void Draw(SpriteBatch batch, Texture2D texture)
+        {
+            batch.Draw(texture, base.PictureBox, Color.White);
         }
     }
 }

@@ -19,9 +19,20 @@ namespace Lamia_Vittas
 {
     class Environmental:MovableGamePiece
     {
+        /// <summary>
+        /// Parameterized Constructor, all values passed up
+        /// </summary>
+        /// <param name="picturesize">Rectangle for the object</param>
+        /// <param name="texture">Image for the object</param>
+        /// <param name="dir">Direction the object is facing</param>
         public Environmental(Rectangle picturesize, Texture2D texture, int dir)
             : base(picturesize, texture,dir)
         {
+        }
+
+        public void Draw(SpriteBatch batch, Texture2D texture)
+        {
+            batch.Draw(texture, base.PictureBox, Color.White);
         }
 
         public override void Move()

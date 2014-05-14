@@ -18,9 +18,20 @@ namespace Lamia_Vittas
 {
     class Mechanical:GamePiece
     {
+        //boolean determining whether or not the object is active or not
+        public bool on;
+
+        /// <summary>
+        /// Parameterized Constructor,
+        /// All values passed in are passed up
+        /// </summary>
+        /// <param name="picturesize">Rectangle holding the image</param>
+        /// <param name="texture">The image of the object</param>
         public Mechanical(Rectangle picturesize, Texture2D texture)
             : base(picturesize, texture)
         {
+            //sets on to false by default
+            on = false;
         }
     }
 }

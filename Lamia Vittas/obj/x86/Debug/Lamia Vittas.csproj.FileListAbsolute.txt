@@ -87,6 +87,35 @@ C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Cont
 C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.exe
 C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.pdb
 C:\Users\Joe\Documents\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.csprojResolveAssemblyReference.cache
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.exe
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.pdb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Bush.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\GeneralBLock.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Spikes.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Vial.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Yarn.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Arial.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\MainScreen.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Pause.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\TestQuit.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\TestStart.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Return to Menu.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\BoundingBox.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Cat.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Girl.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Fist.xnb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.exe
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lamia Vittas.pdb
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Lidgren.Network.dll
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\MonoGame.Framework.dll
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\OpenTK.dll
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Tao.Sdl.dll
+\\banner.main.ad.rit.edu\students\gmb3516\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.csprojResolveAssemblyReference.cache
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\ButtonOriginal.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\ButtonPressed.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\Door.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\GirlWalkSpritesheet.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\CatWalkSpritesheet.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\MainUnclicked.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\pauseMenu.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\NewButton.xnb
@@ -94,3 +123,17 @@ Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\QuitButton.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\R2Desktop.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\R2Game.xnb
 Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\R2Menu.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\BrightBlock.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\CatBush.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\CatSpikes.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\DarkBlock.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\catlife.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\catBackground.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\GameOver.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\girlBackground.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\girlLife.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\HealthHud.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\VialHud.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\YarnHud.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\HUD.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\WinScreen.xnb
