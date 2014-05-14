@@ -32,26 +32,19 @@ namespace Lamia_Vittas
         Cat cat;
         public Fist fist;
         public int state;
-        int health;
         int lives;
-        const int MAXHEALTH = 250;
+        bool canheal;
 
-        public int Health
+        public bool Canheal
         {
-            get { return health; }
-            set { health = value; }
-
+            get { return canheal; }
+            set { canheal = value; }
         }
 
         public int Lives
         {
             get { return lives; }
             set { lives = value; }
-        }
-
-        public int MAXHEALTH_P
-        {
-            get { return MAXHEALTH; }
         }
 
         /// <summary>
@@ -66,8 +59,7 @@ namespace Lamia_Vittas
             cat = c1;
             fist = f1;
             state = st;
-            health = g1.HealthFriendly;
-            lives = 10;
+            lives = girl.Lives;
         }
 
         /// <summary>
@@ -106,17 +98,23 @@ namespace Lamia_Vittas
         /// <summary>
         /// The player takes damage
         /// </summary>
-        /// <param name="dmgTaken">the amount of damage taken</param>
-        public void TakeHit(int dmgTaken)
+        /// <param name="ll">the amount of lives lost</param>
+        public void TakeHit(int ll)
         {
             //takes damage
-            health= health - dmgTaken;
+            lives = lives - ll;
+            Die();            
+        }
 
-            if (health <= 0)
-            {//checks if dead
-                health = 0;
-                Die();
-
+        /// <summary>
+        /// The player gains lives
+        /// </summary>
+        /// <param name="lg">amount of lives gained</param>
+        public void GainLife(int lg)
+        {
+            if (canheal == true)
+            {
+                lives = lives + 1;
             }
         }
 
@@ -127,23 +125,6 @@ namespace Lamia_Vittas
         {
             // reset the postition
             ResetPosition();
-
-            // reset the health
-            health = MAXHEALTH;
-
-            // lose a life
-            Lives -= 1;
-            /*
-            switch (state)
-            {//decides which method to call; 0 for girl, 1 for cat
-                case 0:
-                    girl.Die();
-                    break;
-                case 1:
-                    cat.Die();
-                    break;
-            }
-             */
         }
 
         /// <summary>

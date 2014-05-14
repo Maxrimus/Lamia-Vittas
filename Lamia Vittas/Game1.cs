@@ -63,10 +63,10 @@ namespace Lamia_Vittas
         Fist f1;
         Cat c1;
         Player p1;
-        //Button b1;
-        //Door d1;
-        //Spike s1, s2;
-        //Bush bu1, bu2;
+        Button b1;
+        Door d1;
+        Spike s1, s2;
+        Bush bu1, bu2;
 
         // list to hold the collectibles
         List<Collectible> coll;
@@ -248,8 +248,7 @@ namespace Lamia_Vittas
             f1 = new Fist(new Rectangle(300, 172, 60, 20), Content.Load<Texture2D>(GameVariables.fistTexture), 1);
             allObjects.Add(f1);
             c1 = new Cat(new Rectangle(600,100, 128, 96), Content.Load<Texture2D>(GameVariables.catTexture), 1, 250, 0);
-            allObjects.Add(c1);
-            /*
+            allObjects.Add(c1);           
             s1 = new Spike(new Rectangle(0, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
             allObjects.Add(s1);
             bu1 = new Bush(new Rectangle(200, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
@@ -262,7 +261,7 @@ namespace Lamia_Vittas
             allObjects.Add(b1);
             d1 = new Door(new Rectangle(650, 150, 25, 150), Content.Load<Texture2D>(GameVariables.doorTexture), b1);
             allObjects.Add(d1);
-             */
+             
 
             //Animation Sheets
             gWSheet = Content.Load<Texture2D>(GameVariables.girlTextureSheet);
@@ -575,21 +574,6 @@ namespace Lamia_Vittas
                     p1.SetPosition(new Rectangle(p1.GetPosition().X, startY - p1.GetPosition().Height, p1.GetPosition().Width, p1.GetPosition().Height));
                     jumping = false;//sets jumping to false
                 }
-
-/*
-                if (((p1.GetPosition().Y + p1.GetPosition().Height) >= startY) || (colliding))
-                {//if the player has landed
-
-                    if (!colliding)
-                    {
-                        //makes sure the character is set where it started
-                        p1.SetPosition(new Rectangle(p1.GetPosition().X, startY - p1.GetPosition().Height, p1.GetPosition().Width, p1.GetPosition().Height));
-                    }
-                    jumping = false;//sets jumping to false
-
-
-                }
- */
                 
             }
             else
@@ -966,7 +950,7 @@ namespace Lamia_Vittas
                     }
                 }
 
-                /*
+                
                 //draws obstacles
                 if (p1.state == 0)
                 {
@@ -984,7 +968,7 @@ namespace Lamia_Vittas
                 }
                 b1.Draw(spriteBatch);
                 d1.Draw(spriteBatch);
-                 */
+                 
 
                 foreach (GamePiece i in bBs)
                 {//draws all Bounding Boxes
@@ -1008,7 +992,6 @@ namespace Lamia_Vittas
                     + "\nP1 Left:       " + p1.GetPosition().Left
                     + "\nP1 Right:     " + p1.GetPosition().Right
                     + "\nJump Speed:   " + jumpSpeed
-                    + "\nHealth:        " + p1.Health
                     + "\nLives:         " + p1.Lives
                     + "\nGame Over: " + GameOver
                     + "\n\nLeft arrow - move left     Right arrom - more right     Shift - switch states     Space - jump/hover     R - respawn", new Vector2(0, 400), Color.Red, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
@@ -1074,56 +1057,11 @@ namespace Lamia_Vittas
                             Console.WriteLine("RIGHT");
                             p1.SetPosition(new Rectangle(plat.PictureBox.Right, p1.GetPosition().Y, p1.GetPosition().Width, p1.GetPosition().Height));
                         }
-
-                    }
-
-                    /*
-                    // determines if player is on top of a block
-                    if ((p1.GetPosition().Top < plat.PictureBox.Top) && 
-                        (p1.GetPosition().Center.Y < plat.PictureBox.Top) && 
-                        (p1.GetPosition().Bottom > plat.PictureBox.Top) && 
-                        (p1.GetPosition().Center.X >= plat.PictureBox.Left && p1.GetPosition().Center.X <= plat.PictureBox.Right))
-                    {
-                        colliding = true;
-                        p1.SetPosition(new Rectangle(p1.GetPosition().X, plat.PictureBox.Top - (p1.GetPosition().Height), p1.GetPosition().Width, p1.GetPosition().Height));
-                    }
-
-                    // determines if player is to the left of a block
-                    if ((p1.GetPosition().Top < plat.PictureBox.Bottom) &&
-                        (p1.GetPosition().Center.Y < plat.PictureBox.Bottom && p1.GetPosition().Y > plat.PictureBox.Top) &&
-                        (p1.GetPosition().Bottom <= plat.PictureBox.Bottom && p1.GetPosition().Bottom >= plat.PictureBox.Top) &&
-                        (p1.GetPosition().Left < plat.PictureBox.Left) &&
-                        (p1.GetPosition().Center.X < plat.PictureBox.Left) &&
-                        (p1.GetPosition().Right > plat.PictureBox.Left))
-                    {
-                        p1.SetPosition(new Rectangle(plat.PictureBox.Left - p1.GetPosition().Width, p1.GetPosition().Y, p1.GetPosition().Width, p1.GetPosition().Height));
-                    }
-
-                    // determines if player is to the right of a block
-                    if ((p1.GetPosition().Top < plat.PictureBox.Bottom) &&
-                        (p1.GetPosition().Center.Y < plat.PictureBox.Bottom && p1.GetPosition().Y > plat.PictureBox.Top) &&
-                        (p1.GetPosition().Bottom <= plat.PictureBox.Bottom && p1.GetPosition().Bottom >= plat.PictureBox.Top) &&
-                        (p1.GetPosition().Left < plat.PictureBox.Right) &&
-                        (p1.GetPosition().Center.X > plat.PictureBox.Right) &&
-                        (p1.GetPosition().Right > plat.PictureBox.Right))
-                    {
-                        p1.SetPosition(new Rectangle(plat.PictureBox.Right, p1.GetPosition().Y, p1.GetPosition().Width, p1.GetPosition().Height));
-                    }
+                    }               
                 }
 
-                /*
-                if ((p1.GetPosition().X < d1.PictureBox.Right && p1.GetPosition().X > d1.PictureBox.Left) && p1.IsColliding(d1))
-                {//determines if player colliding with door from left
-                    p1.SetPosition(new Rectangle(p1.GetPosition().X + 1, p1.GetPosition().Y, p1.GetPosition().Width, p1.GetPosition().Height));
-                }
-
-                if ((p1.GetPosition().X + p1.GetPosition().Width > d1.PictureBox.Left && p1.GetPosition().X + p1.GetPosition().Width < d1.PictureBox.Right) && p1.IsColliding(d1))
-                {//determines if player colliding with door from right
-                    p1.SetPosition(new Rectangle(p1.GetPosition().X - 1, p1.GetPosition().Y, p1.GetPosition().Width, p1.GetPosition().Height));
-                }
-                 */
-                }
-                /*
+                // check for damage to the player
+                
                 if (p1.fist.IsColliding(b1))
                 {//determines if button it pushed
                     b1.on = true;
@@ -1160,7 +1098,7 @@ namespace Lamia_Vittas
                     // damage the player
                     bu2.DamagePlayerBush(p1);
                 }
-                 */
+                 
             }
         }
 

@@ -19,29 +19,14 @@ namespace Lamia_Vittas
 {
     abstract class Character:MovableGamePiece
     {
-        /*Attributes
-         * health: how many hits the character can take
-         * attack: how many health untis the character takes off
-         */
+        // lives of a cat/girl
+        private static int lives;
 
-        // health of a cat/girl
-        private static int healthFriendly;
-
-        // health of a character
-        private int health;
-
-        // property for the health of the cat/ girl
-        public int HealthFriendly
+        // property for the lives of the cat/ girl
+        public int Lives
         {
-            get { return healthFriendly; }
-            set { healthFriendly = value; }
-        }
-
-        // property for the health of a character
-        public int Health
-        {
-            get { return health; }
-            set { health = value; }
+            get { return lives; }
+            set { lives = value; }
         }
 
         //the attack value of the character
@@ -60,11 +45,10 @@ namespace Lamia_Vittas
         /// <param name="dir">Direction the image is facing, 0 for left, 1 for right</param>
         /// <param name="hlth">The hits the character can take</param>
         /// <param name="atk">The damage the character can deal</param>
-        public Character(Rectangle picturesize, Texture2D texture, int dir, int hlth, int atk)
+        public Character(Rectangle picturesize, Texture2D texture, int dir, int lvs, int atk)
             : base(picturesize, texture,dir)
         {
-            health = hlth;
-            healthFriendly = health;
+            lives = lvs;
             attack = atk;
         }
 

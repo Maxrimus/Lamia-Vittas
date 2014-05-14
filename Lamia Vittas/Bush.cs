@@ -36,8 +36,17 @@ namespace Lamia_Vittas
         /// <param name="chara">Character object to take damage</param>
         public void DamagePlayerBush(Player plyr)
         {
-            //makes the player take 10 damage
-            plyr.TakeHit(10);
+            if (plyr.state == 1)
+            {
+                plyr.GainLife(1);
+                plyr.Canheal = false; // make it so that the player can only heal once
+            }
+            else if (plyr.state == 0)
+            {
+                //makes the player take 1 damage
+                plyr.TakeHit(1);
+            }
+            
         }
     }
 }
