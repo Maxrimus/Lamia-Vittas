@@ -27,7 +27,7 @@ namespace Lamia_Vittas
         public static string arialFont = "Arial";
 
         //movement
-        public static int playerMAXSpeed = 10;
+        public static int playerMAXSpeed = 8;
 
         //dark textures
         public static string girlTexture = "Girl";

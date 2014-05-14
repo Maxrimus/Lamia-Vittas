@@ -59,10 +59,10 @@ namespace Lamia_Vittas
         Fist f1;
         Cat c1;
         Player p1;
-        Button b1;
-        Door d1;
-        Spike s1, s2;
-        Bush bu1, bu2;
+        //Button b1;
+        //Door d1;
+        //Spike s1, s2;
+        //Bush bu1, bu2;
 
         // list to hold the collectibles
         List<Collectible> coll;
@@ -83,6 +83,7 @@ namespace Lamia_Vittas
         bool jumping;
         int startY;
         int jumpSpeed;
+        bool colliding;
 
         //list to hold all Bounding Boxes
         List<GamePiece> bBs;
@@ -182,6 +183,7 @@ namespace Lamia_Vittas
             allObjects.Add(f1);
             c1 = new Cat(new Rectangle(600,100, 128, 96), Content.Load<Texture2D>(GameVariables.catTexture), 1, 250, 0);
             allObjects.Add(c1);
+            /*
             s1 = new Spike(new Rectangle(0, 300, 200, 50), Content.Load<Texture2D>(GameVariables.spikeTexture), 1);
             allObjects.Add(s1);
             bu1 = new Bush(new Rectangle(200, 300, 200, 50), Content.Load<Texture2D>(GameVariables.bushTexture), 1);
@@ -194,6 +196,7 @@ namespace Lamia_Vittas
             allObjects.Add(b1);
             d1 = new Door(new Rectangle(650, 150, 25, 150), Content.Load<Texture2D>(GameVariables.doorTexture), b1);
             allObjects.Add(d1);
+             */
 
             //Animation Sheets
             gWSheet = Content.Load<Texture2D>(GameVariables.girlTextureSheet);
@@ -276,11 +279,8 @@ namespace Lamia_Vittas
 
 
             //creates platforms and adds to platforms List
+            // floor
             platforms.Add(new Platform(new Rectangle(0, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(0, 200, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(0, 225, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(0, 250, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(0, 275, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(25, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(50, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(75, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
@@ -312,12 +312,69 @@ namespace Lamia_Vittas
             platforms.Add(new Platform(new Rectangle(725, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(750, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
             platforms.Add(new Platform(new Rectangle(775, 300, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(650, 0, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(650, 25, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(650, 50, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(650, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(650, 100, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
-            platforms.Add(new Platform(new Rectangle(650, 125, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            // end floor
+
+
+            // box around girl
+            //left
+            /*
+            platforms.Add(new Platform(new Rectangle(150, 275, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(150, 250, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(150, 225, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(150, 200, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(150, 175, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(150, 150, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(150, 125, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));           
+            platforms.Add(new Platform(new Rectangle(150, 100, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(150, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+
+
+            //top
+            platforms.Add(new Platform(new Rectangle(175, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(200, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(225, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(250, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(275, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(300, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(325, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(350, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(375, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(400, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(425, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(450, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(475, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(500, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(525, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+
+            // right
+            platforms.Add(new Platform(new Rectangle(550, 275, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(550, 250, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(550, 225, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(550, 200, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(550, 175, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(550, 150, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(550, 125, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(550, 100, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(550, 75, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            //end box around girl
+             */
+
+
+            // pillar on left
+            platforms.Add(new Platform(new Rectangle(150, 275, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(150, 250, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(125, 275, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(125, 250, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+
+            //end left pillar
+
+            //pillar on right
+            platforms.Add(new Platform(new Rectangle(550, 125, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(550, 150, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(525, 125, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            platforms.Add(new Platform(new Rectangle(525, 150, 25, 25), Content.Load<Texture2D>(GameVariables.blockTexture)));
+            //end right pillar
+
 
             foreach (Platform i in platforms)
             {//adds all platforms to allObjects List
@@ -414,21 +471,44 @@ namespace Lamia_Vittas
                 p1.Move();
             }
 
+            //checks for any collisions
+            CheckCollisions();
+
             if (jumping)
             {//if already jumping
 
                 //sets the position, adding the current jumpSpeed to the Y
-                p1.SetPosition(new Rectangle(p1.GetPosition().X,p1.GetPosition().Y + jumpSpeed,p1.GetPosition().Width,p1.GetPosition().Height));
-                
-                jumpSpeed += 1;//increments jumpspeed to slow down or speed up
+                if (!colliding)
+                {
+                    p1.SetPosition(new Rectangle(p1.GetPosition().X, p1.GetPosition().Y + jumpSpeed, p1.GetPosition().Width, p1.GetPosition().Height));
 
-                if ((p1.GetPosition().Y + p1.GetPosition().Height) >= startY)
+                }
+                jumpSpeed += 1;//increments jumpspeed to slow down or speed up
+                
+                if(((p1.GetPosition().Y + p1.GetPosition().Height) > startY) || colliding)
+                {//if the player has landed
+                    if (colliding)
+                    {
+                        p1.SetPosition(new Rectangle(p1.GetPosition().X, p1.GetPosition().Y - jumpSpeed, p1.GetPosition().Width, p1.GetPosition().Height));
+                        jumping = false;
+                        return;
+                    }
+                    //makes sure the character is set where it started
+                    p1.SetPosition(new Rectangle(p1.GetPosition().X, startY - p1.GetPosition().Height, p1.GetPosition().Width, p1.GetPosition().Height));
+                    jumping = false;//sets jumping to false
+                    
+
+                }
+                /*
+                if (((p1.GetPosition().Y + p1.GetPosition().Height) >= startY) || colliding)
                 {//if the player has landed
 
                     //makes sure the character is set where it started
                     p1.SetPosition(new Rectangle(p1.GetPosition().X, startY - p1.GetPosition().Height, p1.GetPosition().Width, p1.GetPosition().Height)); ;
                     jumping = false;//sets jumping to false
+
                 }
+                */
             }
             else
             {//not currently jumping
@@ -445,7 +525,18 @@ namespace Lamia_Vittas
                         jumpSpeed = -20;
                     }
                 }
+
             }
+
+            if (!jumping && !colliding)
+            {
+                p1.SetPosition(new Rectangle(p1.GetPosition().X, p1.GetPosition().Y + 10, p1.GetPosition().Width, p1.GetPosition().Height));
+            }      
+            else if (!jumping && colliding)
+            {
+                p1.SetPosition(new Rectangle(p1.GetPosition().X, p1.GetPosition().Y + 1, p1.GetPosition().Width, p1.GetPosition().Height));
+            }
+            
 
             if (kState.IsKeyDown(Keys.LeftShift) && !oldState.IsKeyDown(Keys.LeftShift))
             {//switches from girl to cat and vice versa
@@ -459,7 +550,7 @@ namespace Lamia_Vittas
                 {
                     z.Collected = false;
                 }
-                b1.on = false;
+                //b1.on = false;
             }
 
             if (kState.IsKeyDown(Keys.Z) && p1.state == 0)
@@ -498,12 +589,10 @@ namespace Lamia_Vittas
             //sets old state to the current one
             oldState = kState;
 
-            //checks for any collisions
-            CheckCollisions();
-
             //checks for any collections
             CheckCollections();
 
+            /*
             //opens door if button is pressed
             d1.Open();
 
@@ -537,6 +626,7 @@ namespace Lamia_Vittas
                 GameOver = true;
                 Exit();
             }
+             */
 
            
                 //Gets the mouse's state.
@@ -641,7 +731,8 @@ namespace Lamia_Vittas
                     Draw(gameTime);
                 }
             }
-       
+
+            colliding = false;
           
             base.Update(gameTime);
         }
@@ -709,6 +800,7 @@ namespace Lamia_Vittas
                     }
                 }
 
+                /*
                 //draws obstacles
                 if (p1.state == 0)
                 {
@@ -726,6 +818,7 @@ namespace Lamia_Vittas
                 }
                 b1.Draw(spriteBatch);
                 d1.Draw(spriteBatch);
+                 */
 
                 foreach (GamePiece i in bBs)
                 {//draws all Bounding Boxes
@@ -748,10 +841,11 @@ namespace Lamia_Vittas
                     + "\nP1 Bottom:  " + p1.GetPosition().Bottom                   
                     + "\nP1 Left:       " + p1.GetPosition().Left
                     + "\nP1 Right:     " + p1.GetPosition().Right
+                    + "\nJump Speed:   " + jumpSpeed
                     + "\nHealth:        " + p1.Health
                     + "\nLives:         " + p1.Lives
                     + "\nGame Over: " + GameOver
-                    + "\n\nLeft arrow - move left     Right arrom - more right     Shift - switch states     Space - jump/hover     R - respawn", new Vector2(0, 300), Color.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                    + "\n\nLeft arrow - move left     Right arrom - more right     Shift - switch states     Space - jump/hover     R - respawn", new Vector2(0, 400), Color.Red, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
 
                 spriteBatch.DrawString(font, "Vials left: " + vialsLeft + " Yarn Left: " + yarnLeft, new Vector2(10, 10), Color.Black);
 
@@ -778,6 +872,45 @@ namespace Lamia_Vittas
             {
                 if (p1.GetPosition().Intersects(plat.PictureBox))
                 {
+                    // for when on top of a block or hitting the bottom
+                    
+
+                    if (p1.GetPosition().Bottom > plat.PictureBox.Top
+                        && p1.GetPosition().Bottom < plat.PictureBox.Center.Y)
+                    {//top
+                        colliding = true;
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("TOP");
+                        p1.SetPosition(new Rectangle(p1.GetPosition().X, plat.PictureBox.Top - p1.GetPosition().Height, p1.GetPosition().Width, p1.GetPosition().Height));
+                        
+                    }
+                    else if (p1.GetPosition().Top < plat.PictureBox.Bottom
+                        && p1.GetPosition().Top > plat.PictureBox.Center.Y)
+                    { //bottom                     
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("BOTTOM");
+                        p1.SetPosition(new Rectangle(p1.GetPosition().X, plat.PictureBox.Bottom, p1.GetPosition().Width, p1.GetPosition().Height));
+                    }
+                    else // left or right collision
+                    {
+                        if(p1.GetPosition().Right > plat.PictureBox.Left
+                            && p1.GetPosition().Right < plat.PictureBox.Center.X)
+                        {//left of a block
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("LEFT");
+                            p1.SetPosition(new Rectangle(plat.PictureBox.Left - p1.GetPosition().Width, p1.GetPosition().Y, p1.GetPosition().Width, p1.GetPosition().Height));
+                        }
+                        else if(p1.GetPosition().Left < plat.PictureBox.Right
+                            && p1.GetPosition().Left > plat.PictureBox.Center.X)
+                        {// right of a block
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("RIGHT");
+                            p1.SetPosition(new Rectangle(plat.PictureBox.Right, p1.GetPosition().Y, p1.GetPosition().Width, p1.GetPosition().Height));
+                        }
+
+                    }
+
+                    /*
                     // determines if player is on top of a block
                     if ((p1.GetPosition().Top < plat.PictureBox.Top) && 
                         (p1.GetPosition().Center.Y < plat.PictureBox.Top) && 
@@ -810,6 +943,7 @@ namespace Lamia_Vittas
                     }
                 }
 
+                /*
                 if ((p1.GetPosition().X < d1.PictureBox.Right && p1.GetPosition().X > d1.PictureBox.Left) && p1.IsColliding(d1))
                 {//determines if player colliding with door from left
                     p1.SetPosition(new Rectangle(p1.GetPosition().X + 1, p1.GetPosition().Y, p1.GetPosition().Width, p1.GetPosition().Height));
@@ -819,43 +953,46 @@ namespace Lamia_Vittas
                 {//determines if player colliding with door from right
                     p1.SetPosition(new Rectangle(p1.GetPosition().X - 1, p1.GetPosition().Y, p1.GetPosition().Width, p1.GetPosition().Height));
                 }
-            }
+                 */
+                }
+                /*
+                if (p1.fist.IsColliding(b1))
+                {//determines if button it pushed
+                    b1.on = true;
+                }
 
-            if (p1.fist.IsColliding(b1))
-            {//determines if button it pushed
-                b1.on = true;
-            }
+                //spike checks
 
-            //spike checks
+                if (p1.GetPosition().Intersects(s1.PictureBox))
+                {// check for collisions between spikes and character
 
-            if (p1.GetPosition().Intersects(s1.PictureBox))
-            {// check for collisions between spikes and character
+                    // damage the player
+                    s1.DamagePlayerSpike(p1);
+                }
 
-                // damage the player
-                s1.DamagePlayerSpike(p1);
-            }
+                if (p1.GetPosition().Intersects(s2.PictureBox))
+                {// check for collisions between spikes and character
 
-            if (p1.GetPosition().Intersects(s2.PictureBox))
-            {// check for collisions between spikes and character
+                    // damage the player
+                    s2.DamagePlayerSpike(p1);
+                }
 
-                // damage the player
-                s2.DamagePlayerSpike(p1);
-            }
+                //bush checks
 
-            //bush checks
+                if (p1.GetPosition().Intersects(bu1.PictureBox))
+                {// check for collisions between spikes and character
 
-            if (p1.GetPosition().Intersects(bu1.PictureBox))
-            {// check for collisions between spikes and character
+                    // damage the player
+                    bu1.DamagePlayerBush(p1);
+                }
 
-                // damage the player
-                bu1.DamagePlayerBush(p1);
-            }
+                if (p1.GetPosition().Intersects(bu2.PictureBox))
+                {// check for collisions between spikes and character
 
-            if (p1.GetPosition().Intersects(bu2.PictureBox))
-            {// check for collisions between spikes and character
-
-                // damage the player
-                bu2.DamagePlayerBush(p1);
+                    // damage the player
+                    bu2.DamagePlayerBush(p1);
+                }
+                 */
             }
         }
 
