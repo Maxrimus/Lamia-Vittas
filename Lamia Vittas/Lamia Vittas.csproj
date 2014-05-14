@@ -63,7 +63,6 @@
     <Compile Include="Screen.cs" />
     <Compile Include="Spike.cs" />
     <Compile Include="Vial.cs" />
-    <Compile Include="Vine.cs" />
     <Compile Include="Yarn.cs" />
   </ItemGroup>
   <ItemGroup>

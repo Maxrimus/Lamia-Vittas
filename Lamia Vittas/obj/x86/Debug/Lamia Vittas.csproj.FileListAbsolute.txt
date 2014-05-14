@@ -158,3 +158,9 @@ Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\R2Menu.xnb
 \\banner.main.ad.rit.edu\students\kxk9106\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\OpenTK.dll
 \\banner.main.ad.rit.edu\students\kxk9106\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Tao.Sdl.dll
 \\banner.main.ad.rit.edu\students\kxk9106\IGMProfile\Desktop\GitHub\Lamia-Vittas\Lamia Vittas\obj\x86\Debug\Lamia Vittas.csprojResolveAssemblyReference.cache
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\BrightBlock.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\CatBush.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\CatSpikes.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\DarkBlock.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\CatJumpSpritesheet.xnb
+Z:\GitHub\Lamia-Vittas\Lamia Vittas\bin\WindowsGL\Debug\Content\GirlJumpSpritesheet.xnb
