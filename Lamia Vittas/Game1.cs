@@ -484,16 +484,22 @@ namespace Lamia_Vittas
             {//if already jumping
 
                 //sets the position, adding the current jumpSpeed to the Y
-
                 if (!colliding)
                 {
                     p1.SetPosition(new Rectangle(p1.GetPosition().X, p1.GetPosition().Y + jumpSpeed, p1.GetPosition().Width, p1.GetPosition().Height));
-
+                    if (colliding)
+                    {
+                        p1.SetPosition(new Rectangle(p1.GetPosition().X, p1.GetPosition().Y - (jumpSpeed/2), p1.GetPosition().Width, p1.GetPosition().Height));
+                    }
                 }
 
                 jumpSpeed += 1;//increments jumpspeed to slow down or speed up
-                
-                if(((p1.GetPosition().Y + p1.GetPosition().Height) > startY) || colliding)
+                if (jumpSpeed > 16)
+                {
+                    jumpSpeed = 16;
+                }
+
+                if (((p1.GetPosition().Y + p1.GetPosition().Height) > startY) || colliding)
                 {//if the player has landed
                     if (colliding)
                     {
@@ -504,9 +510,9 @@ namespace Lamia_Vittas
                     //makes sure the character is set where it started
                     p1.SetPosition(new Rectangle(p1.GetPosition().X, startY - p1.GetPosition().Height, p1.GetPosition().Width, p1.GetPosition().Height));
                     jumping = false;//sets jumping to false
-                    
+                }
 
-
+/*
                 if (((p1.GetPosition().Y + p1.GetPosition().Height) >= startY) || (colliding))
                 {//if the player has landed
 
@@ -517,8 +523,10 @@ namespace Lamia_Vittas
                     }
                     jumping = false;//sets jumping to false
 
+
                 }
-                */
+ */
+                
             }
             else
             {//not currently jumping
@@ -547,16 +555,6 @@ namespace Lamia_Vittas
                 p1.SetPosition(new Rectangle(p1.GetPosition().X, p1.GetPosition().Y + 1, p1.GetPosition().Width, p1.GetPosition().Height));
             }
             
-
-            if (!jumping && !colliding)
-            {
-                p1.SetPosition(new Rectangle(p1.GetPosition().X, p1.GetPosition().Y + 10, p1.GetPosition().Width, p1.GetPosition().Height));
-            }
-            else if (!jumping && colliding)
-            {
-                p1.SetPosition(new Rectangle(p1.GetPosition().X, p1.GetPosition().Y + 1, p1.GetPosition().Width, p1.GetPosition().Height));
-            }
-
             if (kState.IsKeyDown(Keys.LeftShift) && !oldState.IsKeyDown(Keys.LeftShift))
             {//switches from girl to cat and vice versa
                 p1.Switch();
@@ -979,8 +977,6 @@ namespace Lamia_Vittas
                 if (p1.GetPosition().Intersects(plat.PictureBox))
                 {
                     // for when on top of a block or hitting the bottom
-                    
-
                     if (p1.GetPosition().Bottom > plat.PictureBox.Top
                         && p1.GetPosition().Bottom < plat.PictureBox.Center.Y)
                     {//top
@@ -992,7 +988,8 @@ namespace Lamia_Vittas
                     }
                     else if (p1.GetPosition().Top < plat.PictureBox.Bottom
                         && p1.GetPosition().Top > plat.PictureBox.Center.Y)
-                    { //bottom                     
+                    { //bottom     
+                        colliding = true;
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("BOTTOM");
                         p1.SetPosition(new Rectangle(p1.GetPosition().X, plat.PictureBox.Bottom, p1.GetPosition().Width, p1.GetPosition().Height));
