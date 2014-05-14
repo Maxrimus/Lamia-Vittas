@@ -36,10 +36,10 @@ namespace Lamia_Vittas
         /// <param name="vector">Location of the image</param>
         /// <param name="texture">Texture of the image</param>
         /// <param name="dir">Direction the image is facing, 0 for left, 1 for right</param>
-        /// <param name="hlth">The hits the character can take</param>
+        /// <param name="hlth">The lives a player has</param>
         /// <param name="atk">The damage the character can deal</param>
-        public Girl(Rectangle picturesize, Texture2D texture,int dir,int hlth, int atk)
-            : base(picturesize, texture,dir,hlth,atk)
+        public Girl(Rectangle picturesize, Texture2D texture,int dir,int lvs, int atk)
+            : base(picturesize, texture,dir,lvs,atk)
         {
             startPosGirl = new Rectangle(picturesize.X, picturesize.Y, GameVariables.girlWidth, GameVariables.girlHeight);
         }

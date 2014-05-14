@@ -37,10 +37,10 @@ namespace Lamia_Vittas
         /// <param name="picturesize">Rectangle holding all shape info about the cat</param>
         /// <param name="texture">The cat's texture</param>
         /// <param name="dir">The direction of the cat</param>
-        /// <param name="hlth">The cat's health</param>
+        /// <param name="hlth">The cat's lives</param>
         /// <param name="atk">The cat's attack</param>
-        public Cat(Rectangle picturesize, Texture2D texture, int dir, int hlth, int atk)
-            : base(picturesize, texture,dir,hlth,atk)
+        public Cat(Rectangle picturesize, Texture2D texture, int dir, int lvs, int atk)
+            : base(picturesize, texture,dir,lvs,atk)
         {
             //assigns startPosCat
             startPosCat = new Rectangle(picturesize.X, picturesize.Y, GameVariables.catWidth, GameVariables.catHeight);
